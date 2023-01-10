@@ -1,0 +1,44 @@
+{
+    "items": [
+        {
+            "avatar": "/Assets/UserAvatars/Bear.jpg"
+        },
+        {
+            "avatar": "/Assets/UserAvatars/Bird.jpg"
+        },
+        {
+            "avatar": "/Assets/UserAvatars/Cat.jpg"
+        },
+        {
+            "avatar": "/Assets/UserAvatars/Chicken.jpg"
+        },
+        {
+            "avatar": "/Assets/UserAvatars/Deer.jpg"
+        },
+        {
+            "avatar": "/Assets/UserAvatars/Dog.jpg"
+        },
+        {
+            "avatar": "/Assets/UserAvatars/Giraffe.jpg"
+        },
+        {
+            "avatar": "/Assets/UserAvatars/Horse.jpg"
+        },
+        {
+            "avatar": "/Assets/UserAvatars/Mouse.jpg"
+        },
+        {
+            "avatar": "/Assets/UserAvatars/Panda.jpg"
+        },
+        {
+            "avatar": "/Assets/UserAvatars/Pig.jpg"
+        },
+        {
+            "avatar": "/Assets/UserAvatars/Rabbit.jpg"
+        }
+    ],
+    "info":{
+        "project": "YouPipe imitation of the video hosting website",
+        "utility": "List of default avatars for users to pick"
+    }
+}

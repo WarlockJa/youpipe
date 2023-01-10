@@ -1,0 +1,81 @@
+{
+    "items": [
+        {
+            "itemName": "All"
+        },
+        {
+            "itemName": "Trending"
+        },
+        {
+            "itemName": "Gaming"
+        },
+        {
+            "itemName": "Music"
+        },
+        {
+            "itemName": "Sport"
+        },
+        {
+            "itemName": "Scenic"
+        },
+        {
+            "itemName": "Live"
+        },
+        {
+            "itemName": "Podcasts"
+        },
+        {
+            "itemName": "History"
+        },
+        {
+            "itemName": "Comedy"
+        },
+        {
+            "itemName": "Movies"
+        },
+        {
+            "itemName": "Education"
+        },
+        {
+            "itemName": "Art"
+        },
+        {
+            "itemName": "Fashion"
+        },
+        {
+            "itemName": "Health"
+        },
+        {
+            "itemName": "Food"
+        },
+        {
+            "itemName": "Memes"
+        },
+        {
+            "itemName": "Fitness"
+        },
+        {
+            "itemName": "Learning"
+        },
+        {
+            "itemName": "Entertainment"
+        },
+        {
+            "itemName": "Shorts"
+        },
+        {
+            "itemName": "TikTok"
+        },
+        {
+            "itemName": "Funny"
+        },
+        {
+            "itemName": "Programming"
+        }
+    ],
+    "info":
+    {
+        "project": "YouPipe imitation of the video hosting website",
+        "utility": "Tag list items"
+    }
+}

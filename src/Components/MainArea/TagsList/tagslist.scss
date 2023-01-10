@@ -1,0 +1,71 @@
+@import "../../../globals.scss";
+
+.tagsContainer {
+    position: sticky;
+    background-color: $main-background-color;
+
+    .tagsContainer-tagsList {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        overflow-x: scroll;
+        scroll-behavior: smooth;
+
+        scrollbar-width: none;
+        &::-webkit-scrollbar {
+            display: none;
+        }
+
+        .tagsList-tag {
+            background-color: $icons-backgroundColor-hover;
+            padding: 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            
+            &:hover{
+                background-color: $icons-backgroundColor-active;
+            }
+        }
+    }
+    
+    .arrow-left {
+        
+        img {
+            transform: rotate(180deg);
+        }
+    }
+    .arrow-left[scrolledtop='1'] {
+        display: none;
+    }
+
+    .arrow-right {
+        right: 0;
+        top: 0;
+    }
+    .arrow-right[scrolledtop='1'] {
+        display: none;
+    }
+
+    .tagsContainer-arrow {
+        position: absolute;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: $headerMenu-height;
+        padding: 10px;
+        box-shadow: 0px 0px 7px 7px $main-background-color;
+        background-color: $main-background-color;
+        
+        .arrow-shadow {
+            position: absolute;
+            padding: $headerMenu-height - 30px;
+            border-radius: 50%;
+            background-color: $icons-backgroundColor-hover;
+        }
+
+        img {
+            z-index: 2;
+            height: $headerMenu-height - 30px;
+        }
+    }
+}

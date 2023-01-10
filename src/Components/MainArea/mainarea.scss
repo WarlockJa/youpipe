@@ -1,0 +1,46 @@
+@import '../../globals.scss';
+
+.mainContainer::-webkit-scrollbar {
+    width: 0.5em;
+    
+}
+.mainContainer::-webkit-scrollbar-thumb {
+    background-color: $scrollbar-thumb-background-color;
+    border-radius: 15px;
+}
+
+.mainContainer {
+    margin-top: $headerMenu-height;
+    scroll-behavior: smooth;
+
+    overflow-y: scroll;
+    height: calc(100vh - $headerMenu-height);
+
+    .loadingPlug {
+        display: table;
+        margin: 0 auto;
+    }
+
+    .emptyPlug {
+        display: table;
+        margin: 0 auto;
+    }
+}
+
+.mainContainer[sidemenustate='0'] {
+    max-width: calc(100% - $sideMenu-folded-width);
+    margin-left: $sideMenu-folded-width;
+}
+
+.mainContainer[sidemenustate='1'] {
+    max-width: calc(100% - $sideMenu-expanded-width);
+    margin-left: $sideMenu-expanded-width;
+}
+
+.mainContainer[sidemenustate='2'] {
+    width: 20vw;
+
+    .tagsList {
+        position: relative;
+    }
+}

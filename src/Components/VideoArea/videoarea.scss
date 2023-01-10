@@ -1,0 +1,291 @@
+@import '../../globals.scss';
+
+.videoArea-container::-webkit-scrollbar {
+    width: 0.5em;
+    
+}
+.videoArea-container::-webkit-scrollbar-thumb {
+    background-color: $scrollbar-thumb-background-color;
+    border-radius: 15px;
+}
+
+.videoArea-container[videomode='0'] {
+    display: hidden;
+}
+
+.videoArea-container[videomode='1'] {
+    scroll-behavior: smooth;
+    overflow-y: scroll;
+    width: 75vw;
+    height: calc(100vh - $headerMenu-height);
+    margin-top: $headerMenu-height;
+    padding: 0 1.5rem;
+    
+    .videoArea-videoContainer {
+
+        .videoArea-video {
+            width: 100%;
+            object-fit: contain;
+        }
+
+        .videoArea-videoTitle {
+            color: $main-font-color;
+            padding: 0.4rem;
+            font-size: 1.2rem;
+        }
+        
+        .videoArea-channelInfo {
+            display: flex;
+            align-items: center;
+
+            .videoArea-channelInfo-avatar {
+                width: 3rem;
+                cursor: pointer;
+
+                img {
+                    width: 100%;
+                    object-fit: contain;
+                }
+            }
+
+            .videoArea-channelInfo-secondSection {
+                display: flex;
+                flex-direction: column;
+                margin-left: 1rem;
+
+                .videoArea-channelInfo-secondSection-channelName {
+                    cursor: pointer;
+                }
+
+                p {
+                    margin: 0;
+                    font-size: 0.9rem;
+                }
+            }
+
+            .videoArea-channelInfo-subscribeButton {
+                margin-left: 2rem;
+            }
+
+
+            .videoArea-ratingSection {
+                flex-grow: 1;
+                display: flex;
+                justify-content: flex-end;
+
+                .videoArea-ratingSection-likes {
+                    border-radius: 20px 0 0 20px;
+                    padding: 0.5rem;
+                }
+                
+                .videoArea-ratingSection-divider {
+                    width: 1px;
+                    background-color: $buttons-backgroundColor;
+                    display: flex;
+                    align-items: center;
+                    
+                    .videoArea-ratingSection-divider-line {
+                        width: 100%;
+                        height: 65%;
+                        background-color: $buttons-divider-color;
+                    }
+                }
+                
+                .videoArea-ratingSection-dislikes {
+                    border-radius: 0 20px 20px 0;
+                    padding: 0.5rem;
+                }
+            }
+        }
+        
+        .videoArea-description {
+            background-color: $buttons-backgroundColor;
+            padding: 1rem;
+            border-radius: 10px;
+        }
+    }
+
+    .videoArea-container-commentsSection {
+        background-color: #0004;
+        margin-top: 1rem;
+        padding: 1rem;
+
+        .commentsSection-addCommentContainer {
+
+            .addCommentContainer-header {
+                display: flex;
+
+                .avatarContainer {
+                    cursor: pointer;
+                    
+                    img {
+                        border-radius: 50%;
+                        object-fit: contain;
+                        width: 3rem;
+                    }
+                    
+                    svg {
+                        border-radius: 50%;
+                        width: 3rem;
+                        height: 100%;
+                    }
+                }
+
+
+                .commentBody {
+                    flex-grow: 1;
+                    font-size: 1rem;
+                    margin-left: 1rem;
+
+                    outline: none;
+                    border: none;
+                    border-bottom: 1px solid $main-border-color;
+                    background-color: transparent;
+                    resize: none;
+                }
+                .commentBody::-webkit-scrollbar {
+                    width: 0.5em;
+                }
+                .commentBody::-webkit-scrollbar-thumb {
+                    background-color: $scrollbar-thumb-background-color;
+                    border-radius: 15px;
+                }
+            }
+        }
+
+        .addCommentContainer-activeSection {
+            display: flex;
+            justify-content: flex-end;
+            gap: 0.5rem;
+
+            &.invisible {
+                display: none;
+            }
+        }
+    }
+
+    .commentsSection-comments {
+        
+        .comments-comment {
+            display: flex;
+            margin-top: 1rem;
+
+            .avatarContainer{
+                cursor: pointer;
+                align-self: flex-start;
+                    
+                img {
+                    border-radius: 50%;
+                    object-fit: contain;
+                    width: 3rem;
+                }
+                
+                svg {
+                    border-radius: 50%;
+                    width: 3rem;
+                    height: 100%;
+                }
+            }
+
+            .comment-body {
+                display: flex;
+                flex-direction: column;
+                margin-left: 1rem;
+                flex: 0.95;
+
+                .body-header {
+                    display: flex;
+                    gap: 0.5rem;
+
+                    p {
+                        margin: 0;
+                        font-size: 0.9rem;
+                    }
+                }
+
+                .comment-text {
+                    font-size: 0.9rem;
+                }
+            }
+
+            &:hover {
+
+                .comment-menu {
+
+                    .dots-container {
+                        display:flex;
+                    }
+                }
+            }
+
+            .comment-menu {
+                flex: 0.05;
+                
+                .dots-container {
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                    gap: 3px;
+                    
+                    border-radius: 50%;
+                    padding: 0.5rem;
+                    height: 1rem;
+                    width: 1rem;
+                    
+                    cursor: pointer;
+                    display: none;
+
+                    &:active {
+                        background-color: darkgrey;
+                    }
+    
+                    .dots {
+                        width: 3px;
+                        height: 3px;
+                        background-color: #454545;
+                        border-radius: 50%;
+                    }
+                }
+            }
+        }
+    }
+}
+
+.videoArea-button {
+    background-color: $buttons-backgroundColor;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    color: $main-font-color;
+
+    svg {
+        width: 1.2rem;
+        height: 1.2rem;
+        padding: 0 0.5rem;
+    }
+
+    &:hover {
+        background-color: $buttons-backgroundColor-hover;
+    }
+
+    &:active {
+        background-color: $buttons-backgroundColor-active;
+    }
+
+}
+
+.inactive {
+    background-color: #FFF4;
+    cursor: default;
+    color: #0002;
+    
+    &:hover {
+        background-color: #FFF4;
+    }
+    
+    &:active {
+        background-color: #FFF4;
+    }
+}

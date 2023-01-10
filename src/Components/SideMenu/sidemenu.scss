@@ -1,0 +1,105 @@
+@import '../../globals.scss';
+
+.expanded::-webkit-scrollbar {
+    width: 0.5em;
+}
+
+.expanded::-webkit-scrollbar-thumb {
+    background-color: $scrollbar-thumb-background-color;
+    border-radius: 15px;
+}
+
+.folded::-webkit-scrollbar {
+    width: 0;
+}
+
+.sidemenu {
+    position: fixed;
+    height: calc(100vh - $headerMenu-height);
+    top: $headerMenu-height;
+    background-color: $main-background-color;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    z-index: 2;
+
+    overflow-y: scroll;
+    
+    .sideMenu-section {
+        width: 100%;
+
+        display: flex;
+        flex-direction: column;
+
+        .line-break {
+            border-bottom: 1px solid #0003;
+        }
+
+        .sideMenu-section-item {
+            display: flex;
+            padding: 1rem 0;
+            border-radius: 10px;
+            cursor: pointer;
+
+            img {
+                width: 1.7rem;
+                padding: 0 1rem;
+                object-fit: contain;
+            }
+
+            p {
+                padding-left: 1em;
+                margin: 0;
+            }
+
+            &:hover {
+                background-color: $icons-backgroundColor-hover;
+            }
+        }
+    }
+
+    .active {
+        background-color: $icons-backgroundColor-hover;
+    }
+}
+
+.videoModeHidden {
+    left: -$sideMenu-expanded-width;
+}
+
+.videoModeCover {
+    left: 0;
+}
+
+.expanded {
+    transition: left 100ms ease;
+    width: $sideMenu-expanded-width;
+
+    .sideMenu-section {
+
+        .sideMenu-section-item {
+            align-items: center;
+
+            p {
+                padding: 0;
+            }
+        }
+    }
+}
+
+.folded {
+    width: $sideMenu-folded-width;
+
+    .sideMenu-section {
+
+        .sideMenu-section-item {
+            flex-direction: column;
+            
+            p {
+                padding: 0;
+                font-size: 0.6rem;
+                text-align: center;
+            }
+        }
+    }
+}
