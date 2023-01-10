@@ -60,7 +60,10 @@ export default function VideoArea() {
     // returning comments array
     const Comments = (props) => {
         const { commentsArray } = props
-        if(loading) return <LoadingPlug />
+        if(loading) {
+            handleCancelCommentClick()
+            return <LoadingPlug />
+        }
         if(commentsArray.length === 0) return <EmptyPlug />
 
         const result = commentsArray.map((item, index) => {
@@ -161,6 +164,7 @@ export default function VideoArea() {
                                 value={commentText}
                                 onChange={(e) => setCommentText(e.target.value)}
                                 onClick={() => setShowAddCommentButtons(true)}
+                                placeholder="Add a comment..."
                             ></textarea>
                         </div>
                         <div className={showAddCommentButtons ? "addCommentContainer-activeSection" : "addCommentContainer-activeSection invisible"}>

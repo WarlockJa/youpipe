@@ -6,8 +6,10 @@ import { useMenuData, useMenuUpdateData } from '../../../../ContextProviders/Men
 
 export default function NoUserOptions(props) {
     const { iconRef } = props
+    // theme context
     const darkTheme = useTheme()
     const ToggleTheme = useThemeUpdate()
+    // menu context
     const menuData = useMenuData()
     const ChangeMenu = useMenuUpdateData()
     const noUserMenuRef = useRef(null)

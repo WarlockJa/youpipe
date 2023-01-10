@@ -34,6 +34,7 @@ export default function UserMenu(props) {
 
     useEventOutsideListener('mousedown', handleClickOutside)
 
+    // handling your channel menu option click
     const handleYourChannelClick = () => {
         ChangeMenu({...menuData, userMenu: !menuData.userMenu })
         ChangeQuery({
