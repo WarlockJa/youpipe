@@ -70,7 +70,7 @@ export const postUnauthorizedRequest = ({ request, body, setDataArray }) => {
 }
 
 // authorized post comment request
-// used in VideoArea
+// used in CommentsArea
 export function PostComment(props) {
     const { AccessToken, CommentData } = props
     const headers = new Headers({ "Authorization": 'Bearer ' + AccessToken, "Content-Type": "application/json" })
@@ -78,6 +78,26 @@ export function PostComment(props) {
         method: 'POST',
         headers: headers,
         body: JSON.stringify(CommentData),
+        mode: 'cors',
+        cache: 'default',
+        secure: true,
+    })
+    const callback = (response) => {
+        console.log(response.status)
+    }
+
+    DataFetch({ request: request, callback: callback }) 
+}
+
+// delete comment
+// used in CommentMenu
+export function DeleteComment(props) {
+    const { AccessToken, body } = props
+    const headers = new Headers({ "Authorization": 'Bearer ' + AccessToken, "Content-Type": "application/json" })
+    const request = new Request(URI + 'commentAuthorized', {
+        method: 'DELETE',
+        headers: headers,
+        body: JSON.stringify(body),
         mode: 'cors',
         cache: 'default',
         secure: true,

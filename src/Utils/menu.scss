@@ -37,6 +37,7 @@
     max-height: 60vh;
     right: 1%;
     overflow-y: scroll;
+    z-index: 2;
 
     .menu-return {
         display: flex;

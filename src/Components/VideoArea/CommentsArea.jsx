@@ -7,13 +7,14 @@ import { PostComment, postUnauthorizedCommentsRequest } from "../../Utils/API/Re
 import EmptyPlug from "../../Utils/EmptyPlug"
 import LoadingPlug from "../../Utils/LoadingPlug"
 import useFetchWithPagination from "../../Utils/useFetchWithPagination"
+import CommentMenu from './CommentMenu'
 
 export default function CommentsArea() {
-    // auth context
-    const userData = useAuthData()
     // video context
     const video = useVideo()
     const ChangeVideo = useVideoUpdate()
+    // auth context
+    const userData = useAuthData()
     // add comment necessities
     const [showAddCommentButtons, setShowAddCommentButtons] = useState(false)
     const [commentText, setCommentText] = useState('')
@@ -42,35 +43,59 @@ export default function CommentsArea() {
         if (node) observer.current.observe(node)
     },[loading, hasMore])
 
+    // clearing up unfinished comment on switch to another page
+    const VideoModeCheck = () => {
+        if(commentText) handleCancelCommentClick()
+        return <LoadingPlug />
+    }
+    
+    const [commentMenuState, setCommentMenuState] = useState(null)
+    const commentsRef = useRef([])
+    // comment menu click
+    const handleCommentMenuClick = (e) => {
+        
+        if(e.target.id !== '') setCommentMenuState(e.target.id)
+    }
+
     // returning comments array
     const Comments = (props) => {
-        const { commentsArray, loading, dateFormat } = props
-        if(loading) {
-            handleCancelCommentClick()
-            return <LoadingPlug />
-        }
+        const { commentsArray, dateFormat } = props
         if(commentsArray.length === 0) return <EmptyPlug />
 
         const result = commentsArray.map((item, index) => {
-            return <div key={'comment' + index} className="comments-comment">
-                <div className="avatarContainer">
-                    <img src={item.avatar} alt="" />
-                </div>
-                <div className="comment-body">
-                    <div className="body-header">
-                        <p className="comment-author">{item.author}</p>
-                        <p className="comment-date">{dateFormat.format(Date.now() - Date.parse(item.date))} ago</p> 
+            return( 
+                <div key={'comment' + index} className="comments-comment">
+                    <div className="avatarContainer">
+                        <img src={item.avatar} alt="" />
                     </div>
-                    <div className='comment-text'>{item.comment}</div>
-                </div>
-                <div className="comment-menu">
-                    <div className="dots-container">
-                        <div className="dots"></div>
-                        <div className="dots"></div>
-                        <div className="dots"></div>
+                    <div className="comment-body">
+                        <div className="body-header">
+                            <p className="comment-author">{item.author}</p>
+                            <p className="comment-date">{dateFormat.format(Date.now() - Date.parse(item.date))} ago</p> 
+                        </div>
+                        <div className='comment-text'>{item.comment}</div>
                     </div>
+                    <div className="comment-menu">
+                        <div
+                            className="dots-container"
+                            id={index}
+                            ref={element => commentsRef[index] = element}
+                            onClick={(e) => handleCommentMenuClick(e)}
+                        >
+                            <div className="dots"></div>
+                            <div className="dots"></div>
+                            <div className="dots"></div>
+                        </div>
+                    </div>
+                    <CommentMenu
+                        show={commentMenuState===index.toString()}
+                        owner={item.author === userData.name}
+                        commentMenuState={commentMenuState}
+                        setCommentMenuState={setCommentMenuState}
+                        id={item._id}
+                    />
                 </div>
-            </div>
+            )
         })
 
         if(hasMore) result.push(<div className="paginationMarker" ref={paginationMarkerElementRef}></div>)
@@ -79,8 +104,9 @@ export default function CommentsArea() {
 
     // handling add comment buttons
     const handleCancelCommentClick = () => {
-        setCommentText(() => '')
-        setShowAddCommentButtons(() => false)
+        setCommentText('')
+        setShowAddCommentButtons(false)
+        setCommentMenuState(null)
     }
 
     const handleAddCommentClick = (props) => {
@@ -124,11 +150,13 @@ export default function CommentsArea() {
                 </div>
             </div>
             <div className="commentsSection-comments">
-                <Comments
-                    commentsArray={data}
-                    loading={loading}
-                    dateFormat={dateFormat}
-                />
+                {loading
+                    ? <VideoModeCheck />
+                    : <Comments
+                        commentsArray={data}
+                        dateFormat={dateFormat}
+                    />
+                }
             </div>
         </form>
     )
