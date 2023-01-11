@@ -3,6 +3,8 @@ import Icons from '../../Assets/icons'
 import { useVideo, useVideoUpdate } from '../../ContextProviders/VideoContext'
 import { useQuery, useQueryUpdate } from '../../ContextProviders/QueryProvider'
 import CommentsArea from './CommentsArea'
+import { useRef } from 'react'
+import { useEffect } from 'react'
 
 export default function VideoArea() {
     // video context
@@ -11,6 +13,8 @@ export default function VideoArea() {
     // query context
     const query = useQuery()
     const ChangeQuery = useQueryUpdate()
+    //
+    const videoAreaRef = useRef()
     
     // handling click on user icon or channel name
     const goToVideoAuthorsPage = () => {
@@ -23,6 +27,13 @@ export default function VideoArea() {
         })
     }
 
+    useEffect(() => {
+        // scrolling to the top of the vide area page on new slide select
+        if(videoAreaRef.current) {
+            videoAreaRef.current.scrollIntoView()
+        }
+    },[video.element.title])
+
     return (
         <div
             className="videoArea-container"
@@ -31,7 +42,7 @@ export default function VideoArea() {
             {video.active &&
             <>
                 <form className="videoArea-videoContainer">
-                    <img className='videoArea-video' src={video.element.image} alt="" />
+                    <img className='videoArea-video' src={video.element.image} alt="" ref={videoAreaRef} />
                     <div className="videoArea-videoTitle">{video.element.title}</div>
                     <div className="videoArea-channelInfo">
                         <div

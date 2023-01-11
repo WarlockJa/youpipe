@@ -1,5 +1,6 @@
 import { useCallback, useRef } from "react"
 import { useAuthData } from "../../ContextProviders/AuthContext"
+import { useVideo, useVideoUpdate } from "../../ContextProviders/VideoContext"
 import { DeleteComment } from "../../Utils/API/RequestsLibrary"
 import useEventOutsideListener from "../../Utils/useEventOutsideListener"
 
@@ -8,6 +9,9 @@ export default function CommentMenu(props) {
     const commentMenuRef = useRef()
     // auth context
     const userData = useAuthData()
+    // video context
+    const video = useVideo()
+    const ChangeVideo = useVideoUpdate()
 
     // closing user menu if clicked outside of it's area using custom hook
     const handleClickOutside = useCallback((event) => {
@@ -21,6 +25,13 @@ export default function CommentMenu(props) {
 
     useEventOutsideListener('mousedown', handleClickOutside)
 
+    const handleDeleteComment = (props) => {
+        const { userData, id, video } = props
+        DeleteComment({ AccessToken: userData.accessToken, body: { id: id } })
+        setCommentMenuState(null)
+        ChangeVideo({ ...video, amountToFind: video.amountToFind - 1 })
+    }
+
     return (
         <div
             className="menu"
@@ -30,9 +41,12 @@ export default function CommentMenu(props) {
             {owner
                 ? <div 
                     className="menu-item"
-                    onClick={() => DeleteComment({ AccessToken: userData.accessToken, body: { id: id } })}
+                    onClick={() => handleDeleteComment({ userData: userData, id: id, video: video })}
                 >Delete</div>
-                : <div className="menu-item">Report</div>
+                : <div
+                    className="menu-item"
+                    onClick={() => setCommentMenuState(null)}
+                >Report</div>
             }
         </div>
     )

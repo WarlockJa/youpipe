@@ -1,9 +1,9 @@
 import './commentsarea.scss'
 import Icons from "../../Assets/icons"
 import { useCallback, useRef, useState } from "react"
-import { useAuthData } from "../../ContextProviders/AuthContext"
+import { useAuthData, useAuthUpdateData } from "../../ContextProviders/AuthContext"
 import { useVideo, useVideoUpdate } from "../../ContextProviders/VideoContext"
-import { PostComment, postUnauthorizedCommentsRequest } from "../../Utils/API/RequestsLibrary"
+import { PostComment, postUnauthorizedCommentsRequest, RefreshToken } from "../../Utils/API/RequestsLibrary"
 import EmptyPlug from "../../Utils/EmptyPlug"
 import LoadingPlug from "../../Utils/LoadingPlug"
 import useFetchWithPagination from "../../Utils/useFetchWithPagination"
@@ -15,9 +15,12 @@ export default function CommentsArea() {
     const ChangeVideo = useVideoUpdate()
     // auth context
     const userData = useAuthData()
+    const ChangeUser = useAuthUpdateData()
     // add comment necessities
     const [showAddCommentButtons, setShowAddCommentButtons] = useState(false)
     const [commentText, setCommentText] = useState('')
+    // comment's menu state
+    const [commentMenuState, setCommentMenuState] = useState(null)
 
     // TODO: make an export function
     const dateFormat = new Intl.DateTimeFormat("en-GB", {day: '2-digit', hour: '2-digit', minute: '2-digit'})
@@ -49,8 +52,6 @@ export default function CommentsArea() {
         return <LoadingPlug />
     }
     
-    const [commentMenuState, setCommentMenuState] = useState(null)
-    const commentsRef = useRef([])
     // comment menu click
     const handleCommentMenuClick = (e) => {
         
@@ -77,9 +78,8 @@ export default function CommentsArea() {
                     </div>
                     <div className="comment-menu">
                         <div
-                            className="dots-container"
                             id={index}
-                            ref={element => commentsRef[index] = element}
+                            className="dots-container"
                             onClick={(e) => handleCommentMenuClick(e)}
                         >
                             <div className="dots"></div>
@@ -89,7 +89,7 @@ export default function CommentsArea() {
                     </div>
                     <CommentMenu
                         show={commentMenuState===index.toString()}
-                        owner={item.author === userData.name}
+                        owner={userData?.name ? item.author === userData.name : false}
                         commentMenuState={commentMenuState}
                         setCommentMenuState={setCommentMenuState}
                         id={item._id}
@@ -98,7 +98,7 @@ export default function CommentsArea() {
             )
         })
 
-        if(hasMore) result.push(<div className="paginationMarker" ref={paginationMarkerElementRef}></div>)
+        if(hasMore) result.push(<div key={"PaginationMarker"} className="paginationMarker" ref={paginationMarkerElementRef}></div>)
         return result
     }
 
@@ -114,8 +114,23 @@ export default function CommentsArea() {
         if(!comment) return
         const newCommentData = { video: videoId, comment: comment, avatar: userAvatar }
         PostComment({ AccessToken: accessToken, CommentData: newCommentData })
+        ChangeVideo({ ...video, amountToFind: video.amountToFind + 1 })
         setCommentText(() => '')
         setShowAddCommentButtons(() => false)
+    }
+
+    // handle add comment activation
+    const handleAddCommentInterfaceActive = () => {
+        if(!userData) return
+
+        RefreshToken(ChangeUser)
+        setShowAddCommentButtons(true)
+    }
+
+    // handle input area change
+    const handleNewCommentInputChange = (e) => {
+        if(!userData) return
+        setCommentText(e.target.value)
     }
 
     return (
@@ -128,9 +143,9 @@ export default function CommentsArea() {
                     <textarea
                         className='commentBody'
                         value={commentText}
-                        onChange={(e) => setCommentText(e.target.value)}
-                        onClick={() => setShowAddCommentButtons(true)}
-                        placeholder="Add a comment..."
+                        onChange={(e) => handleNewCommentInputChange(e)}
+                        onClick={() => handleAddCommentInterfaceActive()}
+                        placeholder={userData ? "Add a comment..." : "Log in to leave a comment"}
                     ></textarea>
                 </div>
                 <div className={showAddCommentButtons ? "addCommentContainer-activeSection" : "addCommentContainer-activeSection invisible"}>

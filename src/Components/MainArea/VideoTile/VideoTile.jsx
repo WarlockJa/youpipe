@@ -2,6 +2,8 @@ import './videotile.scss'
 import StumpImage from "../../../Assets/stumpimage.png"
 import { useVideo, useVideoUpdate } from '../../../ContextProviders/VideoContext'
 import { useSideMenu, useSideMenuUpdate } from '../../../ContextProviders/SideMenuContext'
+import { RefreshToken } from '../../../Utils/API/RequestsLibrary'
+import { useAuthUpdateData } from '../../../ContextProviders/AuthContext'
 
 export default function VideoTile(props) {
     const { element } = props
@@ -11,6 +13,8 @@ export default function VideoTile(props) {
     // side menu context
     const sideMenuOptions = useSideMenu()
     const ChangeSideMenu = useSideMenuUpdate()
+    // auth context
+    const ChangeUser = useAuthUpdateData()
 
     // returning stump tile to fill up unfinished row
     if(!element) return (
@@ -26,6 +30,7 @@ export default function VideoTile(props) {
     const dateFormat = new Intl.DateTimeFormat("en-GB", {day: '2-digit', hour: '2-digit', minute: '2-digit'})
 
     const handleVideoTileClick = () => {
+        RefreshToken(ChangeUser)
         ChangeVideo({ active: true, element: element, amountToFind: 40, defaults: video.defaults })
         ChangeSideMenu({ ...sideMenuOptions, sideMenuFolded: true })
     }

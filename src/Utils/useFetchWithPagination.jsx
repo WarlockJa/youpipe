@@ -20,10 +20,13 @@ export default function useFetchWithPagination(props) {
     // fetch more data when the page number changes
     useEffect(() => {
         setLoading(true)
+        let isCanceled = false
 
         const callback = (result) => {
-            setData(result.result)
-            setHasMore(result.hasMore > 0)
+            if(!isCanceled) {
+                setData(result.result)
+                setHasMore(result.hasMore > 0)
+            }
             setLoading(false)
         }
 
@@ -33,6 +36,8 @@ export default function useFetchWithPagination(props) {
         } else {
             setLoading(false)
         }
+
+        return () => isCanceled = true
 
     },[query.amountToFind, dependencyField])
 
