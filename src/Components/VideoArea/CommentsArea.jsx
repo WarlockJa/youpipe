@@ -2,34 +2,37 @@ import './commentsarea.scss'
 import Icons from "../../Assets/icons"
 import { useCallback, useRef, useState } from "react"
 import { useAuthData, useAuthUpdateData } from "../../ContextProviders/AuthContext"
-import { useVideo, useVideoUpdate } from "../../ContextProviders/VideoContext"
 import { PostComment, postUnauthorizedCommentsRequest, RefreshToken } from "../../Utils/API/RequestsLibrary"
 import EmptyPlug from "../../Utils/EmptyPlug"
 import LoadingPlug from "../../Utils/LoadingPlug"
 import useFetchWithPagination from "../../Utils/useFetchWithPagination"
 import CommentMenu from './CommentMenu'
+import { useEffect } from 'react'
 
-export default function CommentsArea() {
-    // video context
-    const video = useVideo()
-    const ChangeVideo = useVideoUpdate()
+export default function CommentsArea(props) {
+    const { videoId } = props
     // auth context
     const userData = useAuthData()
     const ChangeUser = useAuthUpdateData()
+    // comments fetch query
+    const [commentsQuery, setCommentsQuery] = useState({ amountToFind: 20, video: videoId })
     // add comment necessities
     const [showAddCommentButtons, setShowAddCommentButtons] = useState(false)
     const [commentText, setCommentText] = useState('')
     // comment's menu state
     const [commentMenuState, setCommentMenuState] = useState(null)
 
+    // resetting comments state on a new slide click
+    useEffect(() => {
+        setCommentsQuery({ amountToFind: 20, video: videoId })
+        handleCancelCommentClick()
+    },[videoId])
+
     // TODO: make an export function
     const dateFormat = new Intl.DateTimeFormat("en-GB", {day: '2-digit', hour: '2-digit', minute: '2-digit'})
 
-    // preparing pureQuery for the fetch hook
-    const pureQuery = { amountToFind: video.amountToFind, video: video.element._id }
-
     // fetching comments data
-    const { loading, hasMore, data } = useFetchWithPagination({ query: pureQuery, request: postUnauthorizedCommentsRequest })
+    const { loading, hasMore, data } = useFetchWithPagination({ query: commentsQuery, request: postUnauthorizedCommentsRequest })
 
     // pagination setup
     const observer = useRef()
@@ -38,30 +41,18 @@ export default function CommentsArea() {
         if (observer.current) observer.current.disconnect()
 
         observer.current = new IntersectionObserver(entries => {
-            if (entries[0].isIntersecting && hasMore) {
-                ChangeVideo({ ...video, amountToFind: video.amountToFind + 20 })
+            if (entries[0].isIntersecting && hasMore > 0) {
+                setCommentsQuery({ ...commentsQuery, amountToFind: commentsQuery.amountToFind + 20 })
             }
         })
 
         if (node) observer.current.observe(node)
     },[loading, hasMore])
 
-    // clearing up unfinished comment on switch to another page
-    const VideoModeCheck = () => {
-        if(commentText) handleCancelCommentClick()
-        return <LoadingPlug />
-    }
-    
-    // comment menu click
-    const handleCommentMenuClick = (e) => {
-        
-        if(e.target.id !== '') setCommentMenuState(e.target.id)
-    }
-
     // returning comments array
     const Comments = (props) => {
         const { commentsArray, dateFormat } = props
-        if(commentsArray.length === 0) return <EmptyPlug />
+        if(commentsArray.length === 0) return
 
         const result = commentsArray.map((item, index) => {
             return( 
@@ -80,7 +71,8 @@ export default function CommentsArea() {
                         <div
                             id={index}
                             className="dots-container"
-                            onClick={(e) => handleCommentMenuClick(e)}
+                            // onClick={(e) => handleCommentMenuClick(e)}
+                            onClick={(e) => e.target.id && setCommentMenuState(e.target.id)}
                         >
                             <div className="dots"></div>
                             <div className="dots"></div>
@@ -92,14 +84,21 @@ export default function CommentsArea() {
                         owner={userData?.name ? item.author === userData.name : false}
                         commentMenuState={commentMenuState}
                         setCommentMenuState={setCommentMenuState}
+                        commentsQuery={commentsQuery}
+                        setCommentsQuery={setCommentsQuery}
                         id={item._id}
                     />
                 </div>
             )
         })
 
-        if(hasMore) result.push(<div key={"PaginationMarker"} className="paginationMarker" ref={paginationMarkerElementRef}></div>)
+        if(hasMore > 0) result.push(<div key={"PaginationMarker"} className="paginationMarker" ref={paginationMarkerElementRef}></div>)
         return result
+    }
+
+    // comment menu click
+    const handleCommentMenuClick = (e) => {
+        if(e.target.id !== '') setCommentMenuState(e.target.id)
     }
 
     // handling add comment buttons
@@ -108,13 +107,13 @@ export default function CommentsArea() {
         setShowAddCommentButtons(false)
         setCommentMenuState(null)
     }
-
+    
     const handleAddCommentClick = (props) => {
         const { comment, videoId, userAvatar, accessToken } = props
         if(!comment) return
         const newCommentData = { video: videoId, comment: comment, avatar: userAvatar }
         PostComment({ AccessToken: accessToken, CommentData: newCommentData })
-        ChangeVideo({ ...video, amountToFind: video.amountToFind + 1 })
+        setCommentsQuery({ ...commentsQuery, amountToFind: commentsQuery + 1 })
         setCommentText(() => '')
         setShowAddCommentButtons(() => false)
     }
@@ -127,12 +126,6 @@ export default function CommentsArea() {
         setShowAddCommentButtons(true)
     }
 
-    // handle input area change
-    const handleNewCommentInputChange = (e) => {
-        if(!userData) return
-        setCommentText(e.target.value)
-    }
-
     return (
         <form className="videoArea-container-commentsSection">
             <div className="commentsSection-addCommentContainer">
@@ -143,7 +136,7 @@ export default function CommentsArea() {
                     <textarea
                         className='commentBody'
                         value={commentText}
-                        onChange={(e) => handleNewCommentInputChange(e)}
+                        onChange={(e) => userData && setCommentText(e.target.value)}
                         onClick={() => handleAddCommentInterfaceActive()}
                         placeholder={userData ? "Add a comment..." : "Log in to leave a comment"}
                     ></textarea>
@@ -157,7 +150,7 @@ export default function CommentsArea() {
                         className={commentText ? "addComment videoArea-button" : "addComment videoArea-button inactive"}
                         onClick={() => handleAddCommentClick({
                             comment: commentText,
-                            videoId: video.element._id,
+                            videoId: videoId,
                             userAvatar: userData.avatar,
                             accessToken: userData.accessToken
                         })}
@@ -165,13 +158,12 @@ export default function CommentsArea() {
                 </div>
             </div>
             <div className="commentsSection-comments">
-                {loading
-                    ? <VideoModeCheck />
-                    : <Comments
-                        commentsArray={data}
-                        dateFormat={dateFormat}
-                    />
-                }
+                 <Comments
+                    commentsArray={data}
+                    dateFormat={dateFormat}
+                />
+                {loading && <LoadingPlug />}
+                {!loading && data.length === 0 && <EmptyPlug />}
             </div>
         </form>
     )

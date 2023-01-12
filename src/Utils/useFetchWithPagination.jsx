@@ -6,7 +6,7 @@ export default function useFetchWithPagination(props) {
 
     const [loading, setLoading] = useState(true)
     const [data, setData] = useState([])
-    const [hasMore, setHasMore] = useState(false)
+    const [hasMore, setHasMore] = useState(null)
 
     // forming a macro dependency for different query use cases
     const { amountToFind, ...queryRest } = query
@@ -25,7 +25,7 @@ export default function useFetchWithPagination(props) {
         const callback = (result) => {
             if(!isCanceled) {
                 setData(result.result)
-                setHasMore(result.hasMore > 0)
+                setHasMore(result.hasMore)
             }
             setLoading(false)
         }

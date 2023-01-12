@@ -3,8 +3,7 @@ import Icons from '../../Assets/icons'
 import { useVideo, useVideoUpdate } from '../../ContextProviders/VideoContext'
 import { useQuery, useQueryUpdate } from '../../ContextProviders/QueryProvider'
 import CommentsArea from './CommentsArea'
-import { useRef } from 'react'
-import { useEffect } from 'react'
+import { useRef, useEffect } from 'react'
 
 export default function VideoArea() {
     // video context
@@ -81,7 +80,9 @@ export default function VideoArea() {
                     </div>
                     <div className="videoArea-description">{video.element.description}</div>
                 </form>
-                <CommentsArea />
+                <CommentsArea
+                    videoId = {video.element._id}
+                />
             </>}
         </div>
     )

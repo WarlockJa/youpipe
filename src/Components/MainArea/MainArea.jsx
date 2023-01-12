@@ -37,7 +37,7 @@ export default function MainArea() {
     if (observer.current) observer.current.disconnect()
 
     observer.current = new IntersectionObserver(entries => {
-      if (entries[0].isIntersecting && hasMore) {
+      if (entries[0].isIntersecting && hasMore > 0) {
         ChangeQuery({ ...query, amountToFind: query.amountToFind + query.defaults.increment })
       }
     })
@@ -65,7 +65,7 @@ export default function MainArea() {
         lastLinePassed = true
         return(
           <React.Fragment key={'PaginatorFragment'+index}>
-            {hasMore && <div className="paginationMarker" ref={paginationMarkerElementRef}></div>}
+            {hasMore > 0 && <div className="paginationMarker" ref={paginationMarkerElementRef}></div>}
             <RowContainer key={'RowContainer'+index} rowElementsNumber={rowLength} elements={videos.slice(rowStart, rowStart + rowLength)} />
           </React.Fragment>
         )
