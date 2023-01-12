@@ -71,7 +71,6 @@ export default function CommentsArea(props) {
                         <div
                             id={index}
                             className="dots-container"
-                            // onClick={(e) => handleCommentMenuClick(e)}
                             onClick={(e) => e.target.id && setCommentMenuState(e.target.id)}
                         >
                             <div className="dots"></div>
@@ -94,11 +93,6 @@ export default function CommentsArea(props) {
 
         if(hasMore > 0) result.push(<div key={"PaginationMarker"} className="paginationMarker" ref={paginationMarkerElementRef}></div>)
         return result
-    }
-
-    // comment menu click
-    const handleCommentMenuClick = (e) => {
-        if(e.target.id !== '') setCommentMenuState(e.target.id)
     }
 
     // handling add comment buttons

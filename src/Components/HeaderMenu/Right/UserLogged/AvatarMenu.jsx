@@ -8,10 +8,12 @@ import { updateUserData } from '../../../../Utils/API/RequestsLibrary'
 
 export default function AvatarMenu(props) {
     const { iconMenuRef } = props
+    // auth context
     const userData = useAuthData()
-    const ChangeUser = useAuthUpdateData()
+    // menu context
     const menuData = useMenuData()
     const ChangeMenu = useMenuUpdateData()
+    
     const avatarMenuRef = useRef(null)
 
     // closing user menu if clicked outside of it's area using custom hook
@@ -32,7 +34,7 @@ export default function AvatarMenu(props) {
                 <div
                     key={index}
                     className="avatar"
-                    onClick={() => updateUserData({ AccessToken: userData.accessToken, UserData: userData, ChangeUser: ChangeUser, UpdateFields: { "avatar": item.avatar } })}
+                    onClick={() => updateUserData({ AccessToken: userData.accessToken, UpdateFields: { "avatar": item.avatar } })}
                 >
                     <img src={item.avatar} alt="" />
                 </div>

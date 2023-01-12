@@ -4,6 +4,7 @@ import { useVideo, useVideoUpdate } from '../../../ContextProviders/VideoContext
 import { useSideMenu, useSideMenuUpdate } from '../../../ContextProviders/SideMenuContext'
 import { RefreshToken } from '../../../Utils/API/RequestsLibrary'
 import { useAuthUpdateData } from '../../../ContextProviders/AuthContext'
+import { useQuery, useQueryUpdate } from '../../../ContextProviders/QueryProvider'
 
 export default function VideoTile(props) {
     const { element } = props
@@ -15,6 +16,9 @@ export default function VideoTile(props) {
     const ChangeSideMenu = useSideMenuUpdate()
     // auth context
     const ChangeUser = useAuthUpdateData()
+    // query context
+    const query = useQuery()
+    const ChangeQuery = useQueryUpdate()
 
     // returning stump tile to fill up unfinished row
     if(!element) return (
@@ -30,9 +34,24 @@ export default function VideoTile(props) {
     const dateFormat = new Intl.DateTimeFormat("en-GB", {day: '2-digit', hour: '2-digit', minute: '2-digit'})
 
     const handleVideoTileClick = () => {
+        // refreshing Access Token for the user
         RefreshToken(ChangeUser)
+        // Switching to another slide
         ChangeVideo({ active: true, element: element, amountToFind: 40, defaults: video.defaults })
+        // Folding side menu for video mode
         ChangeSideMenu({ ...sideMenuOptions, sideMenuFolded: true })
+        // changing query for the main area based on the tags of the selected slide
+        let randomTagsArray = [];
+        // selecting a random N=1 number of tags from the list
+        [...Array(1)].map(_item => randomTagsArray.push(element.tags[ Math.floor(Math.random() * element.tags.length) ]))
+        // making the request array unique
+        // randomTagsArray = [...new Set(randomTagsArray.map(item => item))]
+        ChangeQuery({
+            amountToFind: query.defaults.amountToFind,
+            fieldToSortBy: query.defaults.fieldToSortBy,
+            query: { type: "tags", field: randomTagsArray },
+            defaults: query.defaults
+        })
     }
 
     return (

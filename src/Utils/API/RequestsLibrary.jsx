@@ -186,7 +186,7 @@ export function getIdToken(AccessToken, ChangeUser) {
 // updates authorized user's data
 // used in AvatarMenu
 export function updateUserData(props) {
-    const { AccessToken, UserData, ChangeUser, UpdateFields } = props
+    const { AccessToken, UpdateFields } = props
     const headers = new Headers({ "Authorization": 'Bearer ' + AccessToken, "Content-Type": "application/json" })
     const request = new Request(URI + 'userAuthorized', {
         method: 'PUT',
@@ -197,8 +197,7 @@ export function updateUserData(props) {
         secure: true,
     })
     const callback = async (response) => {
-        response.status === 200 ? ChangeUser({...UserData, ...UpdateFields}) : 
-        RefreshToken(ChangeUser)
+        window.location.reload()
     }
 
     DataFetch({ request: request, callback: callback })
