@@ -176,7 +176,7 @@ export function getIdToken(AccessToken, ChangeUser) {
         cache: 'default',
         secure: true,
     })
-    const callback = async (response) => {
+    const callback = (response) => {
         response.json().then(IdToken => ChangeUser({ "accessToken": AccessToken, ...IdToken }));
     }
 
@@ -196,8 +196,8 @@ export function updateUserData(props) {
         cache: 'default',
         secure: true,
     })
-    const callback = async (response) => {
-        window.location.reload()
+    const callback = (response) => {
+        console.log(response)
     }
 
     DataFetch({ request: request, callback: callback })

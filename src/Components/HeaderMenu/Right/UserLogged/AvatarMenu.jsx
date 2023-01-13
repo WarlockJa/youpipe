@@ -1,7 +1,6 @@
 import { useCallback, useRef } from 'react'
 import useEventOutsideListener from '../../../../Utils/useEventOutsideListener'
-import '../../../../Utils/menu.scss'
-import { useAuthData, useAuthUpdateData } from '../../../../ContextProviders/AuthContext'
+import { useAuthData } from '../../../../ContextProviders/AuthContext'
 import { useMenuData, useMenuUpdateData } from '../../../../ContextProviders/MenuContext'
 import AvatarsData from './avatars.json'
 import { updateUserData } from '../../../../Utils/API/RequestsLibrary'
@@ -13,7 +12,7 @@ export default function AvatarMenu(props) {
     // menu context
     const menuData = useMenuData()
     const ChangeMenu = useMenuUpdateData()
-    
+
     const avatarMenuRef = useRef(null)
 
     // closing user menu if clicked outside of it's area using custom hook
@@ -28,13 +27,19 @@ export default function AvatarMenu(props) {
 
     useEventOutsideListener('mousedown', handleClickOutside)
 
+    const handleAvatarUpdate = (props) => {
+        const { AccessToken, UpdateFields } = props
+        updateUserData({ AccessToken: AccessToken, UpdateFields: UpdateFields })
+        window.location.reload()
+    }
+
     const AvatarsList = (items) => {
         return items.items.map((item, index) => {
             return(
                 <div
                     key={index}
                     className="avatar"
-                    onClick={() => updateUserData({ AccessToken: userData.accessToken, UpdateFields: { "avatar": item.avatar } })}
+                    onClick={() => handleAvatarUpdate({ AccessToken: userData.accessToken, UpdateFields: { "avatar": item.avatar } })}
                 >
                     <img src={item.avatar} alt="" />
                 </div>

@@ -4,37 +4,73 @@
             "avatar": "/Assets/UserAvatars/Bear.jpg"
         },
         {
+            "avatar": "/Assets/UserAvatars/bear-color.jpg"
+        },
+        {
             "avatar": "/Assets/UserAvatars/Bird.jpg"
+        },
+        {
+            "avatar": "/Assets/UserAvatars/bird-color.jpg"
         },
         {
             "avatar": "/Assets/UserAvatars/Cat.jpg"
         },
         {
+            "avatar": "/Assets/UserAvatars/cat-color.jpg"
+        },
+        {
             "avatar": "/Assets/UserAvatars/Chicken.jpg"
+        },
+        {
+            "avatar": "/Assets/UserAvatars/chicken-color.jpg"
         },
         {
             "avatar": "/Assets/UserAvatars/Deer.jpg"
         },
         {
+            "avatar": "/Assets/UserAvatars/deer-color.jpg"
+        },
+        {
             "avatar": "/Assets/UserAvatars/Dog.jpg"
+        },
+        {
+            "avatar": "/Assets/UserAvatars/dog-color.jpg"
         },
         {
             "avatar": "/Assets/UserAvatars/Giraffe.jpg"
         },
         {
+            "avatar": "/Assets/UserAvatars/giraffe-color.jpg"
+        },
+        {
             "avatar": "/Assets/UserAvatars/Horse.jpg"
+        },
+        {
+            "avatar": "/Assets/UserAvatars/horse-color.jpg"
         },
         {
             "avatar": "/Assets/UserAvatars/Mouse.jpg"
         },
         {
+            "avatar": "/Assets/UserAvatars/mouse-color.jpg"
+        },
+        {
             "avatar": "/Assets/UserAvatars/Panda.jpg"
+        },
+        {
+            "avatar": "/Assets/UserAvatars/panda-color.jpg"
         },
         {
             "avatar": "/Assets/UserAvatars/Pig.jpg"
         },
         {
+            "avatar": "/Assets/UserAvatars/pig-color.jpg"
+        },
+        {
             "avatar": "/Assets/UserAvatars/Rabbit.jpg"
+        },
+        {
+            "avatar": "/Assets/UserAvatars/rabbit-color.jpg"
         }
     ],
     "info":{

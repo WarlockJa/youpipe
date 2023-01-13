@@ -61,11 +61,6 @@ export default function VideoTile(props) {
         >
             <div className="ImageArea">
                 <img src={image} alt="" />
-                <div className='Overlays'>
-                    <div className="WatchLater"></div>
-                    <div className="AddToQueue"></div>
-                    <div className="VideoDuration"></div>
-                </div>
             </div>
             <div className="VideoDescription">
                 <div className="UserIcon">
@@ -75,11 +70,6 @@ export default function VideoTile(props) {
                     <h2 title={title}>{title}</h2>
                     <h3>{author}</h3>
                     <h3>{views} • {dateFormat.format(Date.now() - Date.parse(uploaded))} ago</h3>
-                </div>
-                <div className="VideoOptions">
-                    <div className="dots"></div>
-                    <div className="dots"></div>
-                    <div className="dots"></div>
                 </div>
             </div>
         </div>
