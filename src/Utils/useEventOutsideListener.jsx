@@ -1,6 +1,6 @@
 import { useRef, useEffect } from 'react'
 
-export default function useEventOutsideListener(eventName, handler) {
+export default function useEventOutsideListener(eventName, handler, method) {
     const savedHandler = useRef();
 
     useEffect (() => {
@@ -10,10 +10,14 @@ export default function useEventOutsideListener(eventName, handler) {
     useEffect (() => {
         const eventListener = (event) => savedHandler.current(event)
 
-        document.addEventListener(eventName, eventListener, { passive: false })
+        method === 'window'
+        ? window.addEventListener(eventName, eventListener, { passive: false })
+        : document.addEventListener(eventName, eventListener, { passive: false })
         
         return () => {
-            document.removeEventListener(eventName, eventListener)
+            method === 'window'
+            ? window.removeEventListener(eventName, eventListener)
+            : document.removeEventListener(eventName, eventListener)
         }
     },[eventName])
 }

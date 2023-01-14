@@ -22,7 +22,7 @@ export default function LoginOptions(props) {
         ChangeMenu({...menuData, loginMenu: false}) // closing the menu
     }, [menuData.loginMenu])
 
-    useEventOutsideListener('mousedown', handleClickOutside)
+    useEventOutsideListener('mousedown', handleClickOutside, 'document')
     
     return (
         <div

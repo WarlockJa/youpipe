@@ -3,7 +3,7 @@ import Icon from "../../Assets/tubes.png"
 import { useTheme } from "../../ContextProviders/ThemeContext"
 import { useAuthUpdateData, useAuthData } from "../../ContextProviders/AuthContext"
 import Icons from '../../Assets/icons'
-import { useEffect, useState } from "react"
+import { useCallback, useEffect, useState } from "react"
 import { refreshTokenRequest, getIdTokenRequest, postUnauthorizedRequest, postUnauthorizedVideosRequest } from "../../Utils/API/RequestsLibrary"
 import UserLogged from "./Right/UserLogged/UserLogged"
 import Login from "./Right/Login/Login"
@@ -13,6 +13,7 @@ import LoadingPlug from "../../Utils/LoadingPlug"
 import { useQuery, useQueryUpdate } from "../../ContextProviders/QueryContext"
 import { useSideMenu, useSideMenuUpdate } from "../../ContextProviders/SideMenuContext"
 import { useVideo, useVideoUpdate } from "../../ContextProviders/VideoContext"
+import useEventOutsideListener from "../../Utils/useEventOutsideListener"
 
 export default function HeaderMenu() {
   // theme context
@@ -43,11 +44,44 @@ export default function HeaderMenu() {
     // completing auth context
     ChangeUser((prev) => ({ ...prev, ...IdToken }))
 
-    // processing URI inputs
+    // processing authorized URI requests
+    const queryParameters = new URLSearchParams(window.location.search)
+    const paramLiked = queryParameters.get('liked')
+    const paramSubscribed = queryParameters.get('subs')
+
+    // fetching liked video request from the URI
+    paramLiked && ChangeQuery({
+      amountToFind: query.defaults.amountToFind,
+      fieldToSortBy: query.defaults.fieldToSortBy,
+      query: { type: "liked", field: IdToken.activity.likes },
+      defaults: query.defaults
+    })
+
+    paramSubscribed && ChangeQuery({
+      amountToFind: query.defaults.amountToFind,
+      fieldToSortBy: query.defaults.fieldToSortBy,
+      query: { type: "author", field: IdToken.activity.subscriptions },
+      defaults: query.defaults
+    })
+  }
+
+  // using loading hook to display loading screen on user data fecth during first loading
+  const getAccessToken = useLoadingHook({ callback: callbackGetAccessToken })
+  const getIdToken = useLoadingHook({ callback: callbackGetIdToken })
+
+  // on site load check if Refresh Token present and use it to fetch data
+  // and process URI requests
+  useEffect (() => {
+
+    console.log('Fetching user data from refresh Token useEffect firing')
+    getAccessToken.apiRequest(refreshTokenRequest)
+
+    // processing unauthorized URI inputs
     const queryParameters = new URLSearchParams(window.location.search)
     const paramVideo = queryParameters.get('v')
     const paramSearch = queryParameters.get('search')
-
+    const paramTags = queryParameters.get('tags')
+    
     // search query in URI
     paramSearch && ChangeQuery({
         amountToFind: query.defaults.amountToFind,
@@ -74,22 +108,22 @@ export default function HeaderMenu() {
     // processing video URI request
     const body = { amountToFind: 1, query: { type: "video", field: decodeURI(paramVideo) } }
     paramVideo && postUnauthorizedRequest({ body: body, request: postUnauthorizedVideosRequest, setDataArray: videoURIcallback })
-  }
 
-
-
-
-
-  // using loading hook to display loading screen on user data fecth during first loading
-  const getAccessToken = useLoadingHook({ callback: callbackGetAccessToken })
-  const getIdToken = useLoadingHook({ callback: callbackGetIdToken })
-
-  // on site load check if Refresh Token present and use it to fetch data
-  useEffect (() => {
-
-    console.log('Fetching user data from refresh Token useEffect firing')
-    getAccessToken.apiRequest(refreshTokenRequest)
+    // tags query in URI
+    paramTags && ChangeQuery({
+      amountToFind: query.defaults.amountToFind,
+      fieldToSortBy: query.defaults.fieldToSortBy,
+      query: { type: "tags", field: decodeURI(paramTags).split(' ').map(item => item) },
+      defaults: query.defaults
+    })
   },[])
+
+  // processing popstate change
+  const handlePopstateEvent = useCallback((event) => {
+    window.location.reload()
+  },[])
+
+  useEventOutsideListener('popstate', handlePopstateEvent, 'window')
 
   // executing search
   const handleSearchClick = (searchString) => {

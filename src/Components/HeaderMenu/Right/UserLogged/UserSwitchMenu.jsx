@@ -22,7 +22,7 @@ export default function UserSwitchMenu(props) {
         ChangeMenu({...menuData, userSwitchMenu: false}) // closing the menu
     }, [menuData.userSwitchMenu])
 
-    useEventOutsideListener('mousedown', handleClickOutside)
+    useEventOutsideListener('mousedown', handleClickOutside, document)
 
     return (
         <div

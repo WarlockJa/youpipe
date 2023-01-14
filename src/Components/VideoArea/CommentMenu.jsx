@@ -19,7 +19,7 @@ export default function CommentMenu(props) {
         setCommentMenuState(null) // closing the menu
     }, [commentMenuState])
 
-    useEventOutsideListener('mousedown', handleClickOutside)
+    useEventOutsideListener('mousedown', handleClickOutside, document)
 
     const handleDeleteComment = (props) => {
         const { userData, id } = props

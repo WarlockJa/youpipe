@@ -23,7 +23,7 @@ export default function CreateVideo(props) {
         ChangeMenu({...menuData, createVideoMenu: false}) // closing the menu
     }, [menuData.createVideoMenu])
 
-    useEventOutsideListener('mousedown', handleClickOutside)
+    useEventOutsideListener('mousedown', handleClickOutside, document)
 
     return (
         <form 

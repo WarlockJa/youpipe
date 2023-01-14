@@ -32,7 +32,7 @@ export default function UserMenu(props) {
         ChangeMenu({...menuData, userMenu: false}) // closing the menu
     }, [menuData.userMenu])
 
-    useEventOutsideListener('mousedown', handleClickOutside)
+    useEventOutsideListener('mousedown', handleClickOutside, document)
 
     // handling your channel menu option click
     const handleYourChannelClick = () => {

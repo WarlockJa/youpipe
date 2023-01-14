@@ -19,10 +19,10 @@ export default function VideoArea() {
     const ChangeQuery = useQueryUpdate()
     const videoAreaRef = useRef()
     // user activity on the video and the channel
-    const videoLiked = video.active ? userData.activity.likes.includes(video.element._id) : null
-    const videoDisliked = video.active ? userData.activity.dislikes.includes(video.element._id) : null
-    const channelSubscribed = video.active ? userData.activity.subscriptions.includes(video.element.author) : null
-    
+    const videoLiked = video.active && userData?.activity ? userData.activity.likes.includes(video.element._id) : null
+    const videoDisliked = video.active && userData?.activity ? userData.activity.dislikes.includes(video.element._id) : null
+    const channelSubscribed = video.active && userData?.activity ? userData.activity.subscriptions.includes(video.element.author) : null
+
     useEffect(() => {
         // scrolling to the top of the vide area page on new slide select
         if(videoAreaRef.current) {
@@ -43,6 +43,7 @@ export default function VideoArea() {
 
     const handleLikePress = () => {
         updateUserData({ AccessToken: userData.accessToken, UpdateFields: { activity: { likes: video.element._id } }, ChangeUser: ChangeUser })
+        // ChangeVideo({ ...video, element: { rating: { likes: video.element.rating.likes + 1 } } })
     }
 
     const handleDislikePress = () => {
@@ -97,7 +98,7 @@ export default function VideoArea() {
                             </div>
                             <div
                                 className="videoArea-ratingSection-dislikes videoArea-button"
-                                title={videoDisliked ? video.element.rating.likes : video.element.rating.dislikes - 1 }
+                                title={videoDisliked ? video.element.rating.dislikes + 1 : video.element.rating.dislikes }
                                 onClick={() => handleDislikePress()}
                             >
                                 <Icons.ThumbUp style={{transform: 'rotateZ(180deg)'}}/>

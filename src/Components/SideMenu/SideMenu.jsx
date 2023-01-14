@@ -71,7 +71,7 @@ export default function SideMenu() {
                         },
                         URI: {
                             field1: "tags",
-                            field3: "Shorts" // TODO URI tags request
+                            field3: "?tags=Shorts" // TODO URI tags request
                         }
                     })}
                 >
@@ -91,8 +91,8 @@ export default function SideMenu() {
                             defaults: query.defaults
                         },
                         URI: {
-                            field1: "tags",
-                            field3: "Subscriptions" // TODO URI tags request
+                            field1: "subs",
+                            field3: "?subs=all" // TODO URI tags request
                         }
                     })}
                 >
@@ -113,7 +113,7 @@ export default function SideMenu() {
                         },
                         URI: {
                             field1: "liked",
-                            field3: "Liked" // TODO URI liked request
+                            field3: "?liked=all" // TODO URI liked request
                         }
                     })}
                 >

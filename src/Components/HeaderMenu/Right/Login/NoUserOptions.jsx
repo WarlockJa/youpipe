@@ -24,7 +24,7 @@ export default function NoUserOptions(props) {
         ChangeMenu({...menuData, noUserMenu: false}) // closing the menu
     }, [menuData.noUserMenu])
 
-    useEventOutsideListener('mousedown', handleClickOutside)
+    useEventOutsideListener('mousedown', handleClickOutside, document)
 
     return (
         <div

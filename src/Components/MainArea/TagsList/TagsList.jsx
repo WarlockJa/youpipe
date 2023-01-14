@@ -32,6 +32,7 @@ export default function TagsList() {
   useEventListener('wheel', handleTagListScroll, tagsListRef)
 
   const handleTagClick = (tagValue) => {
+    window.history.pushState("tags", "", process.env.REACT_APP_YOUPIPE_URI + "?tags=" + encodeURI(tagValue))
     tagValue === 'All'
       ? ChangeQuery({
         amountToFind: query.defaults.amountToFind,

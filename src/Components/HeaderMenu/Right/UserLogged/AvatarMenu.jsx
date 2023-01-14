@@ -25,7 +25,7 @@ export default function AvatarMenu(props) {
         ChangeMenu({...menuData, avatarMenu: false}) // closing the menu
     }, [menuData.avatarMenu])
 
-    useEventOutsideListener('mousedown', handleClickOutside)
+    useEventOutsideListener('mousedown', handleClickOutside, document)
 
     const handleAvatarUpdate = (props) => {
         const { AccessToken, UpdateFields } = props
