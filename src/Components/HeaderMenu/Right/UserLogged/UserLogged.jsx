@@ -9,6 +9,10 @@ import { useAuthData } from "../../../../ContextProviders/AuthContext"
 import { useMenuData, useMenuUpdateData } from '../../../../ContextProviders/MenuContext'
 import MenuSwitch from '../../../../Utils/MenuSwitch'
 
+// TODO delete after testing
+import { useQuery } from '../../../../ContextProviders/QueryContext'
+import { useVideo } from '../../../../ContextProviders/VideoContext'
+
 export default function UserLogged() {
   const userMenuRef = useRef(null)
   const cameraMenuRef = useRef(null)
@@ -16,8 +20,12 @@ export default function UserLogged() {
   const menuData = useMenuData()
   const ChangeMenu = useMenuUpdateData()
 
+  const query = useQuery()
+  const video = useVideo()
   const testFunc = () => {
     console.log('UserData: ', userData)
+    console.log('QueryData: ', query)
+    console.log('VideoData: ', video)
   }
 
   return (

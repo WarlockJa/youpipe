@@ -4,7 +4,7 @@ import { useVideo, useVideoUpdate } from '../../../ContextProviders/VideoContext
 import { useSideMenu, useSideMenuUpdate } from '../../../ContextProviders/SideMenuContext'
 import { RefreshToken } from '../../../Utils/API/RequestsLibrary'
 import { useAuthUpdateData } from '../../../ContextProviders/AuthContext'
-import { useQuery, useQueryUpdate } from '../../../ContextProviders/QueryProvider'
+import { useQuery, useQueryUpdate } from '../../../ContextProviders/QueryContext'
 
 export default function VideoTile(props) {
     const { element } = props
@@ -29,11 +29,13 @@ export default function VideoTile(props) {
         </div>
     )
     
-    const { author, avatar, image, title, uploaded, views } = element
+    const { author, avatar, image, title, uploaded, views, _id } = element
     // TODO: time parser
     const dateFormat = new Intl.DateTimeFormat("en-GB", {day: '2-digit', hour: '2-digit', minute: '2-digit'})
 
     const handleVideoTileClick = () => {
+        // changing URI for the video
+        window.history.pushState("video", "", process.env.REACT_APP_YOUPIPE_URI + "?v=" + encodeURI(_id))
         // refreshing Access Token for the user
         RefreshToken(ChangeUser)
         // Switching to another slide

@@ -5,7 +5,7 @@ import { useTheme, useThemeUpdate } from '../../../../ContextProviders/ThemeCont
 import { useAuthData } from '../../../../ContextProviders/AuthContext'
 import { useMenuData, useMenuUpdateData } from '../../../../ContextProviders/MenuContext'
 import { logout } from '../../../../Utils/API/RequestsLibrary'
-import { useQuery, useQueryUpdate } from '../../../../ContextProviders/QueryProvider'
+import { useQuery, useQueryUpdate } from '../../../../ContextProviders/QueryContext'
 
 export default function UserMenu(props) {
     const { iconMenuRef } = props

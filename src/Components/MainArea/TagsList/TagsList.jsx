@@ -4,7 +4,7 @@ import tagsListItems from "../../../Utils/taglist.json";
 import { useRef, useState, useCallback } from 'react';
 import useEventListener from '../../../Utils/useEventListener';
 import handleArrowClick from './handleArrowClick';
-import { useQuery, useQueryUpdate } from '../../../ContextProviders/QueryProvider';
+import { useQuery, useQueryUpdate } from '../../../ContextProviders/QueryContext';
 
 export default function TagsList() {
   const tagsListRef = useRef(null)

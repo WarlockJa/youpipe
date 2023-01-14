@@ -1,17 +1,16 @@
 import "./headermenu.scss"
 import Icon from "../../Assets/tubes.png"
 import { useTheme } from "../../ContextProviders/ThemeContext"
-import { useAuthUpdateData } from "../../ContextProviders/AuthContext"
-import { useAuthData } from "../../ContextProviders/AuthContext"
+import { useAuthUpdateData, useAuthData } from "../../ContextProviders/AuthContext"
 import Icons from '../../Assets/icons'
 import { useEffect, useState } from "react"
-import { refreshTokenRequest, getIdTokenRequest } from "../../Utils/API/RequestsLibrary"
+import { refreshTokenRequest, getIdTokenRequest, postUnauthorizedRequest, postUnauthorizedVideosRequest } from "../../Utils/API/RequestsLibrary"
 import UserLogged from "./Right/UserLogged/UserLogged"
 import Login from "./Right/Login/Login"
 import MenuProvider from "../../ContextProviders/MenuContext"
 import useLoadingHook from "../../Utils/API/useLoadingHook"
 import LoadingPlug from "../../Utils/LoadingPlug"
-import { useQuery, useQueryUpdate } from "../../ContextProviders/QueryProvider"
+import { useQuery, useQueryUpdate } from "../../ContextProviders/QueryContext"
 import { useSideMenu, useSideMenuUpdate } from "../../ContextProviders/SideMenuContext"
 import { useVideo, useVideoUpdate } from "../../ContextProviders/VideoContext"
 
@@ -39,10 +38,47 @@ export default function HeaderMenu() {
     getIdToken.apiRequest(getIdTokenRequest(AccessToken.accessToken))
   }
 
-  // callback for Id Token fetching
+  // callback for Id Token fetching and URI on load processing
   const callbackGetIdToken = (IdToken) => {
+    // completing auth context
     ChangeUser((prev) => ({ ...prev, ...IdToken }))
+
+    // processing URI inputs
+    const queryParameters = new URLSearchParams(window.location.search)
+    const paramVideo = queryParameters.get('v')
+    const paramSearch = queryParameters.get('search')
+
+    // search query in URI
+    paramSearch && ChangeQuery({
+        amountToFind: query.defaults.amountToFind,
+        fieldToSortBy: null,
+        query: { type: "search", field: decodeURI(paramSearch) },
+        defaults: query.defaults
+    })
+    
+    // callback for URI video fetch
+    const videoURIcallback = (result) => {
+      ChangeVideo({ active: true, element: result.result[0], amountToFind: 40, defaults: video.defaults })
+      let randomTagsArray = [];
+      // selecting a random N=1 number of tags from the list
+      [...Array(1)].map(_item => randomTagsArray.push(result.result[0].tags[ Math.floor(Math.random() * result.result[0].tags.length) ]))
+      // making the request array unique
+      ChangeQuery({
+        amountToFind: query.defaults.amountToFind,
+        fieldToSortBy: query.defaults.fieldToSortBy,
+        query: { type: "tags", field: randomTagsArray },
+        defaults: query.defaults
+      })
+    }
+    
+    // processing video URI request
+    const body = { amountToFind: 1, query: { type: "video", field: decodeURI(paramVideo) } }
+    paramVideo && postUnauthorizedRequest({ body: body, request: postUnauthorizedVideosRequest, setDataArray: videoURIcallback })
   }
+
+
+
+
 
   // using loading hook to display loading screen on user data fecth during first loading
   const getAccessToken = useLoadingHook({ callback: callbackGetAccessToken })
@@ -57,11 +93,12 @@ export default function HeaderMenu() {
 
   // executing search
   const handleSearchClick = (searchString) => {
+    window.history.pushState("search", "", process.env.REACT_APP_YOUPIPE_URI + "?search=" + encodeURI(searchString))
     if(searchString) {
       ChangeVideo({ ...video.defaults, defaults: video.defaults })
       ChangeQuery({
         amountToFind: query.defaults.amountToFind,
-        fieldToSortBy: "rating.likes",
+        fieldToSortBy: null,
         query: { type: "search", field: searchString },
         defaults: query.defaults
       })

@@ -55,7 +55,7 @@ export const postUnauthorizedCommentsRequest =
     uriExtenstion: 'commentUnauthorized'
 }
 
-// used in useFetchWithPagination
+// used in useFetchWithPagination, VideoContext
 export const postUnauthorizedRequest = ({ request, body, setDataArray }) => {
     const formedRequest = new Request(URI + request.uriExtenstion, {
         ...request.request,
@@ -186,7 +186,7 @@ export function getIdToken(AccessToken, ChangeUser) {
 // updates authorized user's data
 // used in AvatarMenu
 export function updateUserData(props) {
-    const { AccessToken, UpdateFields } = props
+    const { AccessToken, UpdateFields, ChangeUser } = props
     const headers = new Headers({ "Authorization": 'Bearer ' + AccessToken, "Content-Type": "application/json" })
     const request = new Request(URI + 'userAuthorized', {
         method: 'PUT',
@@ -197,7 +197,9 @@ export function updateUserData(props) {
         secure: true,
     })
     const callback = (response) => {
-        console.log(response)
+        response.status === 403
+            ? window.location.reload()
+            : response.status === 201 || response.status === 204 ? RefreshToken(ChangeUser) : console.log(response.status)
     }
 
     DataFetch({ request: request, callback: callback })

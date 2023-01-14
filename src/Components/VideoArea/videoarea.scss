@@ -67,6 +67,10 @@
                 margin-left: 2rem;
             }
 
+            .videoArea-channelInfo-subscribeButton[subscribed='1'] {
+                background-color: lightblue;
+            }
+
 
             .videoArea-ratingSection {
                 flex-grow: 1;
@@ -76,6 +80,10 @@
                 .videoArea-ratingSection-likes {
                     border-radius: 20px 0 0 20px;
                     padding: 0.5rem;
+                }
+
+                .videoArea-ratingSection-likes[liked='1'] {
+                    background-color: lightblue;
                 }
                 
                 .videoArea-ratingSection-divider {

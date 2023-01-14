@@ -5,7 +5,7 @@ import SideMenu from "./Components/SideMenu/SideMenu";
 import VideoArea from "./Components/VideoArea/VideoArea";
 import ThemeProvider from "./ContextProviders/ThemeContext";
 import AuthProvider from "./ContextProviders/AuthContext";
-import QueryProvider from "./ContextProviders/QueryProvider";
+import QueryProvider from "./ContextProviders/QueryContext";
 import SideMenuProvider from "./ContextProviders/SideMenuContext";
 import VideoProvider from './ContextProviders/VideoContext';
 

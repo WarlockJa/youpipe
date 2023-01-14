@@ -8,8 +8,9 @@ import SubscriptionsActive from '../../Assets/subscriptionsactive.png'
 import Library from '../../Assets/library.png'
 import LibraryActive from '../../Assets/libraryactive.png'
 import { useSideMenu, useSideMenuUpdate } from '../../ContextProviders/SideMenuContext'
-import { useQuery, useQueryUpdate } from '../../ContextProviders/QueryProvider'
+import { useQuery, useQueryUpdate } from '../../ContextProviders/QueryContext'
 import { useVideo, useVideoUpdate } from '../../ContextProviders/VideoContext'
+import { useAuthData } from '../../ContextProviders/AuthContext'
 
 export default function SideMenu() {
     // side menu active element context
@@ -21,8 +22,12 @@ export default function SideMenu() {
     // video context
     const video = useVideo()
     const ChangeVideo = useVideoUpdate()
+    // auth context
+    const userData = useAuthData()
 
-    const handleClick = (elementIndex, query) => {
+    const handleClick = (props) => {
+        const { elementIndex, query, URI } = props
+        window.history.pushState(URI.field1, "", process.env.REACT_APP_YOUPIPE_URI + URI.field3)
         ChangeSideMenu({ ...sideMenuOptions, activeElementIndex: elementIndex })
         ChangeQuery(query)
         ChangeVideo({ ...video.defaults, defaults: video.defaults })
@@ -35,14 +40,19 @@ export default function SideMenu() {
             <div className="sideMenu-section">
                 <div
                     className="sideMenu-section-item"
-                    onClick={() => handleClick(0,
-                        {
+                    onClick={() => handleClick({
+                        elementIndex: 0,
+                        query:{
                             amountToFind: query.defaults.amountToFind,
                             fieldToSortBy: query.defaults.fieldToSortBy,
                             query: query.defaults.query,
                             defaults: query.defaults
-                        })
-                    }
+                        },
+                        URI: {
+                            field1: "Home",
+                            field3: "Home"
+                        }
+                    })}
                 >
                     <img src={sideMenuOptions.activeElementIndex === 0 ? HomeActive : Home} alt="" />
                     <p>Home</p>
@@ -51,29 +61,64 @@ export default function SideMenu() {
             <div className="sideMenu-section">
                 <div
                     className="sideMenu-section-item"
-                    onClick={() => handleClick(1,
-                        {
+                    onClick={() => handleClick({
+                        elementIndex: 1,
+                        query: {
                             amountToFind: query.defaults.amountToFind,
                             fieldToSortBy: query.defaults.fieldToSortBy,
                             query: { type: "tags", field: ['Shorts'] },
                             defaults: query.defaults
-                        })
-                    }
+                        },
+                        URI: {
+                            field1: "tags",
+                            field3: "Shorts" // TODO URI tags request
+                        }
+                    })}
                 >
                     <img src={sideMenuOptions.activeElementIndex === 1 ? ShortsActive : Shorts} alt="" />
                     <p>Shorts</p>
                 </div>
             </div>
             <div className="sideMenu-section">
-                <div className="sideMenu-section-item">
+                <div
+                    className="sideMenu-section-item"
+                    onClick={() => handleClick({
+                        elementIndex: 2,
+                        query: {
+                            amountToFind: query.defaults.amountToFind,
+                            fieldToSortBy: query.defaults.fieldToSortBy,
+                            query: { type: "author", field: userData.activity.subscriptions },
+                            defaults: query.defaults
+                        },
+                        URI: {
+                            field1: "tags",
+                            field3: "Subscriptions" // TODO URI tags request
+                        }
+                    })}
+                >
                     <img src={sideMenuOptions.activeElementIndex === 2 ? SubscriptionsActive : Subscriptions} alt="" />
                     <p>Subscriptions</p>
                 </div>
             </div>
             <div className="sideMenu-section">
-                <div className="sideMenu-section-item">
+                <div
+                    className="sideMenu-section-item"
+                    onClick={() => handleClick({
+                        elementIndex: 3,
+                        query: {
+                            amountToFind: query.defaults.amountToFind,
+                            fieldToSortBy: query.defaults.fieldToSortBy,
+                            query: { type: "liked", field: userData.activity.likes },
+                            defaults: query.defaults
+                        },
+                        URI: {
+                            field1: "liked",
+                            field3: "Liked" // TODO URI liked request
+                        }
+                    })}
+                >
                     <img src={sideMenuOptions.activeElementIndex === 3 ? LibraryActive : Library} alt="" />
-                    <p>Library</p>
+                    <p>Liked videos</p>
                 </div>
             </div>
         </div>
