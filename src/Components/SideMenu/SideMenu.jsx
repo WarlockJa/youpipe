@@ -71,7 +71,7 @@ export default function SideMenu() {
                         },
                         URI: {
                             field1: "tags",
-                            field3: "?tags=Shorts" // TODO URI tags request
+                            field3: "?tags=Shorts"
                         }
                     })}
                 >
@@ -92,7 +92,7 @@ export default function SideMenu() {
                         },
                         URI: {
                             field1: "subs",
-                            field3: "?subs=all" // TODO URI tags request
+                            field3: "?subs=all"
                         }
                     })}
                 >
@@ -113,7 +113,7 @@ export default function SideMenu() {
                         },
                         URI: {
                             field1: "liked",
-                            field3: "?liked=all" // TODO URI liked request
+                            field3: "?liked=all"
                         }
                     })}
                 >

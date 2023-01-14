@@ -1,9 +1,8 @@
 import Icons from '../../../../../Assets/icons'
 import { useCreateVideoData, useCreateVideoUpdateData } from '../../../../../ContextProviders/CreateVideoContext'
-import { useAuthData, useAuthUpdateData } from '../../../../../ContextProviders/AuthContext'
+import { useAuthData } from '../../../../../ContextProviders/AuthContext'
 import { useMenuData, useMenuUpdateData } from '../../../../../ContextProviders/MenuContext'
 import { createNewVideo } from '../../../../../Utils/API/RequestsLibrary'
-import MenuSwitch from '../../../../../Utils/MenuSwitch'
 
 export default function VideoFormLeft(props) {
     const { active, setActive } = props
@@ -18,7 +17,7 @@ export default function VideoFormLeft(props) {
 
     const clearNewVideoData = () => {
         ChangeCreateVideo({ title: '', description: '', rating: { likes: 0, dislikes: 0 }, image: '/Assets/defaultImage.png', views: 0, tags: [], errors: { image: false, title: false } })
-        MenuSwitch({ menuList: menuData, menuItem: 'createVideoMenu', menuFunc: ChangeMenu })
+        ChangeMenu({ ...menuData, createVideoMenu:true })
         setActive(1)
     }
 

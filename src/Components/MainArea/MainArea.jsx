@@ -47,26 +47,32 @@ export default function MainArea() {
   
   // arranging fetched videos into rows
   const MainAreaRowsFill = (props) => {
-    const { videos, rowLength } = props
-    if (videos.length === 0) return
-    const rowsNumber = Math.floor(videos.length / rowLength) + 1
+    const { videos, rowLength, videoModeActive } = props
+    
+    // filtering active video from the feed
+    const videoFeed = videoModeActive ? videos.filter(item => item._id !== videoModeActive) : videos
+
+    if (videoFeed.length === 0) return
+    
+
+    const rowsNumber = Math.floor(videoFeed.length / rowLength) + 1
     let lastLinePassed = false
     
     return [...Array(rowsNumber)].map((_item, index) => {
       const rowStart = index * rowLength
-      const notLastLine = rowStart + rowLength < videos.length
-      const rowEnd = notLastLine ? rowStart + rowLength : videos.length
+      const notLastLine = rowStart + rowLength < videoFeed.length
+      const rowEnd = notLastLine ? rowStart + rowLength : videoFeed.length
 
       if (lastLinePassed) { return }
 
       if(notLastLine) {
-        return <RowContainer key={'RowContainer'+index} rowElementsNumber={rowLength} elements={videos.slice(rowStart, rowEnd)} />
+        return <RowContainer key={'RowContainer'+index} rowElementsNumber={rowLength} elements={videoFeed.slice(rowStart, rowEnd)} />
       }else{
         lastLinePassed = true
         return(
           <React.Fragment key={'PaginatorFragment'+index}>
             {hasMore > 0 && <div className="paginationMarker" ref={paginationMarkerElementRef}></div>}
-            <RowContainer key={'RowContainer'+index} rowElementsNumber={rowLength} elements={videos.slice(rowStart, rowStart + rowLength)} />
+            <RowContainer key={'RowContainer'+index} rowElementsNumber={rowLength} elements={videoFeed.slice(rowStart, rowStart + rowLength)} />
           </React.Fragment>
         )
       }
@@ -80,7 +86,7 @@ export default function MainArea() {
       ref={mainContainerRef}
     >
       <TagsList />
-      <MainAreaRowsFill videos={data} rowLength={columnsNumber} />
+      <MainAreaRowsFill videos={data} rowLength={columnsNumber} videoModeActive={video.element?._id} />
       {!loading && data.length === 0 && <EmptyPlug />}
       {loading && <LoadingPlug />}
     </div>

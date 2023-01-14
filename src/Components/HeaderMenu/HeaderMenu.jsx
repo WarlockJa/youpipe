@@ -113,7 +113,7 @@ export default function HeaderMenu() {
     paramTags && ChangeQuery({
       amountToFind: query.defaults.amountToFind,
       fieldToSortBy: query.defaults.fieldToSortBy,
-      query: { type: "tags", field: decodeURI(paramTags).split(' ').map(item => item) },
+      query: { type: "tags", field: decodeURI(paramTags).split(' ').map(item => item).filter(item => item !== 'All') },
       defaults: query.defaults
     })
   },[])

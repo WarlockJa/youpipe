@@ -7,7 +7,6 @@ import DefaultUserIcon from '../../../../Assets/defaultIcon.png'
 import { useRef } from 'react'
 import { useAuthData } from "../../../../ContextProviders/AuthContext"
 import { useMenuData, useMenuUpdateData } from '../../../../ContextProviders/MenuContext'
-import MenuSwitch from '../../../../Utils/MenuSwitch'
 
 // TODO delete after testing
 import { useQuery } from '../../../../ContextProviders/QueryContext'
@@ -34,7 +33,7 @@ export default function UserLogged() {
         className="headerMenu-right-icon"
         title='Create a video'
         ref={cameraMenuRef}
-        onClick={() => MenuSwitch({ menuList: menuData, menuItem: 'createVideoMenu', menuFunc: ChangeMenu })}
+        onClick={() => ChangeMenu({ ...menuData, createVideoMenu: true })}
       >
         <Icons.Camera />
       </div>
@@ -49,7 +48,7 @@ export default function UserLogged() {
         src={userData ? userData.avatar : DefaultUserIcon}
         alt="Avatar"
         ref={userMenuRef}
-        onClick={() => MenuSwitch({ menuList: menuData, menuItem: 'userMenu', menuFunc: ChangeMenu })}
+        onClick={() => ChangeMenu({ ...menuData, userMenu: true })}
       />
       <UserMenu
         iconMenuRef={userMenuRef}

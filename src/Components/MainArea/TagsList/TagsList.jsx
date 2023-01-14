@@ -32,20 +32,23 @@ export default function TagsList() {
   useEventListener('wheel', handleTagListScroll, tagsListRef)
 
   const handleTagClick = (tagValue) => {
-    window.history.pushState("tags", "", process.env.REACT_APP_YOUPIPE_URI + "?tags=" + encodeURI(tagValue))
-    tagValue === 'All'
-      ? ChangeQuery({
+    if(tagValue === 'All') {
+      ChangeQuery({
         amountToFind: query.defaults.amountToFind,
         fieldToSortBy: query.defaults.fieldToSortBy,
         query: query.defaults.query,
         defaults: query.defaults
       })
-      : ChangeQuery({
+      window.location.replace(process.env.REACT_APP_YOUPIPE_URI)
+    } else {
+      ChangeQuery({
         amountToFind: query.defaults.amountToFind,
         fieldToSortBy: query.defaults.fieldToSortBy,
         query: { type: "tags", field: [tagValue] },
         defaults: query.defaults
       })
+      window.history.pushState("tags", "", process.env.REACT_APP_YOUPIPE_URI + "?tags=" + encodeURI(tagValue))
+    }
   }
 
   return (

@@ -2,7 +2,6 @@ import NoUserOptions from './NoUserOptions'
 import LoginOptions from './LoginOptions'
 import { useRef } from 'react'
 import Icons from '../../../../Assets/icons'
-import MenuSwitch from '../../../../Utils/MenuSwitch'
 import { useMenuData, useMenuUpdateData } from '../../../../ContextProviders/MenuContext'
 
 export default function Login() {
@@ -16,7 +15,7 @@ export default function Login() {
       <div
         className="headerMenu-right-icon"
         ref={noUserOptionsMenuRef}
-        onClick={() => MenuSwitch({ menuList: menuData, menuItem: 'noUserMenu', menuFunc: ChangeMenu })}
+        onClick={() => ChangeMenu({ ...menuData, noUserMenu: true })}
       >
         <div className="headerMenu-right-icon-dots">
           <div className="headerMenu-right-icon-dot"></div>
@@ -30,7 +29,7 @@ export default function Login() {
       <div
         className="headerMenu-right-icon-login"
         ref={loginOptionsMenuRef}
-        onClick={() => MenuSwitch({ menuList: menuData, menuItem: 'loginMenu', menuFunc: ChangeMenu })}
+        onClick={() => ChangeMenu({ ...menuData, loginMenu: true })}
       >
         <Icons.Person />
         <p>Login</p>

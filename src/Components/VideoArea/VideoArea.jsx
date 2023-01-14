@@ -1,11 +1,11 @@
 import './videoarea.scss'
 import Icons from '../../Assets/icons'
+import { useRef, useEffect } from 'react'
 import { useVideo, useVideoUpdate } from '../../ContextProviders/VideoContext'
 import { useQuery, useQueryUpdate } from '../../ContextProviders/QueryContext'
-import CommentsArea from './CommentsArea'
-import { useRef, useEffect } from 'react'
 import { useAuthData, useAuthUpdateData } from '../../ContextProviders/AuthContext'
 import { updateUserData } from '../../Utils/API/RequestsLibrary'
+import CommentsArea from './CommentsArea'
 
 export default function VideoArea() {
     // auth context
@@ -24,7 +24,7 @@ export default function VideoArea() {
     const channelSubscribed = video.active && userData?.activity ? userData.activity.subscriptions.includes(video.element.author) : null
 
     useEffect(() => {
-        // scrolling to the top of the vide area page on new slide select
+        // scrolling to the top of the video area page on new slide select
         if(videoAreaRef.current) {
             videoAreaRef.current.scrollIntoView()
         }
@@ -32,26 +32,32 @@ export default function VideoArea() {
 
     // handling click on user icon or channel name
     const goToVideoAuthorsPage = () => {
-        ChangeVideo({ ...video.defaults, defaults: video.defaults })
+        window.history.pushState("tags", "", process.env.REACT_APP_YOUPIPE_URI + "?tags=" + encodeURI(video.element.author))
         ChangeQuery({
             amountToFind: query.defaults.amountToFind,
             fieldToSortBy: query.defaults.fieldToSortBy,
-            query: { type: "author", field: video.element.author },
+            query: { type: "author", field: [video.element.author] },
             defaults: query.defaults
         })
+        ChangeVideo({ ...video.defaults, defaults: video.defaults })
     }
 
     const handleLikePress = () => {
-        updateUserData({ AccessToken: userData.accessToken, UpdateFields: { activity: { likes: video.element._id } }, ChangeUser: ChangeUser })
-        // ChangeVideo({ ...video, element: { rating: { likes: video.element.rating.likes + 1 } } })
+        userData
+            ? updateUserData({ AccessToken: userData.accessToken, UpdateFields: { activity: { likes: video.element._id } }, ChangeUser: ChangeUser })
+            : console.log('no user plug')
     }
 
     const handleDislikePress = () => {
-        updateUserData({ AccessToken: userData.accessToken, UpdateFields: { activity: { dislikes: video.element._id } }, ChangeUser: ChangeUser })
+        userData
+            ? updateUserData({ AccessToken: userData.accessToken, UpdateFields: { activity: { dislikes: video.element._id } }, ChangeUser: ChangeUser })
+            : console.log('no user plug')
     }
 
     const handleSubscribePress = () => {
-        updateUserData({ AccessToken: userData.accessToken, UpdateFields: { activity: { subscriptions: video.element.author } }, ChangeUser: ChangeUser })
+        userData
+            ? updateUserData({ AccessToken: userData.accessToken, UpdateFields: { activity: { subscriptions: video.element.author } }, ChangeUser: ChangeUser })
+            : console.log('no user plug')
     }
 
     return (
