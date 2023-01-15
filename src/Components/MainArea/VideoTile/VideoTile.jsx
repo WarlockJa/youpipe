@@ -5,6 +5,7 @@ import { useSideMenu, useSideMenuUpdate } from '../../../ContextProviders/SideMe
 import { RefreshToken } from '../../../Utils/API/RequestsLibrary'
 import { useAuthUpdateData } from '../../../ContextProviders/AuthContext'
 import { useQuery, useQueryUpdate } from '../../../ContextProviders/QueryContext'
+import TimeParser from '../../../Utils/TimeParser'
 
 export default function VideoTile(props) {
     const { element } = props
@@ -29,9 +30,8 @@ export default function VideoTile(props) {
         </div>
     )
     
+    // passed video slide information
     const { author, avatar, image, title, uploaded, views, _id } = element
-    // TODO: time parser
-    const dateFormat = new Intl.DateTimeFormat("en-GB", {day: '2-digit', hour: '2-digit', minute: '2-digit'})
 
     const handleVideoTileClick = () => {
         // changing URI for the video
@@ -71,7 +71,7 @@ export default function VideoTile(props) {
                 <div className="Description">
                     <h2 title={title}>{title}</h2>
                     <h3>{author}</h3>
-                    <h3>{views} • {dateFormat.format(Date.now() - Date.parse(uploaded))} ago</h3>
+                    <h3>{views} • {TimeParser(uploaded)}</h3>
                 </div>
             </div>
         </div>

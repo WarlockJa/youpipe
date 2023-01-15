@@ -1,6 +1,6 @@
 import { useCallback, useRef } from 'react'
 import useEventOutsideListener from '../../../../Utils/useEventOutsideListener'
-import { useAuthData } from '../../../../ContextProviders/AuthContext'
+import { useAuthData, useAuthUpdateData } from '../../../../ContextProviders/AuthContext'
 import { useMenuData, useMenuUpdateData } from '../../../../ContextProviders/MenuContext'
 import AvatarsData from './avatars.json'
 import { updateUserData } from '../../../../Utils/API/RequestsLibrary'
@@ -9,6 +9,7 @@ export default function AvatarMenu(props) {
     const { iconMenuRef } = props
     // auth context
     const userData = useAuthData()
+    const ChangeUser = useAuthUpdateData()
     // menu context
     const menuData = useMenuData()
     const ChangeMenu = useMenuUpdateData()
@@ -29,7 +30,7 @@ export default function AvatarMenu(props) {
 
     const handleAvatarUpdate = (props) => {
         const { AccessToken, UpdateFields } = props
-        updateUserData({ AccessToken: AccessToken, UpdateFields: UpdateFields })
+        updateUserData({ AccessToken: AccessToken, UpdateFields: UpdateFields, ChangeUser: ChangeUser })
         window.location.reload()
     }
 

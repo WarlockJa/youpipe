@@ -2,18 +2,19 @@ import { useCallback, useRef } from 'react'
 import useEventOutsideListener from '../../../../Utils/useEventOutsideListener'
 import '../../../../Utils/menu.scss'
 import { useTheme, useThemeUpdate } from '../../../../ContextProviders/ThemeContext'
-import { useAuthData } from '../../../../ContextProviders/AuthContext'
+import { useAuthData, useAuthUpdateData } from '../../../../ContextProviders/AuthContext'
 import { useMenuData, useMenuUpdateData } from '../../../../ContextProviders/MenuContext'
-import { logout } from '../../../../Utils/API/RequestsLibrary'
+import { logout, updateUserData } from '../../../../Utils/API/RequestsLibrary'
 import { useQuery, useQueryUpdate } from '../../../../ContextProviders/QueryContext'
 
 export default function UserMenu(props) {
     const { iconMenuRef } = props
     // theme context
     const darkTheme = useTheme()
-    const ToggleTheme = useThemeUpdate()
+    const ChangeTheme = useThemeUpdate()
     // authorized user context
     const userData = useAuthData()
+    const ChangeUser = useAuthUpdateData()
     // menus context
     const menuData = useMenuData()
     const ChangeMenu = useMenuUpdateData()
@@ -72,7 +73,10 @@ export default function UserMenu(props) {
             >Switch account</div>
             <div
                 className='menu-item'
-                onClick={ToggleTheme}
+                onClick={() => {
+                    updateUserData({ AccessToken: userData.accessToken, UpdateFields: { "darktheme": !darkTheme }, ChangeUser: ChangeUser})
+                    ChangeTheme((prev => !prev))
+                }}
             >Appearance: {darkTheme ? 'Dark' : 'Light'}</div>
             <div className='menu-item'>Send feedback</div>
             <div className='menu-item' onClick={logout}>Sign out</div>

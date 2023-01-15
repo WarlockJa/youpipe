@@ -184,7 +184,7 @@ export function getIdToken(AccessToken, ChangeUser) {
 }
 
 // updates authorized user's data
-// used in AvatarMenu
+// used in AvatarMenu, VideoArea, UserMenu
 export function updateUserData(props) {
     const { AccessToken, UpdateFields, ChangeUser } = props
     const headers = new Headers({ "Authorization": 'Bearer ' + AccessToken, "Content-Type": "application/json" })

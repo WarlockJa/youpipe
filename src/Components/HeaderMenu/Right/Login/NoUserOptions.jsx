@@ -8,7 +8,7 @@ export default function NoUserOptions(props) {
     const { iconRef } = props
     // theme context
     const darkTheme = useTheme()
-    const ToggleTheme = useThemeUpdate()
+    const ChangeTheme = useThemeUpdate()
     // menu context
     const menuData = useMenuData()
     const ChangeMenu = useMenuUpdateData()
@@ -34,7 +34,7 @@ export default function NoUserOptions(props) {
         >
             <div
                 className='menu-item'
-                onClick={ToggleTheme}
+                onClick={() => ChangeTheme(!darkTheme)}
             >Appearance: {darkTheme ? 'Dark' : 'Light'}</div>
             <div className='menu-item'>Send feedback</div>
         </div>

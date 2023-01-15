@@ -1,6 +1,6 @@
 import "./headermenu.scss"
 import Icon from "../../Assets/tubes.png"
-import { useTheme } from "../../ContextProviders/ThemeContext"
+import { useTheme, useThemeUpdate } from "../../ContextProviders/ThemeContext"
 import { useAuthUpdateData, useAuthData } from "../../ContextProviders/AuthContext"
 import Icons from '../../Assets/icons'
 import { useCallback, useEffect, useState } from "react"
@@ -17,7 +17,8 @@ import useEventOutsideListener from "../../Utils/useEventOutsideListener"
 
 export default function HeaderMenu() {
   // theme context
-  const darkTheme = useTheme() ? ' dark' : ''
+  const darkTheme = useTheme()
+  const ChangeTheme = useThemeUpdate()
   // user data context
   const userData = useAuthData()
   const ChangeUser = useAuthUpdateData()
@@ -57,12 +58,17 @@ export default function HeaderMenu() {
       defaults: query.defaults
     })
 
+    // fetching subscribed video request from the URI
     paramSubscribed && ChangeQuery({
       amountToFind: query.defaults.amountToFind,
       fieldToSortBy: query.defaults.fieldToSortBy,
       query: { type: "author", field: IdToken.activity.subscriptions },
       defaults: query.defaults
     })
+
+    //setting up user's theme preference
+    console.log('fetched theme: ',IdToken.darktheme)
+    ChangeTheme(IdToken.darktheme)
   }
 
   // using loading hook to display loading screen on user data fecth during first loading
@@ -145,7 +151,7 @@ export default function HeaderMenu() {
   }
   
   return (
-    <div className={"headerMenu" + darkTheme}>
+    <div className={darkTheme ? "headerMenu dark" : "headerMenu"}>
       <div className="headerMenu-left">
         <div className="headerMenu-left-sidemenuButton" onClick={() => ChangeSideMenu({ ...sideMenuOptions, sideMenuFolded: !sideMenuOptions.sideMenuFolded })}>
           <div className="buttonLine" id="line1"></div>

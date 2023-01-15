@@ -8,6 +8,7 @@ import LoadingPlug from "../../Utils/LoadingPlug"
 import useFetchWithPagination from "../../Utils/useFetchWithPagination"
 import CommentMenu from './CommentMenu'
 import { useEffect } from 'react'
+import TimeParser from '../../Utils/TimeParser'
 
 export default function CommentsArea(props) {
     const { videoId } = props
@@ -27,9 +28,6 @@ export default function CommentsArea(props) {
         setCommentsQuery({ amountToFind: 20, video: videoId })
         handleCancelCommentClick()
     },[videoId])
-
-    // TODO: make an export function
-    const dateFormat = new Intl.DateTimeFormat("en-GB", {day: '2-digit', hour: '2-digit', minute: '2-digit'})
 
     // fetching comments data
     const { loading, hasMore, data } = useFetchWithPagination({ query: commentsQuery, request: postUnauthorizedCommentsRequest })
@@ -63,7 +61,7 @@ export default function CommentsArea(props) {
                     <div className="comment-body">
                         <div className="body-header">
                             <p className="comment-author">{item.author}</p>
-                            <p className="comment-date">{dateFormat.format(Date.now() - Date.parse(item.date))} ago</p> 
+                            <p className="comment-date">{TimeParser(item.date)}</p> 
                         </div>
                         <div className='comment-text'>{item.comment}</div>
                     </div>
@@ -152,10 +150,7 @@ export default function CommentsArea(props) {
                 </div>
             </div>
             <div className="commentsSection-comments">
-                 <Comments
-                    commentsArray={data}
-                    dateFormat={dateFormat}
-                />
+                 <Comments commentsArray={data} />
                 {loading && <LoadingPlug />}
                 {!loading && data.length === 0 && <EmptyPlug />}
             </div>
