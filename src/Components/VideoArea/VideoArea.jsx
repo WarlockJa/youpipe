@@ -1,11 +1,12 @@
 import './videoarea.scss'
 import Icons from '../../Assets/icons'
-import { useRef, useEffect } from 'react'
+import { useRef, useEffect, useState } from 'react'
 import { useVideo, useVideoUpdate } from '../../ContextProviders/VideoContext'
 import { useQuery, useQueryUpdate } from '../../ContextProviders/QueryContext'
 import { useAuthData, useAuthUpdateData } from '../../ContextProviders/AuthContext'
 import { updateUserData } from '../../Utils/API/RequestsLibrary'
 import CommentsArea from './CommentsArea'
+import NoUserAnimationPlug from '../../Utils/NoUserAnimationPlug'
 
 export default function VideoArea() {
     // auth context
@@ -18,6 +19,8 @@ export default function VideoArea() {
     const query = useQuery()
     const ChangeQuery = useQueryUpdate()
     const videoAreaRef = useRef()
+    // no user notification trigger state
+    const [noUserTrigger, setNoUserTrigger] = useState(false)
     // user activity on the video and the channel
     const videoLiked = video.active && userData?.activity ? userData.activity.likes.includes(video.element._id) : null
     const videoDisliked = video.active && userData?.activity ? userData.activity.dislikes.includes(video.element._id) : null
@@ -32,11 +35,11 @@ export default function VideoArea() {
 
     // handling click on user icon or channel name
     const goToVideoAuthorsPage = () => {
-        window.history.pushState("tags", "", process.env.REACT_APP_YOUPIPE_URI + "?tags=" + encodeURI(video.element.author))
+        window.history.pushState("search", "", process.env.REACT_APP_YOUPIPE_URI + "?search=" + encodeURI(video.element.author))
         ChangeQuery({
             amountToFind: query.defaults.amountToFind,
             fieldToSortBy: query.defaults.fieldToSortBy,
-            query: { type: "author", field: [video.element.author] },
+            query: { type: "search", field: video.element.author },
             defaults: query.defaults
         })
         ChangeVideo({ ...video.defaults, defaults: video.defaults })
@@ -45,19 +48,19 @@ export default function VideoArea() {
     const handleLikePress = () => {
         userData
             ? updateUserData({ AccessToken: userData.accessToken, UpdateFields: { activity: { likes: video.element._id } }, ChangeUser: ChangeUser })
-            : console.log('no user plug')
+            : setNoUserTrigger(prev => !prev)
     }
 
     const handleDislikePress = () => {
         userData
             ? updateUserData({ AccessToken: userData.accessToken, UpdateFields: { activity: { dislikes: video.element._id } }, ChangeUser: ChangeUser })
-            : console.log('no user plug')
+            : setNoUserTrigger(prev => !prev)
     }
 
     const handleSubscribePress = () => {
         userData
             ? updateUserData({ AccessToken: userData.accessToken, UpdateFields: { activity: { subscriptions: video.element.author } }, ChangeUser: ChangeUser })
-            : console.log('no user plug')
+            : setNoUserTrigger(prev => !prev)
     }
 
     return (
@@ -113,6 +116,7 @@ export default function VideoArea() {
                     </div>
                     <div className="videoArea-description">{video.element.description}</div>
                 </form>
+                {!userData && <NoUserAnimationPlug trigger={noUserTrigger ? 1 : 0} />}
                 <CommentsArea
                     videoId = {video.element._id}
                 />

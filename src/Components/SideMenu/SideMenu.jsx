@@ -11,6 +11,8 @@ import { useSideMenu, useSideMenuUpdate } from '../../ContextProviders/SideMenuC
 import { useQuery, useQueryUpdate } from '../../ContextProviders/QueryContext'
 import { useVideo, useVideoUpdate } from '../../ContextProviders/VideoContext'
 import { useAuthData } from '../../ContextProviders/AuthContext'
+import { useState } from 'react'
+import NoUserAnimationPlug from '../../Utils/NoUserAnimationPlug'
 
 export default function SideMenu() {
     // side menu active element context
@@ -24,7 +26,11 @@ export default function SideMenu() {
     const ChangeVideo = useVideoUpdate()
     // auth context
     const userData = useAuthData()
+    // no user notification trigger state
+    const [noUserTrigger, setNoUserTrigger] = useState(false)
 
+
+    // handle side menu item click
     const handleClick = (props) => {
         const { elementIndex, query, URI } = props
         window.history.pushState(URI.field1, "", process.env.REACT_APP_YOUPIPE_URI + URI.field3)
@@ -82,19 +88,22 @@ export default function SideMenu() {
             <div className="sideMenu-section">
                 <div
                     className="sideMenu-section-item"
-                    onClick={() => handleClick({
-                        elementIndex: 2,
-                        query: {
-                            amountToFind: query.defaults.amountToFind,
-                            fieldToSortBy: query.defaults.fieldToSortBy,
-                            query: { type: "author", field: userData.activity.subscriptions },
-                            defaults: query.defaults
-                        },
-                        URI: {
-                            field1: "subs",
-                            field3: "?subs=all"
-                        }
-                    })}
+                    onClick={() => userData
+                        ? handleClick({
+                            elementIndex: 2,
+                            query: {
+                                amountToFind: query.defaults.amountToFind,
+                                fieldToSortBy: query.defaults.fieldToSortBy,
+                                query: { type: "author", field: userData.activity.subscriptions },
+                                defaults: query.defaults
+                            },
+                            URI: {
+                                field1: "subs",
+                                field3: "?subs=all"
+                            }
+                        })
+                        : setNoUserTrigger(prev => !prev)
+                    }
                 >
                     <img src={sideMenuOptions.activeElementIndex === 2 ? SubscriptionsActive : Subscriptions} alt="" />
                     <p>Subscriptions</p>
@@ -103,24 +112,28 @@ export default function SideMenu() {
             <div className="sideMenu-section">
                 <div
                     className="sideMenu-section-item"
-                    onClick={() => handleClick({
-                        elementIndex: 3,
-                        query: {
-                            amountToFind: query.defaults.amountToFind,
-                            fieldToSortBy: query.defaults.fieldToSortBy,
-                            query: { type: "liked", field: userData.activity.likes },
-                            defaults: query.defaults
-                        },
-                        URI: {
-                            field1: "liked",
-                            field3: "?liked=all"
-                        }
-                    })}
+                    onClick={() => userData
+                        ? handleClick({
+                            elementIndex: 3,
+                            query: {
+                                amountToFind: query.defaults.amountToFind,
+                                fieldToSortBy: query.defaults.fieldToSortBy,
+                                query: { type: "liked", field: userData.activity.likes },
+                                defaults: query.defaults
+                            },
+                            URI: {
+                                field1: "liked",
+                                field3: "?liked=all"
+                            }
+                        })
+                        : setNoUserTrigger(prev => !prev)
+                    }
                 >
                     <img src={sideMenuOptions.activeElementIndex === 3 ? LibraryActive : Library} alt="" />
                     <p>Liked videos</p>
                 </div>
             </div>
+            {!userData && <NoUserAnimationPlug trigger={noUserTrigger ? 1 : 0} />}
         </div>
     )
 }

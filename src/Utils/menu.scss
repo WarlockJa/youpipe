@@ -155,3 +155,51 @@
 .avatars-grid::-webkit-scrollbar {
     width: 0.25em;
 }
+
+
+.noUserAnimationPlug {
+    position: fixed;
+    top: 9px;
+    right: 28px;
+    z-index: 2;
+    pointer-events: none;
+
+    height: $headerMenu-height - 20px;
+    width: 4.2rem;
+    border: 1px solid $main-border-color;
+    border-radius: 15px;
+    padding: 0 0.5rem;
+}
+
+.noUserAnimationPlug[trigger='0'] {
+    animation: loginButtonFlash0 400ms 1;
+}
+
+.noUserAnimationPlug[trigger='1'] {
+    animation: loginButtonFlash1 400ms 1;
+}
+
+// reattaching the same animation with another name in order to reset its count
+@keyframes loginButtonFlash1 {
+    0% {
+        box-shadow: 0 0 0 0 lightblue;
+    }
+    50% {
+        box-shadow: 0 0 0.5rem 0.5rem lightblue;
+    }
+    100% {
+        box-shadow: 0 0 0 0 lightblue;
+    }
+}
+
+@keyframes loginButtonFlash0 {
+    0% {
+        box-shadow: 0 0 0 0 lightblue;
+    }
+    50% {
+        box-shadow: 0 0 0.5rem 0.5rem lightblue;
+    }
+    100% {
+        box-shadow: 0 0 0 0 lightblue;
+    }
+}
