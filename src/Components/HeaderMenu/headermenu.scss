@@ -295,6 +295,18 @@
     }
 }
 
+// removing create video option
+@include createVideo-cutOff {
+    .headerMenu {
+        .headerMenu-right {
+            .headerMenu-right-icons {
+                .createVideo {
+                    display: none;
+                }
+            }
+        }
+    }
+}
 
 // removing search bar for mobile version
 @include mobile-vertical {

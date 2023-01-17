@@ -30,7 +30,7 @@ export default function UserLogged() {
   return (
     <div className="headerMenu-right-icons">
       <div
-        className="headerMenu-right-icon"
+        className="headerMenu-right-icon createVideo"
         title='Create a video'
         ref={cameraMenuRef}
         onClick={() => ChangeMenu({ ...menuData, createVideoMenu: true })}
@@ -40,9 +40,9 @@ export default function UserLogged() {
       <CreateVideo 
         iconMenuRef={cameraMenuRef}
       />
-      <div className="headerMenu-right-icon" title='Notifications' onClick={testFunc}>
+      {/* <div className="headerMenu-right-icon" title='Notifications' onClick={testFunc}>
         <Icons.Bell />
-      </div>
+      </div> */}
       <img
         className="headerMenu-right-icon"
         src={userData ? userData.avatar : DefaultUserIcon}

@@ -339,3 +339,10 @@ $form-height: 36em;
         }
     }
 }
+
+// removing create video option
+@include createVideo-cutOff {
+    .createVideo-form[visible='1'] {
+        display: none;
+    }
+}

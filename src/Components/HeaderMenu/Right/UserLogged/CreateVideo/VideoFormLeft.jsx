@@ -17,7 +17,7 @@ export default function VideoFormLeft(props) {
 
     const clearNewVideoData = () => {
         ChangeCreateVideo({ title: '', description: '', rating: { likes: 0, dislikes: 0 }, image: '/Assets/defaultImage.png', views: 0, tags: [], errors: { image: false, title: false } })
-        ChangeMenu({ ...menuData, createVideoMenu:true })
+        ChangeMenu({ ...menuData, createVideoMenu: false })
         setActive(1)
     }
 

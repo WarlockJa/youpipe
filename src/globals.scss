@@ -68,3 +68,9 @@ $commentsSection-backgroundColor-dark: #FFF2;
         @content
     }
 }
+
+@mixin createVideo-cutOff {
+    @media (max-width: 920px) {
+        @content
+    }
+}
