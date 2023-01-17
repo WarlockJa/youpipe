@@ -29,5 +29,5 @@ export default function FetchUsersList (props) {
                 </div>
             )
         })
-    } else { return <LoadingPlug /> }
+    } else { return <LoadingPlug darktheme={false} /> }
 }

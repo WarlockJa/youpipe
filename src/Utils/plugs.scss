@@ -1,0 +1,5 @@
+@import '../globals.scss';
+
+.emptyPlug[darktheme='1'], .loadingPlug[darktheme='1'] {
+    color: $main-fontcolor-dark;
+}

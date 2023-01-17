@@ -1,10 +1,11 @@
-import './tagslist.scss';
-import Arrow from "../../../Assets/arrow.png";
-import tagsListItems from "../../../Utils/taglist.json";
-import { useRef, useState, useCallback } from 'react';
-import useEventListener from '../../../Utils/useEventListener';
-import handleArrowClick from './handleArrowClick';
-import { useQuery, useQueryUpdate } from '../../../ContextProviders/QueryContext';
+import './tagslist.scss'
+import Icons from '../../../Assets/icons'
+import tagsListItems from "../../../Utils/taglist.json"
+import { useRef, useState, useCallback } from 'react'
+import useEventListener from '../../../Utils/useEventListener'
+import handleArrowClick from './handleArrowClick'
+import { useQuery, useQueryUpdate } from '../../../ContextProviders/QueryContext'
+import { useTheme } from '../../../ContextProviders/ThemeContext'
 
 export default function TagsList() {
   const tagsListRef = useRef(null)
@@ -12,6 +13,8 @@ export default function TagsList() {
   // videos query context
   const query = useQuery()
   const ChangeQuery = useQueryUpdate()
+  // theme context
+  const darkTheme = useTheme()
 
   const flagsTopBottom = (posL, elRef) => {
     const scrolledTop = posL <= 0 ? true : false
@@ -23,7 +26,7 @@ export default function TagsList() {
     event.preventDefault()
     event.stopPropagation()
 
-    const afterScrollPos = tagsListRef.current.scrollLeft += event.deltaY * 5;
+    const afterScrollPos = tagsListRef.current.scrollLeft += event.deltaY * 5
 
     flagsTopBottom(afterScrollPos, tagsListRef)
 
@@ -52,14 +55,17 @@ export default function TagsList() {
   }
 
   return (
-    <div className="tagsContainer">
+    <div
+      className="tagsContainer"
+      darktheme={darkTheme ? 1 : 0}
+    >
         <div
           className='tagsContainer-arrow arrow-left'
           scrolledtop={tagsListTopBottomFlags.top ? 1 : 0}
           onClick={() => handleArrowClick({ direction: 'left', element: tagsListRef, offset: 250, callback: flagsTopBottom })}
         >
             <div className="arrow-shadow"></div>
-            <img src={Arrow} alt="Previous" />
+            <Icons.Arrow alt="Previous" />
         </div>
         <div className="tagsContainer-tagsList" ref={tagsListRef}>
           {tagsListItems.items.map((item, index) => {
@@ -76,7 +82,7 @@ export default function TagsList() {
           onClick={() => handleArrowClick({ direction: 'right', element: tagsListRef, offset: 250, callback: flagsTopBottom })}
         >
           <div className="arrow-shadow"></div>
-            <img src={Arrow} alt="Next" />
+          <Icons.Arrow alt="Next" />
         </div>
     </div>
   )

@@ -2,10 +2,14 @@ import { ReactComponent as Bell } from './bell.svg';
 import { ReactComponent as Arrow } from './arrow.svg';
 import { ReactComponent as Camera } from './camera.svg';
 import { ReactComponent as Home } from './home.svg';
+import { ReactComponent as HomeActive } from './homeactive.svg';
 import { ReactComponent as Library } from './library.svg';
+import { ReactComponent as LibraryActive } from './libraryactive.svg';
 import { ReactComponent as Loupe } from './loupe.svg';
 import { ReactComponent as Shorts } from './shorts.svg';
+import { ReactComponent as ShortsActive } from './shortsactive.svg';
 import { ReactComponent as Subscriptions } from './subscriptions.svg';
+import { ReactComponent as SubscriptionsActive } from './subscriptionsactive.svg';
 import { ReactComponent as Person } from './person.svg';
 import { ReactComponent as Link } from './link.svg';
 import { ReactComponent as Tags } from './tags.svg';
@@ -21,10 +25,14 @@ const result = {
     Arrow,
     Camera,
     Home,
+    HomeActive,
     Library,
+    LibraryActive,
     Loupe,
     Shorts,
+    ShortsActive,
     Subscriptions,
+    SubscriptionsActive,
     Person,
     Link,
     Tags,

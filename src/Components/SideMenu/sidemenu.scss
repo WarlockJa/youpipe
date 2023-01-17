@@ -41,8 +41,9 @@
             border-radius: 10px;
             cursor: pointer;
 
-            img {
+            svg {
                 width: 1.7rem;
+                height: 1.7rem;
                 padding: 0 1rem;
                 object-fit: contain;
             }
@@ -50,6 +51,7 @@
             p {
                 padding-left: 1em;
                 margin: 0;
+                color: $main-font-color;
             }
 
             &:hover {
@@ -63,6 +65,29 @@
     }
 }
 
+// dark theme changes
+.sidemenu[darktheme='1'] {
+    background-color: $main-background-color-dark;
+
+    .sideMenu-section {
+
+        .sideMenu-section-item {
+         
+            svg {
+                fill: $main-fontcolor-dark;
+            }
+
+            p {
+                color: $main-fontcolor-dark;
+            }
+            &:hover {
+                background-color: $icons-backgroundColor-hover-dark;
+            }
+        }
+    }
+}
+
+// video mode changes
 .videoModeHidden {
     left: -$sideMenu-expanded-width;
 }
@@ -101,5 +126,11 @@
                 text-align: center;
             }
         }
+    }
+}
+
+@include mobile-vertical-small {
+    .sidemenu {
+        display: none;
     }
 }

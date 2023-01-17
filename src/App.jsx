@@ -20,7 +20,7 @@ function App() {
               <VideoProvider>
                 <HeaderMenu />
                 <SideMenu />
-                <div className="feedArea">
+                <div className="feedArea" >
                   <VideoArea />
                   <MainArea />
                 </div>

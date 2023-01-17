@@ -30,7 +30,7 @@
     
     .arrow-left {
         
-        img {
+        svg {
             transform: rotate(180deg);
         }
     }
@@ -63,9 +63,45 @@
             background-color: $icons-backgroundColor-hover;
         }
 
-        img {
+        svg {
             z-index: 2;
             height: $headerMenu-height - 30px;
         }
+    }
+}
+
+// dark theme changes
+.tagsContainer[darktheme='1'] {
+    background-color: $main-background-color-dark;
+
+    .tagsContainer-tagsList {
+
+        .tagsList-tag {
+            background-color: $icons-backgroundColor-hover-dark;
+
+            &:hover{
+                background-color: $icons-backgroundColor-active;
+            }
+        }
+    }
+
+    .tagsContainer-arrow {
+        box-shadow: 0px 0px 7px 7px $main-background-color-dark;
+        background-color: $main-background-color-dark;
+
+        .arrow-shadow {
+            background-color: $icons-backgroundColor-hover-dark;
+        }
+
+        svg {
+            fill: $main-fontcolor-dark;
+        }
+    }
+}
+
+@include mobile {
+    .tagsContainer {
+
+        display: none;
     }
 }

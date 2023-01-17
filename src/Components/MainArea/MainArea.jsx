@@ -10,9 +10,12 @@ import { useQuery, useQueryUpdate } from '../../ContextProviders/QueryContext'
 import { useSideMenu, useSideMenuUpdate } from '../../ContextProviders/SideMenuContext'
 import { useVideo } from '../../ContextProviders/VideoContext'
 import { postUnauthorizedVideosRequest } from '../../Utils/API/RequestsLibrary'
+import { useTheme } from '../../ContextProviders/ThemeContext'
 
 export default function MainArea() {
   const mainContainerRef = useRef(null)
+  // theme context
+  const darkTheme = useTheme()
   // video query context
   const query = useQuery()
   const ChangeQuery = useQueryUpdate()
@@ -83,12 +86,13 @@ export default function MainArea() {
     <div
       className='mainContainer'
       sidemenustate={ video.active ? '2' : sideMenuOptions.sideMenuFolded ? '0' : '1' }
+      darktheme={darkTheme ? 1 : 0}
       ref={mainContainerRef}
     >
       <TagsList />
       <MainAreaRowsFill videos={data} rowLength={columnsNumber} videoModeActive={video.element?._id} />
-      {!loading && data.length === 0 && <EmptyPlug />}
-      {loading && <LoadingPlug />}
+      {!loading && data.length === 0 && <EmptyPlug darktheme={darkTheme} />}
+      {loading && <LoadingPlug darktheme={darkTheme} />}
     </div>
   )
 }

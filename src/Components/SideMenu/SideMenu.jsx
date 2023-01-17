@@ -1,20 +1,16 @@
 import './sidemenu.scss'
-import Home from '../../Assets/home.png'
-import HomeActive from '../../Assets/homeactive.png'
-import Shorts from '../../Assets/shorts.png'
-import ShortsActive from '../../Assets/shortsactive.png'
-import Subscriptions from '../../Assets/subscriptions.png'
-import SubscriptionsActive from '../../Assets/subscriptionsactive.png'
-import Library from '../../Assets/library.png'
-import LibraryActive from '../../Assets/libraryactive.png'
+import Icons from '../../Assets/icons'
 import { useSideMenu, useSideMenuUpdate } from '../../ContextProviders/SideMenuContext'
 import { useQuery, useQueryUpdate } from '../../ContextProviders/QueryContext'
 import { useVideo, useVideoUpdate } from '../../ContextProviders/VideoContext'
 import { useAuthData } from '../../ContextProviders/AuthContext'
-import { useState } from 'react'
+import { useTheme } from '../../ContextProviders/ThemeContext'
 import NoUserAnimationPlug from '../../Utils/NoUserAnimationPlug'
+import { useState } from 'react'
 
 export default function SideMenu() {
+    // theme context
+    const darkTheme = useTheme()
     // side menu active element context
     const sideMenuOptions = useSideMenu()
     const ChangeSideMenu = useSideMenuUpdate()
@@ -40,9 +36,12 @@ export default function SideMenu() {
     }
     
     return (
-        <div className={video.active
-            ? sideMenuOptions.sideMenuFolded ? "sidemenu videoModeHidden expanded" : "sidemenu videoModeCover expanded"
-            : sideMenuOptions.sideMenuFolded ? "sidemenu folded" : "sidemenu expanded"}>
+        <div
+            className={video.active
+                ? sideMenuOptions.sideMenuFolded ? "sidemenu videoModeHidden expanded" : "sidemenu videoModeCover expanded"
+                : sideMenuOptions.sideMenuFolded ? "sidemenu folded" : "sidemenu expanded"}
+            darktheme={darkTheme ? 1 : 0}
+        >
             <div className="sideMenu-section">
                 <div
                     className="sideMenu-section-item"
@@ -60,7 +59,7 @@ export default function SideMenu() {
                         }
                     })}
                 >
-                    <img src={sideMenuOptions.activeElementIndex === 0 ? HomeActive : Home} alt="" />
+                    {sideMenuOptions.activeElementIndex === 0 ? <Icons.HomeActive /> : <Icons.Home />}
                     <p>Home</p>
                 </div>
             </div>
@@ -81,7 +80,7 @@ export default function SideMenu() {
                         }
                     })}
                 >
-                    <img src={sideMenuOptions.activeElementIndex === 1 ? ShortsActive : Shorts} alt="" />
+                    {sideMenuOptions.activeElementIndex === 1 ? <Icons.ShortsActive /> : <Icons.Shorts />}
                     <p>Shorts</p>
                 </div>
             </div>
@@ -105,7 +104,7 @@ export default function SideMenu() {
                         : setNoUserTrigger(prev => !prev)
                     }
                 >
-                    <img src={sideMenuOptions.activeElementIndex === 2 ? SubscriptionsActive : Subscriptions} alt="" />
+                    {sideMenuOptions.activeElementIndex === 2 ? <Icons.SubscriptionsActive /> : <Icons.Subscriptions />}
                     <p>Subscriptions</p>
                 </div>
             </div>
@@ -129,7 +128,7 @@ export default function SideMenu() {
                         : setNoUserTrigger(prev => !prev)
                     }
                 >
-                    <img src={sideMenuOptions.activeElementIndex === 3 ? LibraryActive : Library} alt="" />
+                    {sideMenuOptions.activeElementIndex === 3 ? <Icons.LibraryActive /> : <Icons.Library />}
                     <p>Liked videos</p>
                 </div>
             </div>

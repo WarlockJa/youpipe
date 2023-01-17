@@ -179,7 +179,7 @@
                 user-select: none;
 
                 &:hover {
-                    background-color: $loginButton-backgroundColor-hover;
+                    background-color: $main-attention-color;
                 }
 
                 svg {
@@ -197,7 +197,7 @@
     }
 }
 
-.dark {
+.headerMenu[darktheme='1'] {
     background-color: $main-background-color-dark;
 
     .headerMenu-left {
@@ -280,7 +280,7 @@
             .headerMenu-right-icon-login {
 
                 &:hover {
-                    background-color: $loginButton-backgroundColor-hover-dark;
+                    background-color: $main-attention-color-dark;
                 }
 
                 svg {
@@ -290,6 +290,29 @@
                 p {
                     color: $main-fontcolor-dark;
                 }
+            }
+        }
+    }
+}
+
+
+// removing search bar for mobile version
+@include mobile-vertical {
+    .headerMenu {
+        .headerMenu-center {
+            display: none;
+        }
+    }
+}
+
+@include mobile-vertical-small {
+    .headerMenu {
+        .headerMenu-left {
+            .headerMenu-left-sidemenuButton {
+                display: none;
+            }
+            .headerMenu-left-logo {
+                display: none;
             }
         }
     }

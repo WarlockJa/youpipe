@@ -9,9 +9,12 @@ import useFetchWithPagination from "../../Utils/useFetchWithPagination"
 import CommentMenu from './CommentMenu'
 import { useEffect } from 'react'
 import TimeParser from '../../Utils/TimeParser'
+import { useTheme } from '../../ContextProviders/ThemeContext'
 
 export default function CommentsArea(props) {
     const { videoId } = props
+    // theme context
+    const darkTheme = useTheme()
     // auth context
     const userData = useAuthData()
     const ChangeUser = useAuthUpdateData()
@@ -49,7 +52,7 @@ export default function CommentsArea(props) {
 
     // returning comments array
     const Comments = (props) => {
-        const { commentsArray, dateFormat } = props
+        const { commentsArray } = props
         if(commentsArray.length === 0) return
 
         const result = commentsArray.map((item, index) => {
@@ -119,7 +122,10 @@ export default function CommentsArea(props) {
     }
 
     return (
-        <form className="videoArea-container-commentsSection">
+        <form
+            className="videoArea-container-commentsSection"
+            darktheme={darkTheme ? 1 : 0}
+        >
             <div className="commentsSection-addCommentContainer">
                 <div className="addCommentContainer-header comment-header">
                     <div className="avatarContainer">
@@ -151,8 +157,8 @@ export default function CommentsArea(props) {
             </div>
             <div className="commentsSection-comments">
                  <Comments commentsArray={data} />
-                {loading && <LoadingPlug />}
-                {!loading && data.length === 0 && <EmptyPlug />}
+                {loading && <LoadingPlug darktheme={darkTheme} />}
+                {!loading && data.length === 0 && <EmptyPlug darktheme={darkTheme} />}
             </div>
         </form>
     )

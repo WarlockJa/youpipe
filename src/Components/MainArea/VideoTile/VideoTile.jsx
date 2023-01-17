@@ -3,12 +3,15 @@ import StumpImage from "../../../Assets/stumpimage.png"
 import { useVideo, useVideoUpdate } from '../../../ContextProviders/VideoContext'
 import { useSideMenu, useSideMenuUpdate } from '../../../ContextProviders/SideMenuContext'
 import { RefreshToken } from '../../../Utils/API/RequestsLibrary'
-import { useAuthUpdateData } from '../../../ContextProviders/AuthContext'
+import { useAuthData, useAuthUpdateData } from '../../../ContextProviders/AuthContext'
 import { useQuery, useQueryUpdate } from '../../../ContextProviders/QueryContext'
 import TimeParser from '../../../Utils/TimeParser'
+import { useTheme } from '../../../ContextProviders/ThemeContext'
 
 export default function VideoTile(props) {
     const { element } = props
+    // theme context
+    const darkTheme = useTheme()
     // video context
     const video = useVideo()
     const ChangeVideo = useVideoUpdate()
@@ -16,6 +19,7 @@ export default function VideoTile(props) {
     const sideMenuOptions = useSideMenu()
     const ChangeSideMenu = useSideMenuUpdate()
     // auth context
+    const userData = useAuthData()
     const ChangeUser = useAuthUpdateData()
     // query context
     const query = useQuery()
@@ -23,8 +27,8 @@ export default function VideoTile(props) {
 
     // returning stump tile to fill up unfinished row
     if(!element) return (
-        <div className="video-tile video-tile-stump">
-            <div className="ImageArea">
+        <div className="videoTile video-tile-stump">
+            <div className="videoTile-imageArea">
                 <img src={StumpImage} alt="" />
             </div>
         </div>
@@ -37,7 +41,7 @@ export default function VideoTile(props) {
         // changing URI for the video
         window.history.pushState("video", "", process.env.REACT_APP_YOUPIPE_URI + "?v=" + encodeURI(_id))
         // refreshing Access Token for the user
-        RefreshToken(ChangeUser)
+        if(userData) RefreshToken(ChangeUser)
         // Switching to another slide
         ChangeVideo({ active: true, element: element, amountToFind: 40, defaults: video.defaults })
         // Folding side menu for video mode
@@ -58,17 +62,18 @@ export default function VideoTile(props) {
 
     return (
         <div
-            className="video-tile"
+            className="videoTile"
+            darktheme={darkTheme ? 1 : 0}
             onClick={()=> handleVideoTileClick()}
         >
-            <div className="ImageArea">
+            <div className="videoTile-imageArea">
                 <img src={image} alt="" />
             </div>
-            <div className="VideoDescription">
-                <div className="UserIcon">
+            <div className="videoTile-videoDescription">
+                <div className="videoDescription-userIcon">
                     <img src={avatar} alt="" />
                 </div>
-                <div className="Description">
+                <div className="videoDescription-description">
                     <h2 title={title}>{title}</h2>
                     <h3>{author}</h3>
                     <h3>{views} • {TimeParser(uploaded)}</h3>

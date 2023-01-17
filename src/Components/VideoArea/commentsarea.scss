@@ -1,7 +1,7 @@
 @import '../../globals.scss';
 
 .videoArea-container-commentsSection {
-    background-color: #0004;
+    background-color: $commentsSection-backgroundColor;
     margin-top: 1rem;
     padding: 1rem;
 
@@ -31,10 +31,13 @@
                 font-size: 1rem;
                 margin-left: 1rem;
 
+                font-size: clamp(0.8rem, 1.2vmin, 0.9rem);
+
                 outline: none;
                 border: none;
                 border-bottom: 1px solid $main-border-color;
                 background-color: transparent;
+                color: $main-font-color;
                 resize: none;
             }
             .commentBody::-webkit-scrollbar {
@@ -80,25 +83,27 @@
                     height: 100%;
                 }
             }
-    
+
             .comment-body {
                 display: flex;
                 flex-direction: column;
                 margin-left: 1rem;
                 flex: 0.95;
-    
+
                 .body-header {
                     display: flex;
                     gap: 0.5rem;
     
                     p {
+                        color: $main-font-color;
                         margin: 0;
-                        font-size: 0.9rem;
+                        font-size: clamp(0.8rem, 1.2vmin, 0.9rem);
                     }
                 }
-    
+                
                 .comment-text {
-                    font-size: 0.9rem;
+                    color: $main-font-color;
+                    font-size: clamp(0.8rem, 1.2vmin, 0.9rem);
                 }
             }
     
@@ -130,15 +135,93 @@
                     display: none;
     
                     &:active {
-                        background-color: darkgrey;
+                        background-color: $icons-backgroundColor-active;
                     }
     
                     .dots {
                         width: 3px;
                         height: 3px;
-                        background-color: #454545;
+                        background-color: $main-font-color;
                         border-radius: 50%;
                         pointer-events: none;
+                    }
+                }
+            }
+        }
+    }
+}
+
+.videoArea-container-commentsSection[darktheme='1'] {
+    background-color: $commentsSection-backgroundColor-dark;
+    
+    .addCommentContainer-header {
+
+        .commentBody {
+            color: $main-fontcolor-dark;
+            border-bottom: 1px solid $main-border-color-dark;
+        }
+        .commentBody::-webkit-scrollbar-thumb {
+            background-color: $scrollbar-thumb-background-color-dark;
+        }
+    }
+
+    .addCommentContainer-activeSection {
+
+        .videoArea-button {
+            background-color: $buttons-backgroundColor-dark;
+
+            &:hover {
+                background-color: $buttons-backgroundColor-hover-dark;
+            }
+        
+            &:active {
+                background-color: $buttons-backgroundColor-active-dark;
+            }
+        }
+
+        .inactive {
+            background-color: $buttons-inactive-color;
+            cursor: default;
+            color: $buttons-inactive-fontColor;
+            
+            &:hover {
+                background-color: $buttons-inactive-color;
+            }
+            
+            &:active {
+                background-color: $buttons-inactive-color;
+            }
+        }
+    }
+
+    .commentsSection-comments {
+
+        .comments-comment {
+
+            .comment-body {
+
+                .body-header {
+
+                    p {
+                        color: $main-fontcolor-dark;
+                    }
+                }
+
+                .comment-text {
+                    color: $main-fontcolor-dark;
+                }
+            }
+
+            .comment-menu {
+
+                .dots-container {
+
+                    &:active {
+                        background-color: $icons-backgroundColor-active-dark;
+                    }
+
+                    .dots {
+                        background-color: $main-fontcolor-dark;
                     }
                 }
             }

@@ -7,8 +7,11 @@ import { useAuthData, useAuthUpdateData } from '../../ContextProviders/AuthConte
 import { updateUserData } from '../../Utils/API/RequestsLibrary'
 import CommentsArea from './CommentsArea'
 import NoUserAnimationPlug from '../../Utils/NoUserAnimationPlug'
+import { useTheme } from '../../ContextProviders/ThemeContext'
 
 export default function VideoArea() {
+    // theme context
+    const darkTheme = useTheme()
     // auth context
     const userData = useAuthData()
     const ChangeUser = useAuthUpdateData()
@@ -66,6 +69,7 @@ export default function VideoArea() {
     return (
         <div
             className="videoArea-container"
+            darktheme={darkTheme ? 1 : 0}
             videomode={video.active ? '1' : '0'}
         >
             {video.active &&

@@ -151,7 +151,10 @@ export default function HeaderMenu() {
   }
   
   return (
-    <div className={darkTheme ? "headerMenu dark" : "headerMenu"}>
+    <div
+      className="headerMenu"
+      darktheme={darkTheme ? 1 : 0}
+    >
       <div className="headerMenu-left">
         <div className="headerMenu-left-sidemenuButton" onClick={() => ChangeSideMenu({ ...sideMenuOptions, sideMenuFolded: !sideMenuOptions.sideMenuFolded })}>
           <div className="buttonLine" id="line1"></div>
@@ -187,7 +190,7 @@ export default function HeaderMenu() {
       <div className={"headerMenu-right"}>
         <MenuProvider>
           { 
-            getAccessToken.isLoading || (!getAccessToken.isError && getIdToken.isLoading) ? <LoadingPlug /> :
+            getAccessToken.isLoading || (!getAccessToken.isError && getIdToken.isLoading) ? <LoadingPlug darktheme={darkTheme} /> :
               userData ? <UserLogged /> : <Login />
           }
         </MenuProvider>

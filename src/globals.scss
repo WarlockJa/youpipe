@@ -2,13 +2,13 @@ $main-background-color: white;
 $main-background-color-dark: #131313;
 $main-background-color-dark-hover: #434343;
 $main-font-color: #232323;
-$main-fontcolor-dark: #F3F3F3;
+$main-fontcolor-dark: #A3A3A3;
 $main-border-color: #4444;
 $main-border-color-dark: #F3F3F3;
 $main-placeholder-fontcolor: #AAAAAA;
 
-$loginButton-backgroundColor-hover: #0AF2;
-$loginButton-backgroundColor-hover-dark: rgba(158, 236, 255, 0.3);
+$main-attention-color: rgba(158, 236, 255, 0.7);
+$main-attention-color-dark: rgba(158, 236, 255, 0.3);
 
 $menu-item-color: #FFFE;
 $menu-item-backgroundColor: #FFF2;
@@ -32,12 +32,39 @@ $sideMenu-expanded-width: 250px;
 
 $icons-backgroundColor-hover: lightgrey;
 $icons-backgroundColor-active: darkgrey;
+$icons-backgroundColor-active-dark: #454545;
 $icons-backgroundColor-dark: #696969;
 $icons-backgroundColor-hover-dark: #434343;
 $scrollbar-thumb-background-color: #0009;
 $scrollbar-thumb-background-color-dark: #FFF9;
 
 $buttons-backgroundColor: lightgrey;
+$buttons-backgroundColor-dark: darkgrey;
 $buttons-backgroundColor-hover: darkgrey;
+$buttons-backgroundColor-hover-dark: lightgrey;
 $buttons-backgroundColor-active: #434343;
+$buttons-backgroundColor-active-dark: darkgrey;
 $buttons-divider-color: #4445;
+$buttons-inactive-color: #FFF4;
+$buttons-inactive-fontColor: #0002;
+
+$commentsSection-backgroundColor: #0004;
+$commentsSection-backgroundColor-dark: #FFF2;
+
+@mixin mobile {
+    @media (max-width: 680px) {
+        @content
+    }
+}
+
+@mixin mobile-vertical {
+    @media screen and (orientation: portrait) and (max-width: 680px) {
+        @content
+    }
+
+}
+@mixin mobile-vertical-small {
+    @media screen and (orientation: portrait) and (max-width: 400px) {
+        @content
+    }
+}

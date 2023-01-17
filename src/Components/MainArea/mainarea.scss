@@ -12,6 +12,8 @@
 .mainContainer {
     margin-top: $headerMenu-height;
     scroll-behavior: smooth;
+    background-color: $main-background-color;
+    flex: 1;
 
     overflow-y: scroll;
     height: calc(100vh - $headerMenu-height);
@@ -27,20 +29,39 @@
     }
 }
 
+// dark theme changes
+.mainContainer[darktheme='1'] {
+    background-color: $main-background-color-dark;
+}
+.mainContainer[darktheme='1']::-webkit-scrollbar-thumb {
+    background-color: $scrollbar-thumb-background-color-dark;
+}
+
+// side menu states changes
 .mainContainer[sidemenustate='0'] {
-    max-width: calc(100% - $sideMenu-folded-width);
     margin-left: $sideMenu-folded-width;
+
+    @include mobile-vertical-small {
+        margin-left: 0px;
+    }
 }
 
 .mainContainer[sidemenustate='1'] {
-    max-width: calc(100% - $sideMenu-expanded-width);
     margin-left: $sideMenu-expanded-width;
+
+    @include mobile-vertical-small {
+        margin-left: 0px;
+    }
 }
 
 .mainContainer[sidemenustate='2'] {
-    width: 20vw;
-
+    width: 23vw;
+    
     .tagsList {
         position: relative;
+    }
+
+    @include mobile-vertical-small {
+        display: none;
     }
 }

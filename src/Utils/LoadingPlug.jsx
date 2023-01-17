@@ -1,3 +1,5 @@
-export default function LoadingPlug() {
-    return <div className="loadingPlug">Loading...</div>
+import './plugs.scss'
+
+export default function LoadingPlug(theme) {
+    return <div className="loadingPlug" darktheme={theme ? 1 : 0}>Loading...</div>
 }

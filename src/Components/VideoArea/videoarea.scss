@@ -9,6 +9,7 @@
     border-radius: 15px;
 }
 
+// video mode changes
 .videoArea-container[videomode='0'] {
     display: hidden;
 }
@@ -20,6 +21,7 @@
     height: calc(100vh - $headerMenu-height);
     margin-top: $headerMenu-height;
     padding: 0 1.5rem;
+    background-color: $main-background-color;
     
     .videoArea-videoContainer {
 
@@ -41,8 +43,9 @@
             .videoArea-channelInfo-avatar {
                 width: 3rem;
                 cursor: pointer;
-
+                
                 img {
+                    border-radius: 50%;
                     width: 100%;
                     object-fit: contain;
                 }
@@ -58,6 +61,7 @@
                 }
 
                 p {
+                    color: $main-font-color;
                     margin: 0;
                     font-size: 0.9rem;
                 }
@@ -68,7 +72,7 @@
             }
 
             .videoArea-channelInfo-subscribeButton[subscribed='1'] {
-                background-color: lightblue;
+                background-color: $main-attention-color;
             }
 
 
@@ -83,7 +87,7 @@
                 }
 
                 .videoArea-ratingSection-likes[liked='1'] {
-                    background-color: lightblue;
+                    background-color: $main-attention-color;
                 }
                 
                 .videoArea-ratingSection-divider {
@@ -114,6 +118,48 @@
     }
 }
 
+.videoArea-container[darktheme='1'] {
+    background-color: $main-background-color-dark;
+
+    .videoArea-videoContainer {
+
+        .videoArea-videoTitle {
+            color: $main-fontcolor-dark;
+        }
+
+        .videoArea-channelInfo {
+
+            .videoArea-channelInfo-secondSection{
+
+                p {
+                    color: $main-fontcolor-dark
+                }
+            }
+        }
+
+        .videoArea-button {
+            background-color: $buttons-backgroundColor-dark;
+
+            &:hover {
+                background-color: $buttons-backgroundColor-hover-dark;
+            }
+        
+            &:active {
+                background-color: $buttons-backgroundColor-active-dark;
+            }
+        }
+
+        .videoArea-description {
+            background-color: $commentsSection-backgroundColor-dark;
+            color: $main-fontcolor-dark;
+        }
+    }
+}
+
+.videoArea-container[darktheme='1']::-webkit-scrollbar-thumb {
+    background-color: $scrollbar-thumb-background-color-dark;
+}
+
 .videoArea-button {
     background-color: $buttons-backgroundColor;
     cursor: pointer;
@@ -140,15 +186,31 @@
 }
 
 .inactive {
-    background-color: #FFF4;
+    background-color: $buttons-inactive-color;
     cursor: default;
-    color: #0002;
+    color: $buttons-inactive-fontColor;
     
     &:hover {
-        background-color: #FFF4;
+        background-color: $buttons-inactive-color;
     }
     
     &:active {
-        background-color: #FFF4;
+        background-color: $buttons-inactive-color;
+    }
+}
+
+@include mobile-vertical {
+    .videoArea-container[videomode='1'] {
+        width: 100vw;
+
+        .videoArea-videoContainer {
+
+            .videoArea-channelInfo {
+
+                .videoArea-ratingSection {
+                    display: none;
+                }
+            }
+        }
     }
 }
