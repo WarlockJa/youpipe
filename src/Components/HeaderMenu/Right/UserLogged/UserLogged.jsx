@@ -3,6 +3,7 @@ import UserMenu from './UserMenu'
 import AvatarMenu from './AvatarMenu'
 import UserSwitchMenu from './UserSwitchMenu'
 import CreateVideo from './CreateVideo/CreateVideo'
+import SendFeedback from '../../SendFeedback'
 import DefaultUserIcon from '../../../../Assets/defaultIcon.png'
 import { useRef } from 'react'
 import { useAuthData } from "../../../../ContextProviders/AuthContext"
@@ -25,6 +26,7 @@ export default function UserLogged() {
     console.log('UserData: ', userData)
     console.log('QueryData: ', query)
     console.log('VideoData: ', video)
+    console.log('MenuData: ', menuData)
   }
 
   return (
@@ -40,9 +42,9 @@ export default function UserLogged() {
       <CreateVideo 
         iconMenuRef={cameraMenuRef}
       />
-      {/* <div className="headerMenu-right-icon" title='Notifications' onClick={testFunc}>
+      <div className="headerMenu-right-icon" title='Notifications' onClick={testFunc}>
         <Icons.Bell />
-      </div> */}
+      </div>
       <img
         className="headerMenu-right-icon"
         src={userData ? userData.avatar : DefaultUserIcon}
@@ -50,9 +52,13 @@ export default function UserLogged() {
         ref={userMenuRef}
         onClick={() => ChangeMenu({ ...menuData, userMenu: true })}
       />
+      <SendFeedback
+        iconMenuRef={userMenuRef}
+        noUser={false}
+      />
       <UserMenu
         iconMenuRef={userMenuRef}
-        />
+      />
       <AvatarMenu
         iconMenuRef={userMenuRef}
       />

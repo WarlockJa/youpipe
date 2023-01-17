@@ -1,5 +1,6 @@
 import NoUserOptions from './NoUserOptions'
 import LoginOptions from './LoginOptions'
+import SendFeedback from '../../SendFeedback'
 import { useRef } from 'react'
 import Icons from '../../../../Assets/icons'
 import { useMenuData, useMenuUpdateData } from '../../../../ContextProviders/MenuContext'
@@ -34,6 +35,10 @@ export default function Login() {
         <Icons.Person />
         <p>Login</p>
       </div>
+      <SendFeedback
+        iconMenuRef={loginOptionsMenuRef}
+        noUser={true}
+      />
       <LoginOptions
         iconRef={loginOptionsMenuRef}
       />

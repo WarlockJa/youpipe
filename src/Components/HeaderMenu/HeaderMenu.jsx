@@ -67,7 +67,6 @@ export default function HeaderMenu() {
     })
 
     //setting up user's theme preference
-    console.log('fetched theme: ',IdToken.darktheme)
     ChangeTheme(IdToken.darktheme)
   }
 
@@ -78,8 +77,6 @@ export default function HeaderMenu() {
   // on site load check if Refresh Token present and use it to fetch data
   // and process URI requests
   useEffect (() => {
-
-    console.log('Fetching user data from refresh Token useEffect firing')
     getAccessToken.apiRequest(refreshTokenRequest)
 
     // processing unauthorized URI inputs

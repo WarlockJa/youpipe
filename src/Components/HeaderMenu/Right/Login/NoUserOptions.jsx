@@ -36,7 +36,11 @@ export default function NoUserOptions(props) {
                 className='menu-item'
                 onClick={() => ChangeTheme(!darkTheme)}
             >Appearance: {darkTheme ? 'Dark' : 'Light'}</div>
-            <div className='menu-item'>Send feedback</div>
+            <div
+                className='menu-item'
+                title='Send feedback'
+                onClick={() => ChangeMenu({...menuData, noUserMenu: !menuData.noUserMenu, sendFeedback: !menuData.sendFeedback })}
+            >Send feedback</div>
         </div>
     )
 }

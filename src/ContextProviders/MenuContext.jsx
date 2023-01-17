@@ -1,6 +1,6 @@
 import React, { useContext, useState } from 'react';
 
-const MenuContext = React.createContext({ userMenu: false, avatarMenu: false, noUserMenu: false, loginMenu: false, userSwitchMenu: false, createVideoMenu: false })
+const MenuContext = React.createContext({ userMenu: false, sendFeedback: false, avatarMenu: false, noUserMenu: false, loginMenu: false, userSwitchMenu: false, createVideoMenu: false })
 const MenuUpdateContext = React.createContext()
 
 export function useMenuData() {
@@ -12,7 +12,7 @@ export function useMenuUpdateData() {
 }
 
 export default function MenuProvider({ children }) {
-    const [menuData, setMenuData] = useState({ userMenu: false, avatarMenu: false, noUserMenu: false, loginMenu: false, userSwitchMenu: false, createVideoMenu: false })
+    const [menuData, setMenuData] = useState({ userMenu: false, sendFeedback: false, avatarMenu: false, noUserMenu: false, loginMenu: false, userSwitchMenu: false, createVideoMenu: false })
 
     function ChangeMenu(newMenuData) {
         setMenuData(newMenuData)

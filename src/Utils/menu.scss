@@ -146,6 +146,48 @@
         }
     }
 
+    .menu-feedback {
+        display: flex;
+        flex-direction: column;
+
+        textarea {
+            outline: none;
+            border: none;
+            border-bottom: 1px solid $main-border-color;
+            background-color: transparent;
+            color: $main-fontcolor-dark;
+            resize: none;
+
+            height: 6rem;
+            font-size: clamp(1rem, 1.6vmin, 1.3rem);
+        }
+
+        textarea::-webkit-scrollbar {
+            width: 0.5em;
+        }
+        
+        textarea::-webkit-scrollbar-thumb {
+            background-color: $scrollbar-thumb-background-color-dark;
+            border-radius: 15px;
+        }
+
+        .menu-button {
+            border-radius: 5px;
+            border: none;
+            background-color: $icons-backgroundColor;
+            color: $main-font-color;
+            padding: 0.5rem;
+            font-size: 1rem;
+            text-align: center;
+            cursor: pointer;
+        }
+
+        .menu-button[inactive='1'] {
+            cursor: default;
+            background-color: $icons-backgroundColor-dark;
+        }
+    }
+
     .loadingPlug {
         color: $main-fontcolor-dark;
         padding: 0.5rem 1rem;

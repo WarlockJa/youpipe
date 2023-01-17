@@ -78,7 +78,11 @@ export default function UserMenu(props) {
                     ChangeTheme((prev => !prev))
                 }}
             >Appearance: {darkTheme ? 'Dark' : 'Light'}</div>
-            <div className='menu-item'>Send feedback</div>
+            <div
+                className='menu-item'
+                title='Send feedback'
+                onClick={() => ChangeMenu({...menuData, userMenu: !menuData.userMenu, sendFeedback: !menuData.sendFeedback })}
+            >Send feedback</div>
             <div className='menu-item' onClick={logout}>Sign out</div>
         </div>
     )
