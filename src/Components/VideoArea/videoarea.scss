@@ -135,6 +135,17 @@
                     color: $main-fontcolor-dark
                 }
             }
+
+            .videoArea-ratingSection {
+
+                .videoArea-ratingSection-divider {
+                    background-color: $buttons-backgroundColor-dark;
+                    
+                    .videoArea-ratingSection-divider-line {
+                        background-color: $buttons-divider-color-dark;
+                    }
+                }
+            }
         }
 
         .videoArea-button {

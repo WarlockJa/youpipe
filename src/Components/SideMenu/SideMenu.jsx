@@ -55,7 +55,7 @@ export default function SideMenu() {
                         },
                         URI: {
                             field1: "Home",
-                            field3: "Home"
+                            field3: ""
                         }
                     })}
                 >

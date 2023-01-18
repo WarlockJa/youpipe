@@ -41,7 +41,7 @@ export default function UserMenu(props) {
         ChangeQuery({
             amountToFind: query.defaults.amountToFind,
             fieldToSortBy: query.defaults.fieldToSortBy,
-            query: { type: "author", field: userData.name },
+            query: { type: "author", field: [userData.name] },
             defaults: query.defaults
         })
     }
