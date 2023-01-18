@@ -1,5 +1,5 @@
 import DataFetch from "./DataFetch"
-const URI = "http://localhost:3500/"
+const URI = process.env.REACT_APP_MONGODB_API
 
 
 // request to get a new Access Token with existing refresh token
