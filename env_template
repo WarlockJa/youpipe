@@ -1,0 +1,4 @@
+REACT_APP_DEFAULT_PASSWORD='Password for the default users'
+REACT_APP_YOUPIPE_URI='URL for the application'
+REACT_APP_MAILER_API='mailer API'
+REACT_APP_MONGODB_API='URL for the MongoDB API'

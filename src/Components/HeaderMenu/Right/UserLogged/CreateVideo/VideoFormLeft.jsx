@@ -16,7 +16,7 @@ export default function VideoFormLeft(props) {
     const ChangeMenu = useMenuUpdateData()
 
     const clearNewVideoData = () => {
-        ChangeCreateVideo({ title: '', description: '', rating: { likes: 0, dislikes: 0 }, image: '/Assets/defaultImage.png', views: 0, tags: [], errors: { image: false, title: false } })
+        ChangeCreateVideo({ ...CreateVideoData.defaults, default: CreateVideoData.defaults })
         ChangeMenu({ ...menuData, createVideoMenu: false })
         setActive(1)
     }
@@ -83,7 +83,7 @@ export default function VideoFormLeft(props) {
                 title='Upload'
                 onClick={() => {
                     if(!inputErrorsNewVideoData(CreateVideoData)) {
-                        const { errors, ...NewVideoData } = CreateVideoData
+                        const { errors, defaults, ...NewVideoData } = CreateVideoData
                         createNewVideo({ AccessToken: userData.accessToken, VideoData: NewVideoData })
                         clearNewVideoData()
                     }

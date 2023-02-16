@@ -180,16 +180,16 @@ $form-height: 36em;
 
             p {
                 padding: 0.5rem;
-                background-color: #fff4;
+                background-color: $createVideo-backgroundColor;
                 border-radius: 10px;
                 cursor: pointer;
 
                 &:hover {
-                    background-color: #fff7;
+                    background-color: $createVideo-icon-backgroundColor-hover;
                 }
 
                 &:active {
-                    background-color: #fff8;
+                    background-color: $createVideo-icon-backgroundColor-active;
                 }
             }
         }
@@ -220,7 +220,7 @@ $form-height: 36em;
 
                 &:hover {
                     border: 1px solid coral;
-                    background-color: #fff4;
+                    background-color: $createVideo-backgroundColor;
                 }
 
                 p {
@@ -231,7 +231,7 @@ $form-height: 36em;
             
 
             .active {
-                background-color: #fff8;
+                background-color: $createVideo-borderColor-hover;
             }
         }
 
@@ -260,7 +260,7 @@ $form-height: 36em;
                 padding: 0.5rem 1rem;
                 border: 1px solid $createVideo-borderColor;
                 border-radius: 5px;
-                background-color: #fff4;
+                background-color: $createVideo-backgroundColor;
 
                 p {
                     margin: 0;
@@ -279,7 +279,7 @@ $form-height: 36em;
         }
 
         p {
-            color: $main-fontcolor-dark;
+            color: $createVideo-fontColor;
         }
 
         .sliders {

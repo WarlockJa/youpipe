@@ -1,6 +1,25 @@
 import React, { useContext, useState } from 'react';
 
-const CreateVideoContext = React.createContext({ title: '', description: '', rating: { likes: 0, dislikes: 0 }, image: '/Assets/defaultImage.png', views: 0, tags: [], errors: { image: false, title: false } })
+const CreateVideoContext = React.createContext({
+    title: '',
+    description: '',
+    avatar: '',
+    rating: { likes: 0, dislikes: 0 },
+    image: '/Assets/defaultImage.png',
+    views: 0,
+    tags: [],
+    errors: { image: false, title: false },
+    defaults: {
+        title: '',
+        description: '',
+        avatar: '',
+        rating: { likes: 0, dislikes: 0 },
+        image: '/Assets/defaultImage.png',
+        views: 0,
+        tags: [],
+        errors: { image: false, title: false },
+    }
+})
 const CreateVideoUpdateContext = React.createContext()
 
 export function useCreateVideoData() {
@@ -12,7 +31,26 @@ export function useCreateVideoUpdateData() {
 }
 
 export default function CreateVideoProvider({ children }) {
-    const [createVideoData, setCreateVideoData] = useState({ title: '', description: '', rating: { likes: 0, dislikes: 0 }, image: '/Assets/defaultImage.png', views: 0, tags: [], errors: { image: false, title: false } })
+    const [createVideoData, setCreateVideoData] = useState({
+        title: '',
+        description: '',
+        avatar: '',
+        rating: { likes: 0, dislikes: 0 },
+        image: '/Assets/defaultImage.png',
+        views: 0,
+        tags: [],
+        errors: { image: false, title: false },
+        defaults: {
+            title: '',
+            description: '',
+            avatar: '',
+            rating: { likes: 0, dislikes: 0 },
+            image: '/Assets/defaultImage.png',
+            views: 0,
+            tags: [],
+            errors: { image: false, title: false },
+        }
+    })
 
     function ChangeCreateVideo(newCreateVideoData) {
         setCreateVideoData(newCreateVideoData)

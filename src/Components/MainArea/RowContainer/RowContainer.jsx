@@ -5,7 +5,9 @@ export default function RowContainer(props) {
     const { rowElementsNumber, elements } = props
 
     const SpawnTiles = () => {
-        return [...Array(rowElementsNumber)].map((_item, index) => { return <VideoTile key={elements[index] ? 'VideoTile' + elements[index]._id : 'StumpTile' + index} element={elements[index]} /> })
+        return [...Array(rowElementsNumber)].map((_item, index) => {
+            return <VideoTile key={elements[index] ? 'VideoTile' + elements[index]._id : 'StumpTile' + index} element={elements[index]} />
+        })
     }
 
     return (

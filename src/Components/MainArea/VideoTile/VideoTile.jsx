@@ -7,6 +7,7 @@ import { useAuthData, useAuthUpdateData } from '../../../ContextProviders/AuthCo
 import { useQuery, useQueryUpdate } from '../../../ContextProviders/QueryContext'
 import TimeParser from '../../../Utils/TimeParser'
 import { useTheme } from '../../../ContextProviders/ThemeContext'
+// import resizeFile from '../../../Utils/FileResizer'
 
 export default function VideoTile(props) {
     const { element } = props
@@ -36,6 +37,9 @@ export default function VideoTile(props) {
     
     // passed video slide information
     const { author, avatar, image, title, uploaded, views, _id } = element
+
+    console.log(element)
+    // const resizedImage = await resizeFile(image)
 
     const handleVideoTileClick = () => {
         // changing URI for the video
