@@ -26,7 +26,7 @@ export default function SendFeedback(props) {
 
     const handleSendFeedback = (message) => {
         if(message !== '') {
-            sendMail({ emailAddress: 'Roman.S@warlockja.ru', emailTopic: 'YouPipe feedback', emailBody: message })
+            sendMail({ emailAddress: process.env.REACT_APP_MAIL_USER, emailTopic: 'YouPipe feedback', emailBody: message })
             setFeedbackText(() => 'Thank you for your feedback!')
         }
     }
