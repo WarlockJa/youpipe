@@ -10,13 +10,18 @@ export function EditImage() {
     const ChangeCreateVideo = useCreateVideoUpdateData()
     const [imageMenuState, setImageMenuState] = useState(false)
 
+    // changing URL of the preview image to full image
+    const previewToFullImage = (imagePath) => {
+        return imagePath.replace('PreviewImages', 'VideoImages')
+    }
+
     const VideoImagesList = (items) => {
         return items.items.map((item, index) => {
             return(
                 <div
                     key={index}
                     className="videoImageTile"
-                    onClick={() => ChangeCreateVideo({ ...createVideoData, image: item.image, errors: { image: false , ...ChangeCreateVideo.errors } })}
+                    onClick={() => ChangeCreateVideo({ ...createVideoData, image: item.image, previewImage: previewToFullImage(item.image), errors: { image: false , ...ChangeCreateVideo.errors } })}
                 >
                     <img src={item.image} alt="" />
                 </div>
