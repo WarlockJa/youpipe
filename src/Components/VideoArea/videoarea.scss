@@ -1,227 +1,238 @@
-@import '../../globals.scss';
+@import "../../globals.scss";
 
 .videoArea-container::-webkit-scrollbar {
-    width: 0.5em;
-    
+  width: 0.5em;
 }
 .videoArea-container::-webkit-scrollbar-thumb {
-    background-color: $scrollbar-thumb-background-color;
-    border-radius: 15px;
+  background-color: $scrollbar-thumb-background-color;
+  border-radius: 15px;
 }
 
 // video mode changes
-.videoArea-container[videomode='0'] {
-    display: hidden;
+.videoArea-container[videomode="0"] {
+  display: hidden;
 }
 
-.videoArea-container[videomode='1'] {
-    scroll-behavior: smooth;
-    overflow-y: scroll;
-    width: 75vw;
-    height: calc(100vh - $headerMenu-height);
-    margin-top: $headerMenu-height;
-    padding: 0 1.5rem;
-    background-color: $main-background-color;
-    
-    .videoArea-videoContainer {
+.videoArea-container[videomode="1"] {
+  scroll-behavior: smooth;
+  overflow-y: scroll;
+  width: 75vw;
+  height: calc(100vh - $headerMenu-height);
+  margin-top: $headerMenu-height;
+  padding: 0 1.5rem;
+  background-color: $main-background-color;
 
-        .videoArea-video {
+  .videoArea-videoContainer {
+    .videoArea-videoWrapper {
+      position: relative;
+
+      .videoArea-video {
+        width: 100%;
+        object-fit: contain;
+      }
+
+      .videoArea-videoLoading {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        background-color: $main-background-loading;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+    }
+
+    .videoArea-videoTitle {
+      color: $main-font-color;
+      padding: 0.4rem;
+      font-size: 1.2rem;
+    }
+
+    .videoArea-channelInfo {
+      display: flex;
+      align-items: center;
+
+      .videoArea-channelInfo-avatar {
+        width: 3rem;
+        cursor: pointer;
+
+        img {
+          border-radius: 50%;
+          width: 100%;
+          object-fit: contain;
+        }
+      }
+
+      .videoArea-channelInfo-secondSection {
+        display: flex;
+        flex-direction: column;
+        margin-left: 1rem;
+
+        .videoArea-channelInfo-secondSection-channelName {
+          cursor: pointer;
+        }
+
+        p {
+          color: $main-font-color;
+          margin: 0;
+          font-size: 0.9rem;
+        }
+      }
+
+      .videoArea-channelInfo-subscribeButton {
+        margin-left: 2rem;
+      }
+
+      .videoArea-channelInfo-subscribeButton[subscribed="1"] {
+        background-color: $main-attention-color;
+      }
+
+      .videoArea-ratingSection {
+        flex-grow: 1;
+        display: flex;
+        justify-content: flex-end;
+
+        .videoArea-ratingSection-likes {
+          border-radius: 20px 0 0 20px;
+          padding: 0.5rem;
+        }
+
+        .videoArea-ratingSection-likes[liked="1"] {
+          background-color: $main-attention-color;
+        }
+
+        .videoArea-ratingSection-divider {
+          width: 1px;
+          background-color: $buttons-backgroundColor;
+          display: flex;
+          align-items: center;
+
+          .videoArea-ratingSection-divider-line {
             width: 100%;
-            object-fit: contain;
+            height: 65%;
+            background-color: $buttons-divider-color;
+          }
         }
 
-        .videoArea-videoTitle {
-            color: $main-font-color;
-            padding: 0.4rem;
-            font-size: 1.2rem;
+        .videoArea-ratingSection-dislikes {
+          border-radius: 0 20px 20px 0;
+          padding: 0.5rem;
         }
-        
-        .videoArea-channelInfo {
-            display: flex;
-            align-items: center;
-
-            .videoArea-channelInfo-avatar {
-                width: 3rem;
-                cursor: pointer;
-                
-                img {
-                    border-radius: 50%;
-                    width: 100%;
-                    object-fit: contain;
-                }
-            }
-
-            .videoArea-channelInfo-secondSection {
-                display: flex;
-                flex-direction: column;
-                margin-left: 1rem;
-
-                .videoArea-channelInfo-secondSection-channelName {
-                    cursor: pointer;
-                }
-
-                p {
-                    color: $main-font-color;
-                    margin: 0;
-                    font-size: 0.9rem;
-                }
-            }
-
-            .videoArea-channelInfo-subscribeButton {
-                margin-left: 2rem;
-            }
-
-            .videoArea-channelInfo-subscribeButton[subscribed='1'] {
-                background-color: $main-attention-color;
-            }
-
-
-            .videoArea-ratingSection {
-                flex-grow: 1;
-                display: flex;
-                justify-content: flex-end;
-
-                .videoArea-ratingSection-likes {
-                    border-radius: 20px 0 0 20px;
-                    padding: 0.5rem;
-                }
-
-                .videoArea-ratingSection-likes[liked='1'] {
-                    background-color: $main-attention-color;
-                }
-                
-                .videoArea-ratingSection-divider {
-                    width: 1px;
-                    background-color: $buttons-backgroundColor;
-                    display: flex;
-                    align-items: center;
-                    
-                    .videoArea-ratingSection-divider-line {
-                        width: 100%;
-                        height: 65%;
-                        background-color: $buttons-divider-color;
-                    }
-                }
-                
-                .videoArea-ratingSection-dislikes {
-                    border-radius: 0 20px 20px 0;
-                    padding: 0.5rem;
-                }
-            }
-        }
-        
-        .videoArea-description {
-            background-color: $buttons-backgroundColor;
-            padding: 1rem;
-            border-radius: 10px;
-        }
+      }
     }
+
+    .videoArea-description {
+      background-color: $buttons-backgroundColor;
+      padding: 1rem;
+      border-radius: 10px;
+    }
+  }
 }
 
-.videoArea-container[darktheme='1'] {
-    background-color: $main-background-color-dark;
+.videoArea-container[darktheme="1"] {
+  background-color: $main-background-color-dark;
 
-    .videoArea-videoContainer {
-
-        .videoArea-videoTitle {
-            color: $main-fontcolor-dark;
-        }
-
-        .videoArea-channelInfo {
-
-            .videoArea-channelInfo-secondSection{
-
-                p {
-                    color: $main-fontcolor-dark
-                }
-            }
-
-            .videoArea-ratingSection {
-
-                .videoArea-ratingSection-divider {
-                    background-color: $buttons-backgroundColor-dark;
-                    
-                    .videoArea-ratingSection-divider-line {
-                        background-color: $buttons-divider-color-dark;
-                    }
-                }
-            }
-        }
-
-        .videoArea-button {
-            background-color: $buttons-backgroundColor-dark;
-
-            &:hover {
-                background-color: $buttons-backgroundColor-hover-dark;
-            }
-        
-            &:active {
-                background-color: $buttons-backgroundColor-active-dark;
-            }
-        }
-
-        .videoArea-description {
-            background-color: $commentsSection-backgroundColor-dark;
-            color: $main-fontcolor-dark;
-        }
+  .videoArea-videoContainer {
+    .videoArea-videoWrapper {
+      .videoArea-videoLoading {
+        background-color: $main-background-loading-dark;
+      }
     }
+    .videoArea-videoTitle {
+      color: $main-fontcolor-dark;
+    }
+
+    .videoArea-channelInfo {
+      .videoArea-channelInfo-secondSection {
+        p {
+          color: $main-fontcolor-dark;
+        }
+      }
+
+      .videoArea-ratingSection {
+        .videoArea-ratingSection-divider {
+          background-color: $buttons-backgroundColor-dark;
+
+          .videoArea-ratingSection-divider-line {
+            background-color: $buttons-divider-color-dark;
+          }
+        }
+      }
+    }
+
+    .videoArea-button {
+      background-color: $buttons-backgroundColor-dark;
+
+      &:hover {
+        background-color: $buttons-backgroundColor-hover-dark;
+      }
+
+      &:active {
+        background-color: $buttons-backgroundColor-active-dark;
+      }
+    }
+
+    .videoArea-description {
+      background-color: $commentsSection-backgroundColor-dark;
+      color: $main-fontcolor-dark;
+    }
+  }
 }
 
-.videoArea-container[darktheme='1']::-webkit-scrollbar-thumb {
-    background-color: $scrollbar-thumb-background-color-dark;
+.videoArea-container[darktheme="1"]::-webkit-scrollbar-thumb {
+  background-color: $scrollbar-thumb-background-color-dark;
 }
 
 .videoArea-button {
-    background-color: $buttons-backgroundColor;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    padding: 0.5rem 1rem;
-    border-radius: 20px;
-    color: $main-font-color;
+  background-color: $buttons-backgroundColor;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  color: $main-font-color;
 
-    svg {
-        width: 1.2rem;
-        height: 1.2rem;
-        padding: 0 0.5rem;
-    }
+  svg {
+    width: 1.2rem;
+    height: 1.2rem;
+    padding: 0 0.5rem;
+  }
 
-    &:hover {
-        background-color: $buttons-backgroundColor-hover;
-    }
+  &:hover {
+    background-color: $buttons-backgroundColor-hover;
+  }
 
-    &:active {
-        background-color: $buttons-backgroundColor-active;
-    }
-
+  &:active {
+    background-color: $buttons-backgroundColor-active;
+  }
 }
 
 .inactive {
+  background-color: $buttons-inactive-color;
+  cursor: default;
+  color: $buttons-inactive-fontColor;
+
+  &:hover {
     background-color: $buttons-inactive-color;
-    cursor: default;
-    color: $buttons-inactive-fontColor;
-    
-    &:hover {
-        background-color: $buttons-inactive-color;
-    }
-    
-    &:active {
-        background-color: $buttons-inactive-color;
-    }
+  }
+
+  &:active {
+    background-color: $buttons-inactive-color;
+  }
 }
 
 @include mobile-vertical {
-    .videoArea-container[videomode='1'] {
-        width: 100vw;
+  .videoArea-container[videomode="1"] {
+    width: 100vw;
 
-        .videoArea-videoContainer {
-
-            .videoArea-channelInfo {
-
-                .videoArea-ratingSection {
-                    display: none;
-                }
-            }
+    .videoArea-videoContainer {
+      .videoArea-channelInfo {
+        .videoArea-ratingSection {
+          display: none;
         }
+      }
     }
+  }
 }

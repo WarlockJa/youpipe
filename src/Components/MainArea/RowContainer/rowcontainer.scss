@@ -1,4 +1,6 @@
 .row-container {
-    display: flex;
-    width: 100%;
+  flex: 1;
+  display: flex;
+  min-height: 27%;
+  width: 100%;
 }

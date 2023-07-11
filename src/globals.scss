@@ -2,30 +2,32 @@ $main-background-color: white;
 $main-background-color-dark: #131313;
 $main-background-color-dark-hover: #434343;
 $main-font-color: #232323;
-$main-fontcolor-dark: #A3A3A3;
+$main-fontcolor-dark: #a3a3a3;
 $main-border-color: #4444;
-$main-border-color-dark: #F3F3F3;
-$main-placeholder-fontcolor: #AAAAAA;
+$main-border-color-dark: #f3f3f3;
+$main-placeholder-fontcolor: #aaaaaa;
+$main-background-loading: rgb(179, 179, 179);
+$main-background-loading-dark: rgb(68, 68, 68);
 
 $main-attention-color: rgba(158, 236, 255, 0.7);
 $main-attention-color-dark: rgba(158, 236, 255, 0.3);
 
-$menu-item-color: #FFFE;
-$menu-item-backgroundColor: #FFF2;
+$menu-item-color: #fffe;
+$menu-item-backgroundColor: #fff2;
 
 $headerMenu-height: 50px;
 
 $headerMenu-userMenu-backgroundColor: #353535;
 
 $createVideo-backgroundColor: #444;
-$createVideo-fontColor: #FFFE;
-$createVideo-icon-backgroundColor-hover: #A3A3A3;
+$createVideo-fontColor: #fffe;
+$createVideo-icon-backgroundColor-hover: #a3a3a3;
 $createVideo-icon-backgroundColor-active: lightgrey;
-$createVideo-icon-color: #A3A3A3;
+$createVideo-icon-color: #a3a3a3;
 $createVideo-icon-color-hover: #232323;
 $createVideo-cancelIcon-color-hover: rgba(131, 0, 22, 0.719);
-$createVideo-borderColor: #A3A3A3;
-$createVideo-borderColor-hover: #fffA;
+$createVideo-borderColor: #a3a3a3;
+$createVideo-borderColor-hover: #fffa;
 
 $sideMenu-folded-width: 60px;
 $sideMenu-folded-height: 80px;
@@ -38,7 +40,7 @@ $icons-backgroundColor: lightgrey;
 $icons-backgroundColor-dark: #696969;
 $icons-backgroundColor-hover-dark: #434343;
 $scrollbar-thumb-background-color: #0009;
-$scrollbar-thumb-background-color-dark: #FFF9;
+$scrollbar-thumb-background-color-dark: #fff9;
 
 $buttons-backgroundColor: lightgrey;
 $buttons-backgroundColor-dark: darkgrey;
@@ -47,33 +49,32 @@ $buttons-backgroundColor-hover-dark: lightgrey;
 $buttons-backgroundColor-active: #434343;
 $buttons-backgroundColor-active-dark: darkgrey;
 $buttons-divider-color: #4445;
-$buttons-divider-color-dark: #FFF5;
-$buttons-inactive-color: #FFF4;
+$buttons-divider-color-dark: #fff5;
+$buttons-inactive-color: #fff4;
 $buttons-inactive-fontColor: #0002;
 
 $commentsSection-backgroundColor: #0004;
-$commentsSection-backgroundColor-dark: #FFF2;
+$commentsSection-backgroundColor-dark: #fff2;
 
 @mixin mobile {
-    @media (max-width: 680px) {
-        @content
-    }
+  @media (max-width: 680px) {
+    @content;
+  }
 }
 
 @mixin mobile-vertical {
-    @media screen and (orientation: portrait) and (max-width: 680px) {
-        @content
-    }
-
+  @media screen and (orientation: portrait) and (max-width: 680px) {
+    @content;
+  }
 }
 @mixin mobile-vertical-small {
-    @media screen and (orientation: portrait) and (max-width: 400px) {
-        @content
-    }
+  @media screen and (orientation: portrait) and (max-width: 400px) {
+    @content;
+  }
 }
 
 @mixin createVideo-cutOff {
-    @media (max-width: 920px) {
-        @content
-    }
+  @media (max-width: 920px) {
+    @content;
+  }
 }
