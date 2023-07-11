@@ -113,6 +113,7 @@ export default function HeaderMenu() {
         active: true,
         element: result.result[0],
         amountToFind: 40,
+        loading: true,
         defaults: video.defaults,
       });
       let randomTagsArray = [];

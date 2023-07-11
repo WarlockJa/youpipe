@@ -41,8 +41,6 @@ export default function VideoArea() {
     video.active && userData?.activity
       ? userData.activity.subscriptions.includes(video.element.author)
       : null;
-  // loading state
-  const [loaded, setLoaded] = useState(false);
 
   useEffect(() => {
     // scrolling to the top of the video area page on new slide select
@@ -114,10 +112,15 @@ export default function VideoArea() {
                 src={video.element.image}
                 alt=""
                 ref={videoAreaRef}
-                onLoadStart={() => setLoaded(false)}
-                onLoad={() => setLoaded(true)}
+                onLoad={() => {
+                  //   await new Promise((resolve) => setTimeout(resolve, 1000));
+                  ChangeVideo({
+                    ...video,
+                    loading: false,
+                  });
+                }}
               />
-              {!loaded && (
+              {video.loading && (
                 <div className="videoArea-videoLoading">
                   <Spinner />
                 </div>

@@ -68,6 +68,7 @@ export default function VideoTile(props) {
       active: true,
       element: element,
       amountToFind: 40,
+      loading: true,
       defaults: video.defaults,
     });
     // Folding side menu for video mode
