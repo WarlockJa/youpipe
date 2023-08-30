@@ -54,6 +54,8 @@ export default function VideoTile(props) {
   // passed video slide information
   const { author, avatar, previewImage, title, uploaded, views, _id } = element;
 
+  _id === "63b66b8f01c5f96ba7926d41" && console.log(loaded);
+
   const handleVideoTileClick = () => {
     // changing URI for the video
     window.history.pushState(
@@ -98,16 +100,16 @@ export default function VideoTile(props) {
       onClick={() => handleVideoTileClick()}
     >
       <div className="videoTile-imageArea">
-        <img src={previewImage} alt="" />
-        {!loaded && (
+        <img src={previewImage} alt="" onLoad={() => setLoaded(true)} />
+        {/* {!loaded && (
           <div className="videotileloading">
             <Spinner />
           </div>
-        )}
+        )} */}
       </div>
       <div className="videoTile-videoDescription">
         <div className="videoDescription-userIcon">
-          <img src={avatar} alt="" onLoad={() => setLoaded(true)} />
+          <img src={avatar} alt="" />
         </div>
         <div className="videoDescription-description">
           <h2 title={title}>{title}</h2>
