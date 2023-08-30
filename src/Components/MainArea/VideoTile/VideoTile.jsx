@@ -1,5 +1,5 @@
 import "./videotile.scss";
-import StumpImage from "../../../Assets/stumpimage.png";
+import StumpImage from "../../../Assets/stumpimagesmall.png";
 import {
   useVideo,
   useVideoUpdate,
@@ -38,8 +38,6 @@ export default function VideoTile(props) {
   // query context
   const query = useQuery();
   const ChangeQuery = useQueryUpdate();
-  // image loaded state
-  const [loaded, setLoaded] = useState(false);
 
   // returning stump tile to fill up unfinished row
   if (!element)
@@ -98,12 +96,10 @@ export default function VideoTile(props) {
       onClick={() => handleVideoTileClick()}
     >
       <div className="videoTile-imageArea">
-        <img src={previewImage} alt="" onLoad={() => setLoaded(true)} />
-        {!loaded && (
-          <div className="videotileloading">
-            <Spinner />
-          </div>
-        )}
+        <div className="videotileloading">
+          <Spinner />
+        </div>
+        <img className="videoTile-imageArea--img" src={previewImage} alt="" />
       </div>
       <div className="videoTile-videoDescription">
         <div className="videoDescription-userIcon">

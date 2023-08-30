@@ -16,7 +16,7 @@
 .videoArea-container[videomode="1"] {
   scroll-behavior: smooth;
   overflow-y: scroll;
-  width: 75vw;
+  width: calc(100% - 25em);
   height: calc(100vh - $headerMenu-height);
   margin-top: $headerMenu-height;
   padding: 0 1.5rem;

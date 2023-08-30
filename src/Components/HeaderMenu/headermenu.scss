@@ -1,331 +1,321 @@
 @import "../../globals.scss";
 
 .headerMenu {
-    position: fixed;
-    width: 100vw;
-    height: $headerMenu-height;
+  position: fixed;
+  width: 100vw;
+  height: $headerMenu-height;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  z-index: 3;
+  background-color: $main-background-color;
+
+  .headerMenu-left {
     display: flex;
     align-items: center;
-    justify-content: space-between;
-    z-index: 2;
-    background-color: $main-background-color;
+    justify-content: center;
 
-    .headerMenu-left {
+    .headerMenu-left-sidemenuButton {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 5px;
+      margin: 5px;
+
+      height: $headerMenu-height - 10px;
+      width: $headerMenu-height - 10px;
+      margin: 0 calc(($sideMenu-folded-width - $headerMenu-height) / 2 + 5px);
+      border-radius: 50%;
+
+      transition: all 150ms ease;
+
+      &:hover {
+        background-color: $icons-backgroundColor-hover;
+      }
+
+      &:active {
+        background-color: $icons-backgroundColor-active;
+      }
+
+      .buttonLine {
+        width: 20px;
+        height: 1px;
+        background-color: $main-font-color;
+      }
+    }
+
+    .headerMenu-left-logo {
+      user-select: none;
+      cursor: pointer;
+
+      font-size: $headerMenu-height - 20px;
+      font-family: sans-serif, serif;
+      font-weight: 1000;
+
+      display: flex;
+      align-items: center;
+
+      img {
+        height: $headerMenu-height - 20px;
+      }
+    }
+  }
+
+  .headerMenu-center {
+    width: 35vw;
+    height: 100%;
+    display: flex;
+    align-items: center;
+
+    .headerMenu-searchBar {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+
+      input {
+        width: 83%;
+        font-size: 1rem;
+        color: $main-font-color;
+        border-radius: 30px 0 0 30px;
+        outline: none;
+        border: 1px solid $main-border-color;
+        padding: 10px 20px;
+      }
+
+      ::placeholder {
+        color: $main-placeholder-fontcolor;
+      }
+
+      .searchButton {
         display: flex;
-        align-items: center;
         justify-content: center;
-        
-        .headerMenu-left-sidemenuButton {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            gap: 5px;
-            margin: 5px;
-    
-            height: $headerMenu-height - 10px;
-            width: $headerMenu-height - 10px;
-            margin: 0 calc(($sideMenu-folded-width - $headerMenu-height)/2 + 5px);
+        border: 1px solid $main-border-color;
+        border-left: none;
+        border-radius: 0 30px 30px 0;
+        background-color: $main-background-color;
+
+        &:hover {
+          background-color: $icons-backgroundColor-hover;
+        }
+
+        &:active {
+          background-color: $icons-backgroundColor-active;
+        }
+
+        svg {
+          width: 1rem;
+          height: 100%;
+          object-fit: contain;
+          padding: 11px 19px;
+        }
+      }
+    }
+  }
+
+  .headerMenu-right {
+    width: 10rem;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 1rem;
+
+    .headerMenu-right-icons {
+      display: flex;
+      width: 100%;
+      align-items: center;
+      justify-content: space-evenly;
+
+      .headerMenu-right-icon {
+        border-radius: 50%;
+        height: $headerMenu-height - 20px;
+        padding: 5px;
+
+        .headerMenu-right-icon-dots {
+          height: $headerMenu-height - 20px;
+          width: $headerMenu-height - 20px;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: center;
+          gap: 3px;
+
+          .headerMenu-right-icon-dot {
+            width: 3px;
+            height: 3px;
             border-radius: 50%;
-    
-            transition: all 150ms ease;
-            
-            &:hover {
-                background-color: $icons-backgroundColor-hover;
-            }
-    
-            &:active {
-                background-color: $icons-backgroundColor-active;
-            }
-    
-            .buttonLine {
-                width: 20px;
-                height: 1px;
-                background-color: $main-font-color;
-            }
+            background-color: $main-font-color;
+          }
         }
-    
-        .headerMenu-left-logo {
-            user-select: none;
-            cursor: pointer;
 
-            font-size: $headerMenu-height - 20px;
-            font-family: sans-serif, serif;
-            font-weight: 1000;
-
-            display: flex;
-            align-items: center;
-            
-            img {
-                height: $headerMenu-height - 20px;
-            }
+        svg {
+          width: 100%;
+          height: 100%;
+          min-width: $headerMenu-height - 20px;
+          min-height: $headerMenu-height - 20px;
+          object-fit: contain;
         }
-    }
 
-    .headerMenu-center {
-        width: 35vw;
-        height: 100%;
+        &:hover {
+          background-color: $icons-backgroundColor-hover;
+        }
+
+        &:active {
+          background-color: $icons-backgroundColor-active;
+        }
+      }
+
+      .headerMenu-right-icon-login {
+        height: $headerMenu-height - 20px;
         display: flex;
         align-items: center;
-        
-        .headerMenu-searchBar {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 100%;
+        gap: 0.5rem;
+        border: 1px solid $main-border-color;
+        border-radius: 15px;
+        padding: 0 0.5rem;
+        cursor: pointer;
+        user-select: none;
 
-            input {
-                width: 83%;
-                font-size: 1rem;
-                color: $main-font-color;
-                border-radius: 30px 0 0 30px;
-                outline: none;
-                border: 1px solid $main-border-color;
-                padding: 10px 20px;
-            }
-            
-            ::placeholder {
-                color: $main-placeholder-fontcolor;
-            }
-            
-            .searchButton {
-                display: flex;
-                justify-content: center;
-                border: 1px solid $main-border-color;
-                border-left: none;
-                border-radius: 0 30px 30px 0;
-                background-color: $main-background-color;
-
-                &:hover {
-                    background-color: $icons-backgroundColor-hover;
-                }
-
-                &:active {
-                    background-color: $icons-backgroundColor-active;
-                }
-                
-                svg {
-                    width: 1rem;
-                    height: 100%;
-                    object-fit: contain;
-                    padding: 11px 19px;
-                }
-            }
+        &:hover {
+          background-color: $main-attention-color;
         }
-    }
-    
-    .headerMenu-right {
-        width: 10rem;
-        height: 100%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        margin-right: 1rem;
 
-        .headerMenu-right-icons {
-            display: flex;
-            width: 100%;
-            align-items: center;
-            justify-content: space-evenly;
-    
-            .headerMenu-right-icon {
-                border-radius: 50%;
-                height: $headerMenu-height - 20px;
-                padding: 5px;
-
-                .headerMenu-right-icon-dots {
-                    height: $headerMenu-height - 20px;
-                    width: $headerMenu-height - 20px;
-                    display: flex;
-                    flex-direction: column;
-                    align-items: center;
-                    justify-content: center;
-                    gap: 3px;
-
-                    .headerMenu-right-icon-dot{
-                        width: 3px;
-                        height: 3px;
-                        border-radius: 50%;
-                        background-color: $main-font-color;
-                    }
-                }
-
-                svg {
-                    width: 100%;
-                    height: 100%;
-                    min-width: $headerMenu-height - 20px;
-                    min-height: $headerMenu-height - 20px;
-                    object-fit: contain;
-                }
-    
-                &:hover {
-                    background-color: $icons-backgroundColor-hover;
-                }
-                
-                &:active {
-                    background-color: $icons-backgroundColor-active;
-                }
-            }
-
-            .headerMenu-right-icon-login {
-                height: $headerMenu-height - 20px;
-                display: flex;
-                align-items: center;
-                gap: 0.5rem;
-                border: 1px solid $main-border-color;
-                border-radius: 15px;
-                padding: 0 0.5rem;
-                cursor: pointer;
-                user-select: none;
-
-                &:hover {
-                    background-color: $main-attention-color;
-                }
-
-                svg {
-                    height: 70%;
-                    width: 100%;
-                    object-fit: contain;
-                }
-
-                p {
-                    color: $main-font-color;
-                }
-            }
-            
+        svg {
+          height: 70%;
+          width: 100%;
+          object-fit: contain;
         }
+
+        p {
+          color: $main-font-color;
+        }
+      }
     }
+  }
 }
 
-.headerMenu[darktheme='1'] {
-    background-color: $main-background-color-dark;
+.headerMenu[darktheme="1"] {
+  background-color: $main-background-color-dark;
 
-    .headerMenu-left {
+  .headerMenu-left {
+    .headerMenu-left-sidemenuButton {
+      &:hover {
+        background-color: $icons-backgroundColor-hover-dark;
+      }
 
-        .headerMenu-left-sidemenuButton {
+      &:active {
+        background-color: $icons-backgroundColor-dark;
+      }
 
-            &:hover {
-                background-color: $icons-backgroundColor-hover-dark;
-            }
-
-            &:active {
-                background-color: $icons-backgroundColor-dark;
-            }
-
-            .buttonLine {
-                background-color: $main-fontcolor-dark;
-            }
-        }
-
-        .headerMenu-left-logo {
-            color: $main-fontcolor-dark;
-        }
+      .buttonLine {
+        background-color: $main-fontcolor-dark;
+      }
     }
 
-    .headerMenu-center {
-
-        .headerMenu-searchBar {
-
-            input {
-                color: $main-fontcolor-dark;
-                background-color: $main-background-color-dark;
-                border: 1px solid $main-border-color;
-            }
-            
-            .searchButton{
-                border: 1px solid $main-border-color;
-                border-left: none;
-                svg {
-                    fill: $main-fontcolor-dark;
-                }
-                background-color: $headerMenu-userMenu-backgroundColor;
-
-                &:hover {
-                    background-color: $icons-backgroundColor-hover-dark;
-                }
-                
-                &:active {
-                    background-color: $icons-backgroundColor-dark;
-                }
-            }
-        }
+    .headerMenu-left-logo {
+      color: $main-fontcolor-dark;
     }
+  }
 
-    .headerMenu-right {
+  .headerMenu-center {
+    .headerMenu-searchBar {
+      input {
+        color: $main-fontcolor-dark;
+        background-color: $main-background-color-dark;
+        border: 1px solid $main-border-color;
+      }
 
-        .headerMenu-right-icons {
-    
-            .headerMenu-right-icon {
-
-                .headerMenu-right-icon-dots {
-
-                    .headerMenu-right-icon-dot {
-                        background-color: $main-fontcolor-dark;
-                    }
-                }
-    
-                svg {
-                    fill: $main-fontcolor-dark;
-                }
-    
-                &:hover {
-                    background-color: $icons-backgroundColor-hover-dark;
-                }
-    
-                &:active {
-                    background-color: $icons-backgroundColor-dark;
-                }
-            }
-
-            .headerMenu-right-icon-login {
-
-                &:hover {
-                    background-color: $main-attention-color-dark;
-                }
-
-                svg {
-                    fill: $main-fontcolor-dark;
-                }
-
-                p {
-                    color: $main-fontcolor-dark;
-                }
-            }
+      .searchButton {
+        border: 1px solid $main-border-color;
+        border-left: none;
+        svg {
+          fill: $main-fontcolor-dark;
         }
+        background-color: $headerMenu-userMenu-backgroundColor;
+
+        &:hover {
+          background-color: $icons-backgroundColor-hover-dark;
+        }
+
+        &:active {
+          background-color: $icons-backgroundColor-dark;
+        }
+      }
     }
+  }
+
+  .headerMenu-right {
+    .headerMenu-right-icons {
+      .headerMenu-right-icon {
+        .headerMenu-right-icon-dots {
+          .headerMenu-right-icon-dot {
+            background-color: $main-fontcolor-dark;
+          }
+        }
+
+        svg {
+          fill: $main-fontcolor-dark;
+        }
+
+        &:hover {
+          background-color: $icons-backgroundColor-hover-dark;
+        }
+
+        &:active {
+          background-color: $icons-backgroundColor-dark;
+        }
+      }
+
+      .headerMenu-right-icon-login {
+        &:hover {
+          background-color: $main-attention-color-dark;
+        }
+
+        svg {
+          fill: $main-fontcolor-dark;
+        }
+
+        p {
+          color: $main-fontcolor-dark;
+        }
+      }
+    }
+  }
 }
 
 // removing create video option
 @include createVideo-cutOff {
-    .headerMenu {
-        .headerMenu-right {
-            .headerMenu-right-icons {
-                .createVideo {
-                    display: none;
-                }
-            }
+  .headerMenu {
+    .headerMenu-right {
+      .headerMenu-right-icons {
+        .createVideo {
+          display: none;
         }
+      }
     }
+  }
 }
 
 // removing search bar for mobile version
 @include mobile-vertical {
-    .headerMenu {
-        .headerMenu-center {
-            display: none;
-        }
+  .headerMenu {
+    .headerMenu-center {
+      display: none;
     }
+  }
 }
 
 @include mobile-vertical-small {
-    .headerMenu {
-        .headerMenu-left {
-            .headerMenu-left-sidemenuButton {
-                display: none;
-            }
-            .headerMenu-left-logo {
-                display: none;
-            }
-        }
+  .headerMenu {
+    .headerMenu-left {
+      .headerMenu-left-sidemenuButton {
+        display: none;
+      }
+      .headerMenu-left-logo {
+        display: none;
+      }
     }
+  }
 }

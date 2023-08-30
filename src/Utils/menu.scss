@@ -1,246 +1,245 @@
 @import "../globals.scss";
 
-.menu[visible='0'] {
-    display: none;
+.menu[visible="0"] {
+  display: none;
 }
 
-.menu[visible='1'] {
-    position: absolute;
-    top: $headerMenu-height;
-    
-    background-color: $headerMenu-userMenu-backgroundColor;
-    border-radius: 10px;
-    padding: 10px 0;
-    
-    .menu-item {
-        color: $menu-item-color;
-        padding: 10px 20px;
-        cursor: pointer;
+.menu[visible="1"] {
+  position: absolute;
+  top: $headerMenu-height;
 
-        &:hover {
-            background-color: $menu-item-backgroundColor;
-        }
+  background-color: $headerMenu-userMenu-backgroundColor;
+  border-radius: 10px;
+  padding: 10px 0;
+
+  .menu-item {
+    color: $menu-item-color;
+    padding: 10px 20px;
+    cursor: pointer;
+
+    &:hover {
+      background-color: $menu-item-backgroundColor;
     }
+  }
 }
 
 .menu::-webkit-scrollbar {
-    width: 0.5em;
+  width: 0.5em;
 }
 
 .menu::-webkit-scrollbar-thumb {
-    background-color: $scrollbar-thumb-background-color-dark;
+  background-color: $scrollbar-thumb-background-color-dark;
 }
 
 .menu {
-    user-select: none;
-    max-width: 300px;
-    max-height: 60vh;
-    right: 1%;
-    overflow-y: scroll;
-    z-index: 2;
+  user-select: none;
+  max-width: 300px;
+  max-height: 60vh;
+  right: 1%;
+  overflow-y: scroll;
+  z-index: 3;
 
-    .menu-return {
-        display: flex;
-        align-items: center;
-        border-bottom: 1px solid $main-border-color-dark;
-        > * {
-            margin-left: 10px;
-        }
-        
-        .menu-return-arrow {
-            position: relative;
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            cursor: pointer;
-
-            &:hover {
-                background-color: $icons-backgroundColor-dark;
-            }
-
-            &:active {
-                background-color: $icons-backgroundColor-active;
-            }
-
-            > * {
-                position: absolute;
-                background-color: $main-fontcolor-dark;
-                top: 50%;
-                left: 30%;
-            }
-
-            .arrow-part1 {
-                width: 1.1rem;
-                height: 1px;
-            }
-
-            .arrow-part2 {
-                width: 0.7rem;
-                height: 1px;
-                transform-origin: left top;
-                transform: rotateZ(45deg);
-            }
-
-            .arrow-part3 {
-                width: 0.7rem;
-                height: 1px;
-                transform-origin: left top;
-                transform: rotateZ(-45deg);
-            }
-        }
-
-        p {
-            color: $main-fontcolor-dark;
-        }
+  .menu-return {
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid $main-border-color-dark;
+    > * {
+      margin-left: 10px;
     }
 
-    .images-grid {
-        display: grid;
-        grid-template-columns: repeat(4, 1fr);
-        grid-template-rows: repeat(4, 1fr);
-        
-        .avatar {
-            padding: 0.3rem;
-            border-radius: 10px;
-            cursor: pointer;
-            
-            img {
-                width: 100%;
-                object-fit: contain;
-                border-radius: 50%;
-            }
+    .menu-return-arrow {
+      position: relative;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      cursor: pointer;
 
-            &:hover {
-                background-color: $icons-backgroundColor-dark;
-            }
+      &:hover {
+        background-color: $icons-backgroundColor-dark;
+      }
 
-            &:active {
-                background-color: $icons-backgroundColor-active;
-            }
-        }
-    }
-    
-    .userInfo {
-        display: grid;
-        grid-template-columns: 1fr 4fr;
-        grid-template-rows: 1fr 1fr;
-        color: $menu-item-color;
-        padding: 10px 20px;
-        cursor: pointer;
+      &:active {
+        background-color: $icons-backgroundColor-active;
+      }
 
-        &:hover {
-            background-color: $main-background-color-dark-hover;
-        }
-        
-        img {
-            grid-row: 1 / 3;
-            grid-column: 1 / 2;
-            width: 100%;
-            object-fit: contain;
-            border-radius: 50%;
-        }
+      > * {
+        position: absolute;
+        background-color: $main-fontcolor-dark;
+        top: 50%;
+        left: 30%;
+      }
 
-        p {
-            margin: 0;
-            padding-left: 1em;
-        }
+      .arrow-part1 {
+        width: 1.1rem;
+        height: 1px;
+      }
+
+      .arrow-part2 {
+        width: 0.7rem;
+        height: 1px;
+        transform-origin: left top;
+        transform: rotateZ(45deg);
+      }
+
+      .arrow-part3 {
+        width: 0.7rem;
+        height: 1px;
+        transform-origin: left top;
+        transform: rotateZ(-45deg);
+      }
     }
 
-    .menu-feedback {
-        display: flex;
-        flex-direction: column;
+    p {
+      color: $main-fontcolor-dark;
+    }
+  }
 
-        textarea {
-            outline: none;
-            border: none;
-            border-bottom: 1px solid $main-border-color;
-            background-color: transparent;
-            color: $main-fontcolor-dark;
-            resize: none;
+  .images-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(4, 1fr);
 
-            height: 6rem;
-            font-size: clamp(1rem, 1.6vmin, 1.3rem);
-        }
+    .avatar {
+      padding: 0.3rem;
+      border-radius: 10px;
+      cursor: pointer;
 
-        textarea::-webkit-scrollbar {
-            width: 0.5em;
-        }
-        
-        textarea::-webkit-scrollbar-thumb {
-            background-color: $scrollbar-thumb-background-color-dark;
-            border-radius: 15px;
-        }
+      img {
+        width: 100%;
+        object-fit: contain;
+        border-radius: 50%;
+      }
 
-        .menu-button {
-            border-radius: 5px;
-            border: none;
-            background-color: $icons-backgroundColor;
-            color: $main-font-color;
-            padding: 0.5rem;
-            font-size: 1rem;
-            text-align: center;
-            cursor: pointer;
-        }
+      &:hover {
+        background-color: $icons-backgroundColor-dark;
+      }
 
-        .menu-button[inactive='1'] {
-            cursor: default;
-            background-color: $icons-backgroundColor-dark;
-        }
+      &:active {
+        background-color: $icons-backgroundColor-active;
+      }
+    }
+  }
+
+  .userInfo {
+    display: grid;
+    grid-template-columns: 1fr 4fr;
+    grid-template-rows: 1fr 1fr;
+    color: $menu-item-color;
+    padding: 10px 20px;
+    cursor: pointer;
+
+    &:hover {
+      background-color: $main-background-color-dark-hover;
     }
 
-    .loadingPlug {
-        color: $main-fontcolor-dark;
-        padding: 0.5rem 1rem;
+    img {
+      grid-row: 1 / 3;
+      grid-column: 1 / 2;
+      width: 100%;
+      object-fit: contain;
+      border-radius: 50%;
     }
+
+    p {
+      margin: 0;
+      padding-left: 1em;
+    }
+  }
+
+  .menu-feedback {
+    display: flex;
+    flex-direction: column;
+
+    textarea {
+      outline: none;
+      border: none;
+      border-bottom: 1px solid $main-border-color;
+      background-color: transparent;
+      color: $main-fontcolor-dark;
+      resize: none;
+
+      height: 6rem;
+      font-size: clamp(1rem, 1.6vmin, 1.3rem);
+    }
+
+    textarea::-webkit-scrollbar {
+      width: 0.5em;
+    }
+
+    textarea::-webkit-scrollbar-thumb {
+      background-color: $scrollbar-thumb-background-color-dark;
+      border-radius: 15px;
+    }
+
+    .menu-button {
+      border-radius: 5px;
+      border: none;
+      background-color: $icons-backgroundColor;
+      color: $main-font-color;
+      padding: 0.5rem;
+      font-size: 1rem;
+      text-align: center;
+      cursor: pointer;
+    }
+
+    .menu-button[inactive="1"] {
+      cursor: default;
+      background-color: $icons-backgroundColor-dark;
+    }
+  }
+
+  .loadingPlug {
+    color: $main-fontcolor-dark;
+    padding: 0.5rem 1rem;
+  }
 }
 
 .avatars-grid::-webkit-scrollbar {
-    width: 0.25em;
+  width: 0.25em;
 }
-
 
 .noUserAnimationPlug {
-    position: fixed;
-    top: 9px;
-    right: 28px;
-    z-index: 2;
-    pointer-events: none;
+  position: fixed;
+  top: 9px;
+  right: 28px;
+  z-index: 3;
+  pointer-events: none;
 
-    height: $headerMenu-height - 20px;
-    width: 4.2rem;
-    border-radius: 15px;
-    padding: 0 0.5rem;
+  height: $headerMenu-height - 20px;
+  width: 4.2rem;
+  border-radius: 15px;
+  padding: 0 0.5rem;
 }
 
-.noUserAnimationPlug[trigger='0'] {
-    animation: loginButtonFlash0 400ms 1;
+.noUserAnimationPlug[trigger="0"] {
+  animation: loginButtonFlash0 400ms 1;
 }
 
-.noUserAnimationPlug[trigger='1'] {
-    animation: loginButtonFlash1 400ms 1;
+.noUserAnimationPlug[trigger="1"] {
+  animation: loginButtonFlash1 400ms 1;
 }
 
 // reattaching the same animation with another name in order to reset its count
 @keyframes loginButtonFlash1 {
-    0% {
-        box-shadow: 0 0 0 0 lightblue;
-    }
-    50% {
-        box-shadow: 0 0 0.5rem 0.5rem lightblue;
-    }
-    100% {
-        box-shadow: 0 0 0 0 lightblue;
-    }
+  0% {
+    box-shadow: 0 0 0 0 lightblue;
+  }
+  50% {
+    box-shadow: 0 0 0.5rem 0.5rem lightblue;
+  }
+  100% {
+    box-shadow: 0 0 0 0 lightblue;
+  }
 }
 
 @keyframes loginButtonFlash0 {
-    0% {
-        box-shadow: 0 0 0 0 lightblue;
-    }
-    50% {
-        box-shadow: 0 0 0.5rem 0.5rem lightblue;
-    }
-    100% {
-        box-shadow: 0 0 0 0 lightblue;
-    }
+  0% {
+    box-shadow: 0 0 0 0 lightblue;
+  }
+  50% {
+    box-shadow: 0 0 0.5rem 0.5rem lightblue;
+  }
+  100% {
+    box-shadow: 0 0 0 0 lightblue;
+  }
 }

@@ -1,136 +1,132 @@
-@import '../../globals.scss';
+@import "../../globals.scss";
 
 .expanded::-webkit-scrollbar {
-    width: 0.5em;
+  width: 0.5em;
 }
 
 .expanded::-webkit-scrollbar-thumb {
-    background-color: $scrollbar-thumb-background-color;
-    border-radius: 15px;
+  background-color: $scrollbar-thumb-background-color;
+  border-radius: 15px;
 }
 
 .folded::-webkit-scrollbar {
-    width: 0;
+  width: 0;
 }
 
 .sidemenu {
-    position: fixed;
-    height: calc(100vh - $headerMenu-height);
-    top: $headerMenu-height;
-    background-color: $main-background-color;
+  position: fixed;
+  height: calc(100vh - $headerMenu-height);
+  top: $headerMenu-height;
+  background-color: $main-background-color;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  z-index: 3;
+
+  overflow-y: scroll;
+
+  .sideMenu-section {
+    width: 100%;
+
     display: flex;
     flex-direction: column;
-    align-items: center;
-    z-index: 2;
 
-    overflow-y: scroll;
-    
-    .sideMenu-section {
-        width: 100%;
-
-        display: flex;
-        flex-direction: column;
-
-        .line-break {
-            border-bottom: 1px solid #0003;
-        }
-
-        .sideMenu-section-item {
-            display: flex;
-            padding: 1rem 0;
-            border-radius: 10px;
-            cursor: pointer;
-
-            svg {
-                width: 1.7rem;
-                height: 1.7rem;
-                padding: 0 1rem;
-                object-fit: contain;
-            }
-
-            p {
-                padding-left: 1em;
-                margin: 0;
-                color: $main-font-color;
-            }
-
-            &:hover {
-                background-color: $icons-backgroundColor-hover;
-            }
-        }
+    .line-break {
+      border-bottom: 1px solid #0003;
     }
 
-    .active {
+    .sideMenu-section-item {
+      display: flex;
+      padding: 1rem 0;
+      border-radius: 10px;
+      cursor: pointer;
+
+      svg {
+        width: 1.7rem;
+        height: 1.7rem;
+        padding: 0 1rem;
+        object-fit: contain;
+      }
+
+      p {
+        padding-left: 1em;
+        margin: 0;
+        color: $main-font-color;
+      }
+
+      &:hover {
         background-color: $icons-backgroundColor-hover;
+      }
     }
+  }
+
+  .active {
+    background-color: $icons-backgroundColor-hover;
+  }
 }
 
 // dark theme changes
-.sidemenu[darktheme='1'] {
-    background-color: $main-background-color-dark;
+.sidemenu[darktheme="1"] {
+  background-color: $main-background-color-dark;
 
-    .sideMenu-section {
+  .sideMenu-section {
+    .sideMenu-section-item {
+      svg {
+        fill: $main-fontcolor-dark;
+      }
 
-        .sideMenu-section-item {
-         
-            svg {
-                fill: $main-fontcolor-dark;
-            }
-
-            p {
-                color: $main-fontcolor-dark;
-            }
-            &:hover {
-                background-color: $icons-backgroundColor-hover-dark;
-            }
-        }
+      p {
+        color: $main-fontcolor-dark;
+      }
+      &:hover {
+        background-color: $icons-backgroundColor-hover-dark;
+      }
     }
+  }
 }
 
 // video mode changes
 .videoModeHidden {
-    left: -$sideMenu-expanded-width;
+  left: -$sideMenu-expanded-width;
 }
 
 .videoModeCover {
-    left: 0;
+  left: 0;
 }
 
 .expanded {
-    transition: left 100ms ease;
-    width: $sideMenu-expanded-width;
+  transition: left 100ms ease;
+  width: $sideMenu-expanded-width;
 
-    .sideMenu-section {
+  .sideMenu-section {
+    .sideMenu-section-item {
+      align-items: center;
 
-        .sideMenu-section-item {
-            align-items: center;
-
-            p {
-                padding: 0;
-            }
-        }
+      p {
+        padding: 0;
+      }
     }
+  }
 }
 
 .folded {
-    width: $sideMenu-folded-width;
+  width: $sideMenu-folded-width;
 
-    .sideMenu-section {
+  .sideMenu-section {
+    .sideMenu-section-item {
+      flex-direction: column;
 
-        .sideMenu-section-item {
-            flex-direction: column;
-            
-            p {
-                padding: 0;
-                font-size: 0.6rem;
-                text-align: center;
-            }
-        }
+      p {
+        padding: 0;
+        font-size: 0.6rem;
+        text-align: center;
+      }
     }
+  }
 }
 
 @include mobile-vertical-small {
-    .sidemenu {
-        display: none;
-    }
+  .sidemenu {
+    display: none;
+  }
 }

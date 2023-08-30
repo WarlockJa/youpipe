@@ -6,7 +6,6 @@
   max-width: 350px;
   max-height: 300px;
   cursor: pointer;
-  position: relative;
 
   .videoTile-imageArea {
     position: relative;
@@ -18,9 +17,9 @@
     border-radius: 10px;
     overflow: hidden;
 
-    img {
+    .videoTile-imageArea--img {
       width: 100%;
-      object-fit: contain;
+      object-fit: fill;
       z-index: 2;
     }
 
@@ -72,12 +71,16 @@
       }
 
       h2 {
-        max-height: 3rem;
+        max-height: 3em;
         overflow: hidden;
-        font-size: clamp(1rem, 1.5vw, 1rem);
+        font-size: clamp(1em, 1.5vw, 1em);
         line-height: 1.2em;
         margin: 0;
         padding: 0;
+
+        width: 16em;
+        white-space: nowrap;
+        text-overflow: ellipsis;
       }
 
       h3 {

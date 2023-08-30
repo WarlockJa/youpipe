@@ -1,67 +1,66 @@
-@import '../../globals.scss';
+@import "../../globals.scss";
 
 .mainContainer::-webkit-scrollbar {
-    width: 0.5em;
-    
+  width: 0.5em;
 }
 .mainContainer::-webkit-scrollbar-thumb {
-    background-color: $scrollbar-thumb-background-color;
-    border-radius: 15px;
+  background-color: $scrollbar-thumb-background-color;
+  border-radius: 15px;
 }
 
 .mainContainer {
-    margin-top: $headerMenu-height;
-    scroll-behavior: smooth;
-    background-color: $main-background-color;
-    flex: 1;
+  margin-top: $headerMenu-height;
+  scroll-behavior: smooth;
+  background-color: $main-background-color;
+  flex: 1;
 
-    overflow-y: scroll;
-    height: calc(100vh - $headerMenu-height);
+  overflow-y: scroll;
+  height: calc(100vh - $headerMenu-height);
 
-    .loadingPlug {
-        display: table;
-        margin: 0 auto;
-    }
+  .loadingPlug {
+    display: table;
+    margin: 0 auto;
+  }
 
-    .emptyPlug {
-        display: table;
-        margin: 0 auto;
-    }
+  .emptyPlug {
+    display: table;
+    margin: 0 auto;
+  }
 }
 
 // dark theme changes
-.mainContainer[darktheme='1'] {
-    background-color: $main-background-color-dark;
+.mainContainer[darktheme="1"] {
+  background-color: $main-background-color-dark;
 }
-.mainContainer[darktheme='1']::-webkit-scrollbar-thumb {
-    background-color: $scrollbar-thumb-background-color-dark;
+.mainContainer[darktheme="1"]::-webkit-scrollbar-thumb {
+  background-color: $scrollbar-thumb-background-color-dark;
 }
 
 // side menu states changes
-.mainContainer[sidemenustate='0'] {
-    margin-left: $sideMenu-folded-width;
+.mainContainer[sidemenustate="0"] {
+  margin-left: $sideMenu-folded-width;
 
-    @include mobile-vertical-small {
-        margin-left: 0px;
-    }
+  @include mobile-vertical-small {
+    margin-left: 0px;
+  }
 }
 
-.mainContainer[sidemenustate='1'] {
-    margin-left: $sideMenu-expanded-width;
+.mainContainer[sidemenustate="1"] {
+  margin-left: $sideMenu-expanded-width;
 
-    @include mobile-vertical-small {
-        margin-left: 0px;
-    }
+  @include mobile-vertical-small {
+    margin-left: 0px;
+  }
 }
 
-.mainContainer[sidemenustate='2'] {
-    width: 23vw;
-    
-    .tagsList {
-        position: relative;
-    }
+.mainContainer[sidemenustate="2"] {
+  width: 25vw;
 
-    @include mobile-vertical-small {
-        display: none;
-    }
+  .tagsList {
+    position: relative;
+  }
+
+  @include mobile-vertical-small {
+    display: none;
+  }
 }

@@ -107,6 +107,11 @@ export default function VideoArea() {
         <>
           <form className="videoArea-videoContainer">
             <div className="videoArea-videoWrapper">
+              {video.loading && (
+                <div className="videoArea-videoLoading">
+                  <Spinner />
+                </div>
+              )}
               <img
                 className="videoArea-video"
                 src={video.element.image}
@@ -120,11 +125,6 @@ export default function VideoArea() {
                   });
                 }}
               />
-              {video.loading && (
-                <div className="videoArea-videoLoading">
-                  <Spinner />
-                </div>
-              )}
             </div>
             <div className="videoArea-videoTitle">{video.element.title}</div>
             <div className="videoArea-channelInfo">
